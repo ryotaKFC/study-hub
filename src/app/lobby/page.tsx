@@ -1,9 +1,33 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+
 import { Navigation } from "@/components/navigation";
 import Timer from "./components/TimerCard";
 import Chat from "./components/ChatCard";
 import Member from "./components/MemberCard";
 
+let socket: Socket;
+
 export default function LobbyPage() {
+    useEffect(() => {
+        // socket.ioに接続
+        if (!socket) {
+            socket = io({
+                path: "/api/socket_io",
+            });
+
+            socket.on("connect", () => {
+                socket.emit("joimRoom", "study-lobby");
+            });
+
+        }
+        return () => {
+            socket?.disconnect();
+        };
+    },[]);
+
     return (
         <div className="min-h-screen bg-emerald-50">
             <Navigation />
