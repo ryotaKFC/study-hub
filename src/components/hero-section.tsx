@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import type { MouseEvent } from "react";
+import {useSession} from "next-auth/react";
 
 const confirmationMessage = "ログインせずに勉強しますか？\n(ログインすることで、あなたの自習の記録が残ります)";
 
 export function HeroSection() {
-
+    const {status} = useSession();
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+        if (status === "authenticated") return;
         const isConfirmed = window.confirm(confirmationMessage);
         if (!isConfirmed) {
             e.preventDefault();
