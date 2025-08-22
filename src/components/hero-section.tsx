@@ -28,12 +28,12 @@ export function HeroSection() {
                 </p>
             </div>
             <div className="flex space-x-6 justify-center text-center">
-                <Link href="/home">
+                <Link href="/lobby">
                     <Button variant="default" onClick={handleClick}>
                         一人で勉強！
                     </Button>
                 </Link>
-                <Link href="/home">
+                <Link href="/lobby">
                     <Button variant="outline" onClick={handleClick}>みんなで勉強！</Button>
                 </Link>
             </div>
