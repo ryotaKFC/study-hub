@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabaseClient } from "@/lib/supabaseClient";
 import { Navigation } from "@/components/navigation";
-import Card from "./components/ui/card";
+import Card from "../lobby/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 type Lobby = {
@@ -18,23 +18,10 @@ type Lobby = {
 export default function Lobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
     const [newLobby, setNewLobby] = useState("");
+
     useEffect(() => {
-        fetchLobbies();
         
-        const channel = supabaseClient
-            .channel("public:lobbies")
-            .on(
-                "postgres_changes",
-                { event: "INSERT", schema: "public", table: "lobbies"},
-                (payload) => {
-                    setLobbies(prev => [payload.new as Lobby, ...prev]);
-                }
-            )
-            .subscribe();
-        return () => {
-            supabaseClient.removeChannel(channel);
-        };
-    }, []);
+    })
 
     async function fetchLobbies() {
         const { data, error } = await supabaseClient
@@ -75,6 +62,7 @@ export default function Lobbies() {
                 />
                 <Button type="submit">作成</Button>
             </form>
+
             <ul>
                 {lobbies.map((lobby) => (
                     <li key={lobby.id}>
