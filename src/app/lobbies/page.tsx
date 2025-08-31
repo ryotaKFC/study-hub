@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabaseClient";
 import { Navigation } from "@/components/navigation";
-import Card from "./components/ui/card";
+import Card from "../lobby/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 type Lobby = {
@@ -19,39 +19,21 @@ export default function Lobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
     const [newLobby, setNewLobby] = useState("");
 
-    const supabaseClient = createClient();
-
-        const fetchLobbies = useCallback( async () => {
-            const { data, error } = await supabaseClient
-                .from("lobbies")
-                .select("*")
-                .order("created_at", { ascending: false});
-            if (error) {
-                console.error(error);
-                return
-            }
-            setLobbies(data as Lobby[]);
-        }, [supabaseClient])
-        
     useEffect(() => {
-        fetchLobbies();
         
-        const channel = supabaseClient
-            .channel("public:lobbies")
-            .on(
-                "postgres_changes",
-                { event: "INSERT", schema: "public", table: "lobbies"},
-                (payload) => {
-                    setLobbies(prev => [payload.new as Lobby, ...prev]);
-                }
-            )
-            .subscribe();
-        return () => {
-            supabaseClient.removeChannel(channel);
-        };
-    }, [fetchLobbies, supabaseClient]);
+    })
 
-
+    async function fetchLobbies() {
+        const { data, error } = await supabaseClient
+            .from("lobbies")
+            .select("*")
+            .order("created_at", { ascending: false});
+        if (error) {
+            console.error(error);
+            return
+        }
+        setLobbies(data as Lobby[]);
+    }
 
     async function createLobby(e?: React.FormEvent) {
         e?.preventDefault();
@@ -80,6 +62,7 @@ export default function Lobbies() {
                 />
                 <Button type="submit">作成</Button>
             </form>
+
             <ul>
                 {lobbies.map((lobby) => (
                     <li key={lobby.id}>

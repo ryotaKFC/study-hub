@@ -1,21 +1,9 @@
-'use client';
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
-import type { MouseEvent } from "react";
-import {useSession} from "next-auth/react";
+import {StudyButton} from "./study-button";
 
-const confirmationMessage = "ログインせずに勉強しますか？\n(ログインすることで、あなたの自習の記録が残ります)";
 
 export function HeroSection() {
-    const {status} = useSession();
-    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        if (status === "authenticated") return;
-        const isConfirmed = window.confirm(confirmationMessage);
-        if (!isConfirmed) {
-            e.preventDefault();
-        }
-    }
     return (
         <div className="min-h-screen -translate-y-1/12 flex flex-col justify-center text-center bg-background">
             <div>
@@ -28,14 +16,7 @@ export function HeroSection() {
                 </p>
             </div>
             <div className="flex space-x-6 justify-center text-center">
-                <Link href="/home">
-                    <Button variant="default" onClick={handleClick}>
-                        一人で勉強！
-                    </Button>
-                </Link>
-                <Link href="/home">
-                    <Button variant="outline" onClick={handleClick}>みんなで勉強！</Button>
-                </Link>
+                <StudyButton />
             </div>
         </div>
     )
