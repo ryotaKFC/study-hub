@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { supabaseClient } from "@/lib/supabaseClient";
+import { useCallback, useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { Navigation } from "@/components/navigation";
 import Card from "./components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,21 @@ type Lobby = {
 export default function Lobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
     const [newLobby, setNewLobby] = useState("");
+
+    const supabaseClient = createClient();
+
+        const fetchLobbies = useCallback( async () => {
+            const { data, error } = await supabaseClient
+                .from("lobbies")
+                .select("*")
+                .order("created_at", { ascending: false});
+            if (error) {
+                console.error(error);
+                return
+            }
+            setLobbies(data as Lobby[]);
+        }, [supabaseClient])
+        
     useEffect(() => {
         fetchLobbies();
         
@@ -34,19 +49,9 @@ export default function Lobbies() {
         return () => {
             supabaseClient.removeChannel(channel);
         };
-    }, []);
+    }, [fetchLobbies, supabaseClient]);
 
-    async function fetchLobbies() {
-        const { data, error } = await supabaseClient
-            .from("lobbies")
-            .select("*")
-            .order("created_at", { ascending: false});
-        if (error) {
-            console.error(error);
-            return
-        }
-        setLobbies(data as Lobby[]);
-    }
+
 
     async function createLobby(e?: React.FormEvent) {
         e?.preventDefault();
