@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { Button } from "@/components/ui/button"
-import LoginButton from './LoginButton';
+import LoginButton from './login-button';
 
 export function Navigation() {
     return (
         <nav className="flex justify-between items-center px-4 py-2 bg-background shadow-md border-b border-black sticky top-0 z-50">
             {/* logo */}
             <div className="flex items-center space-x-4">
-                <Image src="book.svg" alt="site icon" width={50} height={50} />
+                <Image src="../book.svg" alt="site icon" width={50} height={50} />
                 <span className="text-xl hidden sm:inline">Study Hub</span>
             </div>
 
