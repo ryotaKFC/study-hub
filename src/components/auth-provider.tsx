@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createClient }from "@/lib/supabase/client"
 
-const supabaseClient = createClient()
+const supabaseClient = createClient();
 
 type AuthContextType = {
     user: User | null;
@@ -50,7 +50,7 @@ export function AuthProviders({children}: {children: React.ReactNode}) {
 
     return (
         <AuthContext.Provider value={value}>
-            { children}
+            { children }
         </AuthContext.Provider>
     )
 }
