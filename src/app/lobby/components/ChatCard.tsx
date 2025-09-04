@@ -1,8 +1,8 @@
-import Card from "./ui/card";
+import Card from "@/components/ui/card";
 import Chat from "./Chat";
 
 import { useEffect, useState } from "react";
-import { supabaseClient } from '@/lib/supabaseClient'
+import { supabaseClient } from '@/lib/supabase/client'
 import { Button } from "@/components/ui/button";
 
 type Chat = {

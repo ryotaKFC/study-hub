@@ -16,6 +16,7 @@ export function useLobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
     const supabaseClient = createClient();
 
+    // ロビーの取得
     const fetchLobbies = useCallback( async () => {
         const { data, error } = await supabaseClient
             .from("lobbies")
@@ -28,9 +29,24 @@ export function useLobbies() {
         setLobbies(data as Lobby[]);
     }, [supabaseClient])
         
+    // ロビーの作成
+    const createLobby = useCallback( async (name: string) => {
+        if (!name.trim()) return;
+        const { data, error } = await supabaseClient
+            .from("lobbies")
+            .insert([{ name: name, start_time: new Date() }])
+            .select()
+            .single();
+        if (error) {
+            console.error(error);
+            return;
+        }
+        setLobbies(prev => [data as Lobby, ...prev]);
+    }, [supabaseClient])
+
+    // 購読処理
     useEffect(() => {
         fetchLobbies();
-        
         const channel = supabaseClient
             .channel("public:lobbies")
             .on(
@@ -46,20 +62,6 @@ export function useLobbies() {
         };
     }, [fetchLobbies, supabaseClient]);
 
-    
-    async function createLobby(name: string) {
-        if (!name.trim()) return;
-        const { data, error } = await supabaseClient
-            .from("lobbies")
-            .insert([{ name }])
-            .select()
-            .single();
-        if (error) {
-            console.error(error);
-            return;
-        }
-        setLobbies(prev => [data as Lobby, ...prev]);
-    }
 
     return { lobbies,  createLobby };
 }

@@ -1,8 +1,6 @@
-'use client';
-
-
+import { Lobby } from "../hooks/useLobby";
 import Timer from "./Timer";
-import Card from "./ui/card";
+import Card from "@/components/ui/card";
 
 export default function TimerCard() {
     return (
