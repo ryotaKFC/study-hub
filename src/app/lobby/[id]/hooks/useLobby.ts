@@ -1,9 +1,10 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client"
 import { useAuth } from "@/components/auth-provider";
 import { useParams } from "next/navigation";
+import { RealtimeChannel } from "@supabase/supabase-js";
 
 export type Lobby = {
     id: number;
@@ -13,7 +14,6 @@ export type Lobby = {
     break_min: number;
     created_at: string;
 }
-
 export type User = {
     id: number;
     lobby_id: number;
@@ -21,7 +21,6 @@ export type User = {
     display_name: string;
     joined_at: string;
 }
-
 export type Chat = {
     userId: number;
     ChatId: number;
@@ -33,16 +32,17 @@ const supabaseClient = createClient();
 
 
 export function useLobby() {
-    const params = useParams();
-    const lobbyId = Number(params.id);
-    
+    const lobbyId = Number(useParams().id);
     const { user } = useAuth();
-    const [lobby, setLobby] = useState<Lobby>();
     const [userId, setUserId] = useState<number>();
-    const [users, setUsers] = useState<User[]>([]);
-    const [chats, setChats] = useState<Chat[]>([]);
 
-    
+    const userChannelRef = useRef<RealtimeChannel | null>(null);
+    const chatChannelRef = useRef<RealtimeChannel | null>(null);
+
+    const [ lobby, setLobby ] = useState<Lobby | null>(null);
+    const [ users, setUsers ] = useState<User[]>([]);
+    const [ chats, setChats ] = useState<Chat[]>([]);
+
     // ロビーの取得
     const fetchLobby = useCallback( async() => {
         const { data, error } = await supabaseClient
@@ -54,10 +54,11 @@ export function useLobby() {
             console.error(error);
             return;
         }
-        setLobby(data);
+        setLobby(data as Lobby);
+        // return data as Lobby;
     }, [lobbyId])
 
-    // ロビー内ユーザーの取得
+    // usersの取得
     const fetchUsers = useCallback( async() => {
         const { data, error } = await supabaseClient
             .from("lobby_users")
@@ -67,10 +68,11 @@ export function useLobby() {
             console.error(error);
             return;
         }
-        if (data) setUsers(data);
+        // if (data) setUsers(data);
+        return data as User[]
     }, [lobbyId])
 
-    // チャットの取得
+    // chatsの取得
     const fetchChats = useCallback( async() => {
         const { data, error } = await supabaseClient
             .from("lobby_chats")
@@ -82,7 +84,8 @@ export function useLobby() {
             console.error(error);
             return;
         }
-        if (data) setChats(data);
+        // if (data) setChats(data);
+        return data as Chat[];
     }, [lobbyId])
 
     // ロビー入室
@@ -109,21 +112,13 @@ export function useLobby() {
         if (error) console.error(error);
     }, [userId])
 
-    // 初期処理
-    useEffect(() => {
-        joinLobby();
-        fetchLobby();
-        fetchUsers();
-        fetchChats();
-    }, [fetchChats, fetchLobby, fetchUsers, joinLobby]);
-    
-    // 購読処理
-    useEffect(() => {
-        const supabaseChannel = supabaseClient
+    // users購読開始
+    const subscribeToUsers = useCallback(() => {
+        userChannelRef.current = supabaseClient
             .channel("public:lobby_users:"+lobbyId)
             .on(
                 "postgres_changes",
-                { 
+                {
                     event:"INSERT",
                     schema:"public",
                     table:"lobby_users",
@@ -147,20 +142,47 @@ export function useLobby() {
                     setUsers((prev) => prev.filter(user => user.id !== old.id));
                 }
             ).subscribe();
-        
-        const handleBeforeUnload = () => {
-            leaveLobby();
-            supabaseClient.removeChannel(supabaseChannel)
-        };
-
-        window.addEventListener("beforeunload", handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload)
-            handleBeforeUnload();
+    }, [lobbyId]);
+    // user購読解除
+    const unsubscribeFromUsers = useCallback(async () =>{
+        if (userChannelRef.current) {
+            await supabaseClient.removeChannel(userChannelRef.current);
+            userChannelRef.current = null;
         }
-    }, [leaveLobby, lobbyId])
+    }, [])
 
+    // chats購読開始
+    const subscribeToChats = useCallback(() => {
+        chatChannelRef.current = supabaseClient
+            .channel("public:lobby_chats:"+lobbyId)
+            .on(
+                "postgres_changes",
+                {
+                    event:"INSERT",
+                    schema:"public",
+                    table:"lobby_chats",
+                    filter:"lobby_id=eq."+lobbyId,
+                },
+                (payload) => {
+                    const newChat = payload.new as Chat;
+                    setChats((prev) => [...prev, newChat]);
+                }
+            ).subscribe();
+    }, [lobbyId]);
+    // chats購読解除
+    const unsubscribeFromChats = useCallback(async () =>{
+        if (chatChannelRef.current) {
+            await supabaseClient.removeChannel(chatChannelRef.current);
+            chatChannelRef.current = null;
+        }
+    }, [])
+
+    // 初期処理
+    useEffect(() => {
+        fetchLobby();
+        fetchUsers();
+        fetchChats();
+    }, [fetchChats, fetchLobby, fetchUsers, joinLobby]);
     
-    return { lobby, users, chats};
+    return { chats, users, lobby, joinLobby, leaveLobby, subscribeToChats, unsubscribeFromChats, subscribeToUsers, unsubscribeFromUsers };
 }

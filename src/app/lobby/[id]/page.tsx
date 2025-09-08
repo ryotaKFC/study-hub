@@ -4,14 +4,42 @@ import { useParams } from 'next/navigation';
 import TimerCard from "./components/TimerCard";
 import MemberCard from "./components/MemberCard";
 import Card from "@/components/ui/card";
-import { useLobby } from "./hooks/useLobby";
+import { Chat, useLobby, User } from "./hooks/useLobby";
 import { Navigation } from '@/components/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Lobby() {
-    const params = useParams();
-    const lobbyId = Number(params.id);
+    const lobbyId = Number(useParams().id);
+    const [ isStudyTime, setIsStudyTime ] = useState(false);
     
-    const { lobby } = useLobby();
+    const { 
+        joinLobby, 
+        leaveLobby, 
+        subscribeToUsers, 
+        unsubscribeFromUsers, 
+        subscribeToChats, 
+        unsubscribeFromChats, 
+        users, chats, lobby
+    } = useLobby();
+
+    
+   useEffect(() => {
+        joinLobby();
+        subscribeToUsers();
+        subscribeToChats();
+        const handleBeforeUnload = () => {
+            leaveLobby();
+            unsubscribeFromChats();
+            unsubscribeFromUsers();
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload)
+            handleBeforeUnload();
+        }
+
+    }, [joinLobby, leaveLobby, subscribeToChats, subscribeToUsers, unsubscribeFromChats, unsubscribeFromUsers])
 
     if(!lobby) {
         return (
@@ -33,8 +61,11 @@ export default function Lobby() {
                 </div>
 
                 {/* タイマー */}
-                <TimerCard />
+                <TimerCard lobby={lobby} setIsStudyTime={setIsStudyTime} />
+
                 {/* チャット */}
+                
+
                 {/* <ChatCard /> */}
                 {/* <ChatCard/>
                 <Card>
@@ -46,7 +77,7 @@ export default function Lobby() {
                 </Card> */}
 
                 {/* メンバー */}
-                <MemberCard />
+                <MemberCard users={users} />
             </main>
         </div>
     )
