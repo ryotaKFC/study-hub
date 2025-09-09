@@ -1,32 +1,34 @@
 "use client"
 
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useEffect, useState, type MouseEvent } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import type { User } from "@supabase/supabase-js";
 
+const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、あなたの自習の記録が残ります)";
 
 export function StudyButton() {
-    const [user, setUser] = useState("");
-        const supabaseClient = createClient();
-        const confirmationMessage = "ログインせずに勉強しますか？\n(ログインすることで、あなたの自習の記録が残ります)";
+    const [user, setUser] = useState<User | null>(null);
+        const supabaseClient = supabase;
 
-        useEffect(() => {
-            const getUser = async () => {
-            const {
-                data: { user },
-            } = await supabaseClient.auth.getUser()
-                setUser(user ? user.email ?? user.id ?? "" : "")
-            }
-            getUser()
-        }, [supabaseClient.auth])
+    useEffect(() => {
+        const getUser = async () => {
+        const {
+            data: { user },
+        } = await supabaseClient.auth.getUser()
+            setUser(user)
+        }
 
-        const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-            if (user !== "") return;
-            if (!window.confirm(confirmationMessage)) {
+        getUser()
+    }, [supabaseClient.auth])
+
+    function handleClick(e: MouseEvent<HTMLButtonElement>) {
+        if (user) return;
+        if (!window.confirm(CONFIRMATION_MESSAGE)) {
             e.preventDefault();
-            }
-        };
+        }
+    }
         
         return (
             <>
