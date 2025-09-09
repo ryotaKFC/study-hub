@@ -2,7 +2,7 @@
 
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { useAuth } from "./auth-provider";
+import { useAuth } from "@/lib/supabase/auth-provider";
 
 
 export default function LoginButton() {

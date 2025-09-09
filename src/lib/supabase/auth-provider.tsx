@@ -2,9 +2,11 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
-import { createClient }from "@/lib/supabase/client"
+import { useSupabase } from "@/lib/supabase/supabase-provider";
 
-const supabaseClient = createClient()
+type Props = {
+    children: React.ReactNode;
+}
 
 type AuthContextType = {
     user: User | null;
@@ -14,9 +16,10 @@ type AuthContextType = {
 };
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProviders({children}: {children: React.ReactNode}) {
+export function AuthProviders({children}: Props) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const supabaseClient= useSupabase();
 
     useEffect(() => {
         const getUser = async () => {
@@ -30,7 +33,7 @@ export function AuthProviders({children}: {children: React.ReactNode}) {
             }
         };
         getUser();
-    }, []);
+    }, [supabaseClient.auth]);
 
     async function signInWithGoogle () {
         const { error } = await supabaseClient.auth.signInWithOAuth({
@@ -50,7 +53,7 @@ export function AuthProviders({children}: {children: React.ReactNode}) {
 
     return (
         <AuthContext.Provider value={value}>
-            { children}
+            { children }
         </AuthContext.Provider>
     )
 }
