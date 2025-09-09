@@ -1,6 +1,6 @@
 "use client"
 
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useEffect, useState, type MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ロ�
 
 export function StudyButton() {
     const [user, setUser] = useState<User | null>(null);
-        const supabaseClient = createClient();
+        const supabaseClient = supabase;
 
     useEffect(() => {
         const getUser = async () => {
