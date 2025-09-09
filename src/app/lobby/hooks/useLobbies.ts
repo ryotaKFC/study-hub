@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 
 type Lobby = {
     id: number;
@@ -14,7 +14,7 @@ type Lobby = {
 
 export function useLobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
-    const supabaseClient = createClient();
+    const supabaseClient = supabase;
 
     // ロビーの取得
     const fetchLobbies = useCallback( async () => {

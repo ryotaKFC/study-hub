@@ -1,19 +1,15 @@
 'use client'
 
 import {useState, useEffect} from 'react';
-import { Lobby } from "../hooks/useLobby";
+import { useLobby } from './LobbyProviders';
 
-type Props = {
-    lobby: Lobby
-    setIsStudyTime: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export default function Timer({ lobby, setIsStudyTime } : Props) {
-    // const studyTime = (lobby?.study_min ?? 0) * 60;
+export default function Timer() {
+    const { lobby, setIsStudyTime } = useLobby();
+
     const studyTime = lobby.study_min * 60;
-    const breakTime = (lobby?.break_min ?? 0) * 60;
-    const lobbyStartTime = Math.floor(new Date(lobby?.start_time ?? 0).getTime() / 1000);
-    console.log(studyTime);
+    const breakTime = (lobby.break_min ?? 0) * 60;
+    const lobbyStartTime = Math.floor(new Date(lobby.start_time).getTime() / 1000);
     
     const [seconds, setSeconds] = useState(0);
 
@@ -22,8 +18,8 @@ export default function Timer({ lobby, setIsStudyTime } : Props) {
             const currentTime = Math.floor(Date.now() / 1000);
             const totalElapsedTime = currentTime - lobbyStartTime;
             const timeWithInCycle = totalElapsedTime % (studyTime + breakTime);
-
             if (timeWithInCycle < studyTime){
+
                 setIsStudyTime(true);
                 setSeconds(studyTime - timeWithInCycle);
             } else {

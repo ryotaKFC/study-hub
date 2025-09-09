@@ -1,17 +1,16 @@
 import Card from "@/components/ui/card";
-import { User } from "../hooks/useLobby"
+import { useLobby } from "./LobbyProviders";
 
-type Props = {
-    users: User[];
-}
 
-export default function Member({ users }: Props) {
+
+export default function Member() {
+    const { users } = useLobby();
     return (
         <Card>
             <h1 className="text-xl font-bold bg-emerald-800 bg-clip-text text-transparent">👥参加者</h1>
-            <div className="p-7 text-center text-8xl rounded-xl text-emerald-900">
+            <div className="p-7 text-center text-xl rounded-xl text-emerald-900">
                 {users.map(user => 
-                    <li key={user.id}>
+                    <li key={user.user_id}>
                         {user.display_name}
                     </li>
                 )}
