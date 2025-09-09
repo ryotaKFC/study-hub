@@ -1,10 +1,10 @@
 'use client'
 
 import {useState, useEffect} from 'react';
-import { useLobby } from './LobbyProviders';
+import { useLobby } from '../_context/LobbyProviders';
 
 
-export default function Timer() {
+export default function useTimer() {
     const { lobby, setIsStudyTime } = useLobby();
 
     const studyTime = lobby.study_min * 60;
@@ -19,7 +19,6 @@ export default function Timer() {
             const totalElapsedTime = currentTime - lobbyStartTime;
             const timeWithInCycle = totalElapsedTime % (studyTime + breakTime);
             if (timeWithInCycle < studyTime){
-
                 setIsStudyTime(true);
                 setSeconds(studyTime - timeWithInCycle);
             } else {
@@ -42,9 +41,5 @@ export default function Timer() {
     }
 
 
-    return (
-        <h1 className='p-7 text-center text-8xl bg-emerald-100 rounded-xl text-emerald-900'>
-            {formatedTime(seconds)}
-        </h1>
-    );
+    return formatedTime(seconds);
 }

@@ -1,5 +1,5 @@
 import Card from "@/components/ui/card";
-import { useLobby } from "./LobbyProviders";
+import { useLobby } from "../../_context/LobbyProviders";
 
 
 

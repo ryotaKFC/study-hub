@@ -1,10 +1,11 @@
 "use client"
 
 import { useParams } from 'next/navigation';
-import TimerCard from "./components/TimerCard";
-import MemberCard from "./components/MemberCard";
 import { Navigation } from '@/components/navigation';
-import { LobbyProviders } from './components/LobbyProviders';
+import MemberCard from './_components/members/MemberCard';
+import TimerCard from './_components/timer/TimerCard';
+import { LobbyProviders } from './_context/LobbyProviders';
+import ChatCard from './_components/chat/ChatCard';
 
 export default function Lobby() {
     const lobbyId = Number(useParams().id);
@@ -22,7 +23,9 @@ export default function Lobby() {
                     </div>
 
                     <TimerCard />
-
+                    
+                    <ChatCard />
+                    
                     <MemberCard />
                 </main>
             </div>

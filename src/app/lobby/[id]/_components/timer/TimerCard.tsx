@@ -1,7 +1,8 @@
-import Timer from "./Timer";
+import Timer from "./TimerView";
 import Card from "@/components/ui/card";
 
 export default function TimerCard() {
+
     return (
         <Card>
             <h1 className="text-3xl font-bold text-emerald-800 text-center">集中時間</h1>
