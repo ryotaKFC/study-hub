@@ -5,8 +5,8 @@ import { LobbyProviders } from './_context/LobbyProviders';
 import ChatCard from './_components/chat/ChatCard';
 
 
-export default function Lobby({ params }: { params: { id: string } }) {
-    const lobbyId = Number(params.id);
+export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
+    const lobbyId = Number((await params).id);
     
     return (
         <LobbyProviders lobbyId={lobbyId}>
