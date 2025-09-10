@@ -1,4 +1,4 @@
-import Timer from "./TimerView";
+import Timer from "./Timer";
 import Card from "@/components/ui/card";
 
 export default function TimerCard() {

@@ -19,38 +19,10 @@ export type Lobby = {
     created_at: string;
 }
 
-export type User = {
-    id: number;
-    lobby_id: number;
-    user_id: string;
-    display_name: string;
-    joined_at: string;
-}
-
-export type Chat = {
-    userId: number;
-    ChatId: number;
-    displayName: string;
-    content: string;
-}
-
-type PresenceChat = {
-    userId: string;
-    display_name: string;
-    content: string;
-}
-
-type PresenceUser= {
-    user_id: string;
-    display_name: string;
-}
-
 type LobbyContextType = {
+    isLoading: boolean;
     channel: RealtimeChannel,
     lobby: Lobby,
-    users: PresenceUser[],
-    chats: PresenceChat[],
-    sendMessage: (content: string) => Promise<void>;
     isStudyTime: boolean;
     setIsStudyTime: Dispatch<SetStateAction<boolean>>;
 }
@@ -61,9 +33,8 @@ export function LobbyProviders({ lobbyId, children }: Props) {
     const [isStudyTime, setIsStudyTime] = useState(true);
     const [channel, setChannel] = useState<RealtimeChannel | null>(null);
     const [lobby, setLobby] = useState<Lobby | null>(null);
-    const [users, setUsers] = useState<PresenceUser[]>([]);
-    const [chats, setChats] = useState<PresenceChat[]>([]);
-    
+
+    const [isLoading, setIsLoading] = useState(true);
     const { user } = useAuth();
     
     const supabaseClient= useSupabase();
@@ -83,22 +54,6 @@ export function LobbyProviders({ lobbyId, children }: Props) {
         setLobby(data as Lobby);
     }, [lobbyId, supabaseClient])
 
-    // メッセージ送信
-    const sendMessage = useCallback(async (content: string) => {
-        if(!content.trim() || !user || !channel) return;
-
-        const payload = {
-            userId: user.id,
-            dsplay_name: user.user_metadata.name || "ななしさん",
-            content: content,
-        }
-
-        await channel.send({
-            type: "broadcast",
-            event: "chat",
-            payload: payload,
-        });
-    }, [channel, user])
 
 
     useEffect(() => {
@@ -113,19 +68,6 @@ export function LobbyProviders({ lobbyId, children }: Props) {
         });
         setChannel(channel);
         
-        // チャットの受信
-        channel.on("broadcast", { event: "chat" }, ({ payload }) => {
-            setChats((prev) => [...prev, payload]);
-        });
-        
-        // ユーザー入退室監視
-        channel.on("presence", { event: "sync" }, () => {
-            const state = channel.presenceState<PresenceUser>();
-            const new_users: PresenceUser[] = Object.values(state).flat();
-            setUsers(new_users);
-            console.log(new_users);
-        });
-        
         // ロビーへ参加
         channel.subscribe(async (status) => {
             if (status === "SUBSCRIBED") {
@@ -133,29 +75,40 @@ export function LobbyProviders({ lobbyId, children }: Props) {
                     user_id: user.id,
                     display_name: user?.user_metadata?.name || "ななしさん",
                 });
-                console.log("こんにちは！"+user.user_metadata.name+"さん");
             }
         });
 
         // ロビーの設定情報取得
         fetchLobby();
-        
+
         return () => {
             supabaseClient.removeChannel(channel);
         }
     }, [fetchLobby, lobbyId, supabaseClient, user])
+
     
+    // チャンネルの取得
+    useEffect(() => {
+        if(!user) return;
+        const channel = supabaseClient.channel(String(lobbyId), {
+            config: {
+                presence: { key: user.id },
+                broadcast: {self: true}
+            }
+        });
+        setChannel(channel);
+    },[lobbyId, supabaseClient, user]);
+
     if (!lobby || !channel) {
         return <div>Loading...</div>
     }
     
     return (
-        <LobbyContext.Provider value={{ lobby, channel, users, chats, isStudyTime, setIsStudyTime, sendMessage }}>
+        <LobbyContext.Provider value={{ isLoading, lobby, channel, isStudyTime, setIsStudyTime }}>
             {children}
         </LobbyContext.Provider>
     )
 }
-
 
 export const useLobby = () => {
     const context = useContext(LobbyContext)
