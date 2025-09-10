@@ -4,7 +4,11 @@ import TimerCard from './_components/timer/TimerCard';
 import { LobbyProviders } from './_context/LobbyProviders';
 import ChatCard from './_components/chat/ChatCard';
 
-export default function Lobby({ params }: { params: { id: string } }) {
+interface Props {
+  params: { id: string };
+}
+
+export default function Lobby({ params }: Props) {
     const lobbyId = Number(params.id);
     
     return (
