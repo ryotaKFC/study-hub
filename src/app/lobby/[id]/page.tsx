@@ -30,3 +30,4 @@ export default async function Lobby({ params }: { params: Promise<{ id:string }>
     )
 }
 
+
