@@ -13,7 +13,6 @@ export default function Lobby() {
     return (
         <LobbyProviders lobbyId={lobbyId}>
             <div className="min-h-screen bg-emerald-50">
-
                 <Navigation />
                 <main className="mx-14 my-7">
                     {/* ヘッダー */}
@@ -25,7 +24,7 @@ export default function Lobby() {
                     <TimerCard />
                     
                     <ChatCard />
-                    
+
                     <MemberCard />
                 </main>
             </div>
