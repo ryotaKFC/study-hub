@@ -1,3 +1,5 @@
+"use client"
+
 import useTimer from "../../_hooks/useTimer";
 
 export default function TimerView() {

@@ -1,14 +1,15 @@
-"use client"
-
-import { useParams } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
 import MemberCard from './_components/members/MemberCard';
 import TimerCard from './_components/timer/TimerCard';
 import { LobbyProviders } from './_context/LobbyProviders';
 import ChatCard from './_components/chat/ChatCard';
 
-export default function Lobby() {
-    const lobbyId = Number(useParams().id);
+type Props = {
+    params: { id: string };
+}
+
+export default function Lobby({ params }: Props) {
+    const lobbyId = Number(params.id);
     
     return (
         <LobbyProviders lobbyId={lobbyId}>
