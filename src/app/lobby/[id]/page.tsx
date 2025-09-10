@@ -30,3 +30,4 @@ export default function Lobby({ params }: { params: { id: string } }) {
     )
 }
 
+
