@@ -81,9 +81,9 @@ export function LobbyProviders({ lobbyId, children }: Props) {
             return;
         }
         setLobby(data as Lobby);
-        // return data as Lobby;
     }, [lobbyId, supabaseClient])
 
+    // メッセージ送信
     const sendMessage = useCallback(async (content: string) => {
         if(!content.trim() || !user || !channel) return;
 
@@ -107,7 +107,8 @@ export function LobbyProviders({ lobbyId, children }: Props) {
         // 参加ロビーの決定
         const channel = supabaseClient.channel(String(lobbyId), {
             config: {
-                presence: { key: user.id }
+                presence: { key: user.id },
+                broadcast: {self: true}
             }
         });
         setChannel(channel);
@@ -130,8 +131,7 @@ export function LobbyProviders({ lobbyId, children }: Props) {
             if (status === "SUBSCRIBED") {
                 await channel.track({
                     user_id: user.id,
-                    display_name: user?.user_metadata?.name || "ななしさん"
-                    
+                    display_name: user?.user_metadata?.name || "ななしさん",
                 });
                 console.log("こんにちは！"+user.user_metadata.name+"さん");
             }
@@ -146,7 +146,7 @@ export function LobbyProviders({ lobbyId, children }: Props) {
     }, [fetchLobby, lobbyId, supabaseClient, user])
     
     if (!lobby || !channel) {
-        return <div>loading....</div>
+        return <div>Loading...</div>
     }
     
     return (

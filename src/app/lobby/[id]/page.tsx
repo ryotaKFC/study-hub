@@ -1,18 +1,19 @@
-"use client"
-
-import { useParams } from 'next/navigation';
-import TimerCard from "./components/TimerCard";
-import MemberCard from "./components/MemberCard";
 import { Navigation } from '@/components/navigation';
-import { LobbyProviders } from './components/LobbyProviders';
+import MemberCard from './_components/members/MemberCard';
+import TimerCard from './_components/timer/TimerCard';
+import { LobbyProviders } from './_context/LobbyProviders';
+import ChatCard from './_components/chat/ChatCard';
 
-export default function Lobby() {
-    const lobbyId = Number(useParams().id);
+type Props = {
+    params: { id: string };
+}
+
+export default function Lobby({ params }: Props) {
+    const lobbyId = Number(params.id);
     
     return (
         <LobbyProviders lobbyId={lobbyId}>
             <div className="min-h-screen bg-emerald-50">
-
                 <Navigation />
                 <main className="mx-14 my-7">
                     {/* ヘッダー */}
@@ -22,6 +23,8 @@ export default function Lobby() {
                     </div>
 
                     <TimerCard />
+                    
+                    <ChatCard />
 
                     <MemberCard />
                 </main>
