@@ -1,18 +1,16 @@
-'use client'
+"use client"
 
 import {useState, useEffect} from 'react';
-import { useLobby } from '../_context/LobbyProviders';
+import { useLobby } from '../../_context/LobbyProviders';
 
-
-export default function useTimer() {
+export default function Time() {
     const { lobby, setIsStudyTime } = useLobby();
 
     const studyTime = lobby.study_min * 60;
-    const breakTime = (lobby.break_min ?? 0) * 60;
+    const breakTime = lobby.break_min * 60;
     const lobbyStartTime = Math.floor(new Date(lobby.start_time).getTime() / 1000);
     
     const [seconds, setSeconds] = useState(0);
-
     useEffect(() => {
         const interval = setInterval(() => {
             const currentTime = Math.floor(Date.now() / 1000);
@@ -39,7 +37,9 @@ export default function useTimer() {
 
         return minStr + ":" + secStr;
     }
-
-
-    return formatedTime(seconds);
-}
+    return (
+        <h1 className='p-7 text-center text-8xl bg-emerald-100 rounded-xl text-emerald-900'>
+            {formatedTime(seconds)}
+        </h1 >
+    )
+}   
