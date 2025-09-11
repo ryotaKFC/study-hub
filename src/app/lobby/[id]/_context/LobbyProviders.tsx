@@ -54,8 +54,6 @@ export function LobbyProviders({ lobbyId, children }: Props) {
         setLobby(data as Lobby);
     }, [lobbyId, supabaseClient])
 
-
-
     useEffect(() => {
         if(!user) return;
 
@@ -67,16 +65,6 @@ export function LobbyProviders({ lobbyId, children }: Props) {
             }
         });
         setChannel(channel);
-        
-        // ロビーへ参加
-        channel.subscribe(async (status) => {
-            if (status === "SUBSCRIBED") {
-                await channel.track({
-                    user_id: user.id,
-                    display_name: user?.user_metadata?.name || "ななしさん",
-                });
-            }
-        });
 
         // ロビーの設定情報取得
         fetchLobby();
