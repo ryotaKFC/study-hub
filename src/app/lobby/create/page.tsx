@@ -30,11 +30,10 @@ export default function Main() {
                     
                     <form onSubmit={handleCreate} className="flex flex-col m-auto space-y-4">
                         <Input type="text" placeholder="ロビー名" className="text-center" />
-                        <div className="flex justify-center text-center">
+                        <div className="flex justify-center space-x-2">
                             <Checkbox id="isPrivateRoom" className="" />
                             <Label htmlFor="isPrivateRoom">非公開</Label>
                         </div>
-
                     </form>
                 </Card>
             </main>
