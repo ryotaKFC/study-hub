@@ -24,7 +24,7 @@ export function useLobbies() {
             .order("created_at", { ascending: false});
         if (error) {
             console.error(error);
-            return
+            return;
         }
         setLobbies(data as Lobby[]);
     }, [supabaseClient])
@@ -61,7 +61,6 @@ export function useLobbies() {
             supabaseClient.removeChannel(channel);
         };
     }, [fetchLobbies, supabaseClient]);
-
 
     return { lobbies,  createLobby };
 }

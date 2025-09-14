@@ -6,7 +6,7 @@ import { useEffect, useState, type MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
 import type { User } from "@supabase/supabase-js";
 
-const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、あなたの自習の記録が残ります)";
+const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、みんなで勉強することができます)";
 
 export function StudyButton() {
     const [user, setUser] = useState<User | null>(null);
@@ -26,7 +26,7 @@ export function StudyButton() {
     function handleClick(e: MouseEvent<HTMLButtonElement>) {
         if (user) return;
         if (!window.confirm(CONFIRMATION_MESSAGE)) {
-            e.preventDefault();
+            e.preventDefault()
         }
     }
         

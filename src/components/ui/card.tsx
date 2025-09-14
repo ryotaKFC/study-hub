@@ -5,9 +5,9 @@ type CardProps = {
     className?: string;
 };
 
-export default function card({ children }: CardProps, className = "") {
+export default function Card({ children, className }: CardProps ) {
     return (
-        <div className={`space-y-7 mx-auto mt-5 p-6 flex flex-col bg-white rounded-xl shadow-md ${className}`}>
+        <div className={`space-y-7 mx-3.5 mt-5 p-6 bg-white rounded-xl shadow-md ${className}`}>
             {children}
         </div>
     );
