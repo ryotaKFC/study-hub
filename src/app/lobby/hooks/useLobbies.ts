@@ -62,6 +62,5 @@ export function useLobbies() {
         };
     }, [fetchLobbies, supabaseClient]);
 
-
     return { lobbies,  createLobby };
 }

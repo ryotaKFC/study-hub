@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Button } from "@/components/ui/button"
 import LoginButton from './login-button';
+import Link from 'next/link';
 
 export function Navigation() {
     return (
@@ -8,14 +9,16 @@ export function Navigation() {
             {/* logo */}
             <div className="flex items-center space-x-4">
                 <Image src="../book.svg" alt="site icon" width={50} height={50} />
-                <span className="text-xl hidden sm:inline">Study Hub</span>
+                <Link href="/">
+                    <span className="text-xl hidden sm:inline">Study Hub</span>
+                </Link>
             </div>
 
             {/* リンク */}
             <div className="hidden sm:inline">
-                <Button variant="link">ホーム</Button>
-                <Button variant="link">ホーム</Button>
-                <Button variant="link">ホーム</Button>
+                <Button variant="link">ひとりで</Button>
+                <Button variant="link">ホームへ</Button>
+                <Button variant="link">みんなで</Button>
             </div>
 
             {/* ログイン */}

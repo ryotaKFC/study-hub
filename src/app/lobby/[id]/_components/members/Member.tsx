@@ -16,9 +16,12 @@ export default function Member() {
 
     useEffect(() => {
         if (!user) return;
+        
         channel.on("presence", { event: "sync" }, () => {
             const state = channel.presenceState<PresenceMember>();
             const new_members: PresenceMember[] = Object.values(state).flat();
+
+
             setMembers(new_members);
             console.log(new_members);
         });
@@ -36,7 +39,7 @@ export default function Member() {
     return (
         <div>
             {members.map(member => 
-                    <li key={member.user_id}>
+                    <li key={member.user_id} className="list-item ">
                         {member.display_name}
                     </li>
                 )}

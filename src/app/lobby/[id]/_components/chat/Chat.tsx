@@ -65,7 +65,7 @@ export default function Chat() {
                 <input value={newChat}
                     onChange={(e) => setNewChat(e.target.value)}
                     placeholder="絵文字のみ使えます！"
-                    className="border "
+                    className="border"
                 />
                 <Button type="submit">送信</Button>
             </form>
