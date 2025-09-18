@@ -1,8 +1,16 @@
 export type Lobby = {
     id: number;
     name: string;
-    start_time: string;
-    study_min: number;
-    break_min: number;
-    created_at: string;
+    startTime: string;
+    studyMin: number;
+    breakMin: number;
+    isPrivate: boolean;
+}
+
+export type LobbyCreationDate = {
+    name: string;
+    startTime: string;
+    studyMin: number;
+    breakMin: number;
+    isPrivate: boolean;
 }

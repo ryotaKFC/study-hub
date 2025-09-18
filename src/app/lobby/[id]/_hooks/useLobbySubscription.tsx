@@ -29,7 +29,6 @@ export function useLobbySubscription({ lobbyId }: Props) {
                 broadcast: {self: true}
             }
         });
-
         
         // チャットの購読
         newChannel.on("broadcast", { event: "chat" }, ({ payload }) => {
@@ -54,6 +53,10 @@ export function useLobbySubscription({ lobbyId }: Props) {
         });
 
         setChannel(newChannel);
+        return (() => {
+            supabaseClient.removeChannel(newChannel);
+        })
+
 
     }, [lobbyId, supabaseClient, user]);
     

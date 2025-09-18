@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import {useSupabase} from "@/lib/supabase/supabase-provider"
-import { Lobby } from "@/types/Lobby"
+import { Lobby } from "@/types/lobby"
 
 type Props = {
     lobbyId: number;

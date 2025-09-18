@@ -9,7 +9,6 @@ export default function Chat() {
 
     const [ newChat, setNewChat ] = useState("");
 
-
     const handleSubmit = useCallback( async (e: React.FormEvent) => {
         e.preventDefault();
         await sendMessage(newChat);

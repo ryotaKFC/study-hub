@@ -6,9 +6,9 @@ import { useLobby } from '../../_context/LobbyProviders';
 export default function Time() {
     const { lobby, setIsStudyTime } = useLobby();
 
-    const studyTime = lobby.study_min * 60;
-    const breakTime = lobby.break_min * 60;
-    const lobbyStartTime = Math.floor(new Date(lobby.start_time).getTime() / 1000);
+    const studyTime = lobby.studyMin * 60;
+    const breakTime = lobby.breakMin * 60;
+    const lobbyStartTime = Math.floor(new Date(lobby.startTime).getTime() / 1000);
     
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
