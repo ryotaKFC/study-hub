@@ -38,7 +38,7 @@ export default function Time() {
         return minStr + ":" + secStr;
     }
     return (
-        <h1>
+        <h1 className='text-emerald-900 text-center text-6xl sm:text-8xl'>
             {formatedTime(seconds)}
         </h1 >
     )

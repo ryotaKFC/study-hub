@@ -13,7 +13,7 @@ export default async function Lobby({ params }: { params: Promise<{ id:string }>
         <LobbyProviders lobbyId={lobbyId}>
             <div className="min-h-screen bg-emerald-50">
                 <Navigation />
-                <main className="mx-14 my-7">
+                <main className="mx-5 sm:mx-14 my-7">
                     {/* ヘッダー */}
                     <LobbyTitle />
 
