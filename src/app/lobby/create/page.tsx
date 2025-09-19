@@ -71,7 +71,7 @@ export default function Main() {
                             <Checkbox id="isPrivate" className="" checked={isPrivate} onCheckedChange={(checked) => setIsPrivate(checked === true)} />
                             <Label htmlFor="isPrivate">非公開</Label>
                         </div>
-                        <Button type="submit" disabled={!lobbyName ||error ? true : false}>作成</Button>
+                        <Button type="submit" disabled={!lobbyName || error ? true : false}>作成</Button>
                     </form>
                 </Card>
             </main>

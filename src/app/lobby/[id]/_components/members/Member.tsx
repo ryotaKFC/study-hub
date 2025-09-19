@@ -15,7 +15,7 @@ export default function Member() {
     return (
         <div>
             {members.map(member => 
-                    <li key={member.user_id} className="list-item ">
+                    <li key={member.user_id} className="list-none flex flex-row">
                         {member.display_name}
                     </li>
                 )}
