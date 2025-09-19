@@ -57,7 +57,7 @@ export default function Main() {
             <Navigation />
             <main>
                 <h1 className="font-bold text-3xl text-center m-5">ロビーの作成</h1>
-                <Card className="">
+                <Card>
                     <form onSubmit={handleCreate} className="flex flex-col m-auto space-y-4">
                         <Input type="text" placeholder="ロビー名" className="text-center" onChange={(e) => varidationLobbyName(e.target.value)} />
                         {error && <p className="text-red-500 text-xs">{error}</p>}
