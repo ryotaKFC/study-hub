@@ -1,9 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
-
-type type = {
-    default: string;
-    shadow: string;
-}
+import { ReactNode } from "react";
 
 type CardProps = {
     children: ReactNode;
