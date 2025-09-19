@@ -5,7 +5,7 @@ import {useSupabase} from "@/lib/supabase/supabase-provider"
 import { Lobby } from "@/types/lobby"
 
 type Props = {
-    lobbyId: number;
+    lobbyId: string;
 }
 
 export function useLobbyData({ lobbyId }: Props) {

@@ -1,5 +1,5 @@
 export type Lobby = {
-    id: number;
+    id: string;
     name: string;
     startTime: string;
     studyMin: number;

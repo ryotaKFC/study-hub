@@ -42,7 +42,7 @@ export async function getLobbies() {
     return (data as Lobby[]);
 }
 
-export async function getLobbyById(lobbyId: number) {
+export async function getLobbyById(lobbyId: string) {
     const supabaseClient = supabase;
     const { data, error} = await supabaseClient
         .from("lobbies")

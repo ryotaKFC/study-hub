@@ -7,7 +7,7 @@ import { useLobbySubscription } from "../_hooks/useLobbySubscription";
 import { useLobbyData } from "../_hooks/useLobbyData";
 
 type Props = {
-    lobbyId: number;
+    lobbyId: string;
     children: React.ReactNode;
 }
 

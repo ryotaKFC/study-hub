@@ -2,12 +2,14 @@
 
 import { useLobby } from "../../_context/LobbyProviders";
 import { Button } from "@/components/ui/button";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function Chat() {
-    const { chats, sendMessage } = useLobby();
+    const { chats, isStudyTime , sendMessage } = useLobby();
 
     const [ newChat, setNewChat ] = useState("");
+
+    const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const handleSubmit = useCallback( async (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,23 +17,32 @@ export default function Chat() {
         setNewChat("");
     }, [newChat, sendMessage])
 
+    useEffect(() => {
+        if(chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    })
+
     return (
         <>
-            <div className="p-7 text-center text-xl rounded-xl text-emerald-900">
-                {chats.map(chat => 
+            <div 
+                ref={chatContainerRef}
+                className="p-7 text-xl rounded-xl list-none bg-emerald-100/30 h-60 overflow-y-auto">
+                {chats.slice(-20).map(chat => 
                     <li key={chat.chatId}>
-                        {chat.content}
+                        {chat.displayName}：{chat.content}
                     </li>
                 )}
             </div>
-            <form onSubmit={handleSubmit} className="w-full">
-                <input value={newChat}
-                    onChange={(e) => setNewChat(e.target.value)}
-                    placeholder="絵文字のみ使えます！"
-                    className="border"
-                />
-                <Button type="submit">送信</Button>
-            </form>
+                <form onSubmit={handleSubmit} className="w-full flex">
+                    <input
+                        value={newChat}
+                        onChange={(e) => setNewChat(e.target.value)}
+                        placeholder="休憩時間のみチャットは利用できます！"
+                        className="border w-full flex flex-row-reverse"
+                    />
+                    <Button type="submit" disabled={isStudyTime ? true:false} >送信</Button>
+                </form>
         </>
     )
 }
