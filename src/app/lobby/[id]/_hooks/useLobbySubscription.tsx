@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import type { Member, Chat } from "../_context/LobbyProviders"
 
 type Props = {
-    lobbyId: number
+    lobbyId: string
 }
 
 export function useLobbySubscription({ lobbyId }: Props) {

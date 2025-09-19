@@ -7,7 +7,7 @@ import LobbyTitle from './_components/LobbyTitle';
 
 
 export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
-    const lobbyId = Number((await params).id);
+    const lobbyId = (await params).id;
     
     return (
         <LobbyProviders lobbyId={lobbyId}>
