@@ -1,3 +1,5 @@
+"use server"
+
 import { supabase } from "@/lib/supabase/client";
 import type { Lobby, LobbyCreationDate } from "@/types/lobby";
 
@@ -32,7 +34,7 @@ export async function getLobbies() {
     const { data, error } = await supabaseClient
         .from("lobbies")
         .select("*")
-        .order("created_at", { ascending: false});
+        .order("createdAt", { ascending: false});
     if(error) {
         console.error("ロビーの取得に失敗", error)
         throw error;
@@ -49,7 +51,7 @@ export async function getLobbyById(lobbyId: number) {
         .single();
     if(error) {
         console.error(error);
-        return;
+        throw error;
     }
     return (data as Lobby);
 }
