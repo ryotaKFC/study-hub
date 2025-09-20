@@ -12,12 +12,14 @@ export default function TimerCard() {
     "🎯 集中して勉強しましょう！チャットは休憩時間に利用できます" :
     "🍵 少し休憩しましょう！チャットで雑談もOKです";
     return (
-        <Card>
+        <Card variant="background">
             <h1 className="text-3xl font-bold text-emerald-800 text-center">{titleText}</h1>
-            <Timer />
-            <div className="bg-emerald-50 rounded-sm text-center p-4">
+            <Card className="p-7 bg-emerald-100 ">
+                <Timer /> 
+            </Card>
+            <Card className="bg-emerald-50 text-center">
                 <p className="text-emerald-800">{discriptionText}</p>
-            </div>
+            </Card>
         </Card>
     )
 }
