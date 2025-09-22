@@ -13,7 +13,6 @@ export default function Card({ children, className, variant = "default" }: CardP
     switch (variant) {
         case "background":
             variantClass = "shadow-md bg-white";
-            console.log("o");
             break;
         default:
             variantClass = "";

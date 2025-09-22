@@ -13,6 +13,7 @@ import { createLobby } from "@/lib/database/lobbies";
 import type {LobbyCreationDate} from "@/types/lobby"
 import z from "zod";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const lobbyNameSchema = z.string()
     .min(2, {message: "ロビー名は2文字以上で入力してください!"})
@@ -20,9 +21,11 @@ const lobbyNameSchema = z.string()
 
 
 export default function Main() {
+    const searchParams = useSearchParams();
+    const initialPrivate = searchParams.get("isPrivate") === "true";
     const [error, setError] = useState("");
     const [lobbyName, setLobbyName] = useState("");
-    const [isPrivate, setIsPrivate] = useState<boolean>(false);
+    const [isPrivate, setIsPrivate] = useState<boolean>(initialPrivate);
     const [studyMin, setStudyMin] = useState([25])
     const [breakMin, setBreakMin] = useState([5])
 
