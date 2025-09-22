@@ -36,10 +36,6 @@ const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
 export function LobbyProviders({ lobbyId, children }: Props) {
     const [isStudyTime, setIsStudyTime] = useState(true);
-    // const [channel, setChannel] = useState<RealtimeChannel | null>(null);
-    // const [chats, setChats] = useState<Chat[]>([]);
-    // const [members, setMembers] = useState<Member[]>([]);
-    // const [lobby, setLobby] = useState<Lobby | null>(null);
     const { lobby } = useLobbyData({lobbyId});
 
     const { channel, chats, members } = useLobbySubscription({lobbyId});
@@ -65,8 +61,7 @@ export function LobbyProviders({ lobbyId, children }: Props) {
     }, [channel, user])
 
 
-
-    if (!lobby || !channel) {
+    if (!lobby) {
         return <div>Loading...</div>
     }
     

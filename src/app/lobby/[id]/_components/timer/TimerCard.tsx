@@ -1,16 +1,17 @@
 "use client"
 
+import { useAuth } from "@/lib/supabase/auth-provider";
 import { useLobby } from "../../_context/LobbyProviders";
 import Timer from "./Timer";
 import Card from "@/components/ui/card";
 
 export default function TimerCard() {
     const { isStudyTime } = useLobby();
-
     const titleText = isStudyTime ? "勉強中..." : "休憩時間";
     const discriptionText = isStudyTime ? 
     "🎯 集中して勉強しましょう！チャットは休憩時間に利用できます" :
     "🍵 少し休憩しましょう！チャットで雑談もOKです";
+
     return (
         <Card variant="background">
             <h1 className="text-3xl font-bold text-emerald-800 text-center">{titleText}</h1>
