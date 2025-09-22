@@ -29,6 +29,8 @@ export default function Main() {
     const [studyMin, setStudyMin] = useState([25])
     const [breakMin, setBreakMin] = useState([5])
 
+    const [lobbyData, setLobbyData] = useState<LobbyCreationDate | null>()
+
     const router = useRouter();
 
     function varidationLobbyName(name: string) {
@@ -43,6 +45,7 @@ export default function Main() {
 
     async function handleCreate(e: React.FormEvent) {
         e.preventDefault();
+        if(lobbyData) return;
         const newLobbyData: LobbyCreationDate = {
             name: lobbyName,
             startTime: (new Date()).toString(),
@@ -50,9 +53,10 @@ export default function Main() {
             breakMin: breakMin[0],
             isPrivate: isPrivate,
         }
+        setLobbyData(newLobbyData)
         const newLobby = await createLobby(newLobbyData);
-
         router.push("/lobby/"+newLobby?.id)
+        setLobbyData(null);
     }
 
     return (
