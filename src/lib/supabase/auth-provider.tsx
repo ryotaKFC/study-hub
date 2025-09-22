@@ -38,6 +38,9 @@ export function AuthProviders({children}: Props) {
     async function signInWithGoogle () {
         const { error } = await supabaseClient.auth.signInWithOAuth({
             provider: "google",
+            options: {
+                redirectTo: window.location.href, // 直前のURLに戻す
+            },
         })
         if (error) {
             console.error(error)
