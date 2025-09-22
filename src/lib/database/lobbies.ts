@@ -32,6 +32,7 @@ export async function getLobbies() {
     const { data, error } = await supabaseClient
         .from("lobbies")
         .select("*")
+        .eq("isPrivate", "false")
         .order("createdAt", { ascending: false});
     if(error) {
         console.error("ロビーの取得に失敗", error)
