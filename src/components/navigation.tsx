@@ -16,13 +16,6 @@ export function Navigation() {
                 </Link>
             </div>
 
-            {/* リンク */}
-            <div className="hidden sm:inline">
-                <Button variant="link">ひとりで</Button>
-                <Button variant="link">ホームへ</Button>
-                <Button variant="link">みんなで</Button>
-            </div>
-
             {/* ログイン */}
             <div className="w-40 text-center">
                 <LoginButton />
