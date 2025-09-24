@@ -12,7 +12,7 @@ export default function LoginButton() {
         return (
             <div className="flex items-center gap-2">
                 <Button variant="link" onClick={signInWithGoogle} >
-                    ログイン
+                    Google ログイン
                 </Button>
             </div>
         )

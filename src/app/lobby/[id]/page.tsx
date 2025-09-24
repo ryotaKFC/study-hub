@@ -4,6 +4,7 @@ import TimerCard from './_components/timer/TimerCard';
 import { LobbyProviders } from './_context/LobbyProviders';
 import ChatCard from './_components/chat/ChatCard';
 import LobbyTitle from './_components/LobbyTitle';
+import Tips from './_components/Tips';
 
 
 export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
@@ -22,6 +23,8 @@ export default async function Lobby({ params }: { params: Promise<{ id:string }>
                     <ChatCard />
 
                     <MemberCard />
+
+                    <Tips />
                 </main>
             </div>
         </LobbyProviders>

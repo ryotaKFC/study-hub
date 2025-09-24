@@ -22,7 +22,12 @@ export function useLobbies() {
             .channel("public:lobbies")
             .on(
                 "postgres_changes",
-                { event: "INSERT", schema: "public", table: "lobbies"},
+                { 
+                    event: "INSERT", 
+                    schema: "public", 
+                    table: "lobbies",
+                    filter: "isPrivate=eq.false",
+                },
                 (payload) => {
                     setLobbies(prev => [payload.new as Lobby, ...prev]);
                 }

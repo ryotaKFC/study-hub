@@ -6,8 +6,6 @@ import type { Lobby, LobbyCreationDate } from "@/types/lobby";
 
 export async function createLobby(lobbyData: LobbyCreationDate) {
     const supabaseClient = supabase;
-    // const { data: {user}} = await supabaseClient.auth.getUser();
-    // if (!user) throw new Error("ユーザーが認証されていません");
     if (!lobbyData.name.trim()) return;
 
     const { data, error } = await supabaseClient
@@ -34,6 +32,7 @@ export async function getLobbies() {
     const { data, error } = await supabaseClient
         .from("lobbies")
         .select("*")
+        .eq("isPrivate", "false")
         .order("createdAt", { ascending: false});
     if(error) {
         console.error("ロビーの取得に失敗", error)

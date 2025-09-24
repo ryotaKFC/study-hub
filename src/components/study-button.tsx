@@ -19,7 +19,6 @@ export function StudyButton() {
         } = await supabaseClient.auth.getUser()
             setUser(user)
         }
-
         getUser()
     }, [supabaseClient.auth])
 
@@ -32,7 +31,7 @@ export function StudyButton() {
         
         return (
             <>
-                <Link href="/lobby">
+                <Link href="/lobby/create?isPrivate=true">
                     <Button variant="default" onClick={handleClick}>
                         一人で勉強！
                     </Button>
