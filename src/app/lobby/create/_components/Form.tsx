@@ -22,13 +22,11 @@ type Props = {
 }
 
 export default function Form({propIsPrivate}: Props) {
-        const searchParams = useSearchParams();
-        const initialPrivate = searchParams.get("isPrivate") === "true";
         const [error, setError] = useState("");
         const [lobbyName, setLobbyName] = useState("");
-        const [isPrivate, setIsPrivate] = useState<boolean>(initialPrivate);
-        const [studyMin, setStudyMin] = useState([25])
-        const [breakMin, setBreakMin] = useState([5])
+        const [isPrivate, setIsPrivate] = useState<boolean>(propIsPrivate);
+        const [studyMin, setStudyMin] = useState([25]);
+        const [breakMin, setBreakMin] = useState([5]);
     
         const [lobbyData, setLobbyData] = useState<LobbyCreationDate | null>()
     

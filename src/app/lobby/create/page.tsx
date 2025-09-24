@@ -14,7 +14,7 @@ export default async function Main({searchParams}: MainParams) {
             <main>
                 <h1 className="font-bold text-3xl text-center m-5">ロビーの作成</h1>
                 <Card>
-                    <Form isPrivate={isPrivate} />
+                    <Form propIsPrivate={isPrivate} />
                 </Card>
             </main>
         </div>
