@@ -17,13 +17,13 @@ const lobbyNameSchema = z.string()
     .max(15, {message: "ロビー名は15文字以内で入力してください!"});
 
 type Props = {
-    propIsPrivate: boolean,
+    isPrivateParam: boolean,
 }
 
-export default function Form({propIsPrivate}: Props) {
+export default function Form({isPrivateParam}: Props) {
         const [error, setError] = useState("");
         const [lobbyName, setLobbyName] = useState("");
-        const [isPrivate, setIsPrivate] = useState<boolean>(propIsPrivate);
+        const [isPrivate, setIsPrivate] = useState<boolean>(isPrivateParam);
         const [studyMin, setStudyMin] = useState([25]);
         const [breakMin, setBreakMin] = useState([5]);
     
@@ -73,6 +73,5 @@ export default function Form({propIsPrivate}: Props) {
             </div>
             <Button type="submit" disabled={!lobbyName || error ? true : false}>作成</Button>
         </form>
-
     )
 }
