@@ -11,7 +11,6 @@ import { createLobby } from "@/lib/database/lobbies";
 import type {LobbyCreationDate} from "@/types/lobby"
 import z from "zod";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 
 const lobbyNameSchema = z.string()
     .min(2, {message: "ロビー名は2文字以上で入力してください!"})

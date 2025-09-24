@@ -6,7 +6,7 @@ type MainParams = {
     searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Main({searchParams}: MainParams) {
+export default function Main({searchParams}: MainParams) {
     const isPrivate = searchParams.isPrivate === "true";
     return (
         <div>
