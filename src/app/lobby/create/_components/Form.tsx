@@ -58,14 +58,14 @@ export default function Form({isPrivateParam}: Props) {
         setLobbyData(null);
     }
     return (
-        <form onSubmit={handleCreate} className="flex flex-col m-auto space-y-4">
+        <form onSubmit={handleCreate} className="flex flex-col space-y-4 px-3 sm:px-5">
             <Input type="text" placeholder="ロビー名" className="text-center" onChange={(e) => varidationLobbyName(e.target.value)} />
-            {error && <p className="text-red-500 text-xs">{error}</p>}
-            <Label>勉強時間<p>（{studyMin}分）</p></Label>
-            <Slider defaultValue={[25]} min={0} max={60} step={5} onValueChange={setStudyMin} className="w-[60%]"/>
+            {error && <p className="text-red-500 text-xs mx-auto">{error}</p>}
+            <Label className="mx-auto">勉強時間<p>（{studyMin}分）</p></Label>
+            <Slider defaultValue={[25]} min={0} max={60} step={5} onValueChange={setStudyMin} className="mx-auto"/>
 
-            <Label>休憩時間<p>（{breakMin}分）</p></Label>
-            <Slider defaultValue={[5]} min={0} max={15} step={1} onValueChange={setBreakMin} className="w-[60%]" />
+            <Label className="mx-auto">休憩時間<p>（{breakMin}分）</p></Label>
+            <Slider defaultValue={[5]} min={0} max={15} step={1} onValueChange={setBreakMin} className=" mx-auto" />
             
             <div className="flex justify-center space-x-2">
                 <Checkbox id="isPrivate" className="" checked={isPrivate} onCheckedChange={(checked) => setIsPrivate(checked === true)} />

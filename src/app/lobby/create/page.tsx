@@ -10,7 +10,7 @@ export default async function Page( {searchParams}: { searchParams: Promise<{[ke
             <Navigation />
             <main>
                 <h1 className="font-bold text-3xl text-center m-5">ロビーの作成</h1>
-                <Card>
+                <Card variant="background" className="mx-3 sm:mx-[10%]">
                     <Form isPrivateParam={isPrivate === "true"} />
                 </Card>
             </main>
