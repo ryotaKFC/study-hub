@@ -58,7 +58,7 @@ export default function Form({isPrivateParam}: Props) {
         setLobbyData(null);
     }
     return (
-        <form onSubmit={handleCreate} className="flex flex-col space-y-4 px-3 sm:px-5">
+        <form onSubmit={handleCreate} className="flex flex-col space-y-4">
             <Input type="text" placeholder="ロビー名" className="text-center" onChange={(e) => varidationLobbyName(e.target.value)} />
             {error && <p className="text-red-500 text-xs mx-auto">{error}</p>}
             <Label className="mx-auto">勉強時間<p>（{studyMin}分）</p></Label>

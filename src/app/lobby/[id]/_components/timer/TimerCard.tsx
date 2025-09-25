@@ -1,6 +1,5 @@
 "use client"
 
-import { useAuth } from "@/lib/supabase/auth-provider";
 import { useLobby } from "../../_context/LobbyProviders";
 import Timer from "./Timer";
 import Card from "@/components/ui/card";
