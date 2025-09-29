@@ -5,6 +5,7 @@ export type Lobby = {
     studyMin: number;
     breakMin: number;
     isPrivate: boolean;
+    location: {lat:number, lng:number};
 }
 
 export type LobbyCreationDate = {
@@ -13,4 +14,5 @@ export type LobbyCreationDate = {
     studyMin: number;
     breakMin: number;
     isPrivate: boolean;
+    location: {lat:number, lng:number};
 }

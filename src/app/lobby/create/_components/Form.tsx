@@ -76,6 +76,7 @@ export default function Form({isPrivateParam}: Props) {
             studyMin: studyMin[0],
             breakMin: breakMin[0],
             isPrivate: isPrivate,
+            location: point
         }
         setLobbyData(newLobbyData)
         const newLobby = await createLobby(newLobbyData);

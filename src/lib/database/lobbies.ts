@@ -15,8 +15,8 @@ export async function createLobby(lobbyData: LobbyCreationDate) {
             studyMin: lobbyData.studyMin,
             breakMin: lobbyData.breakMin,
             startTime: new Date(),
-            location: null,
             isPrivate: lobbyData.isPrivate,
+            location: lobbyData.location,
         }])
         .select("*")
         .single();
