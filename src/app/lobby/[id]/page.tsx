@@ -5,6 +5,7 @@ import { LobbyProviders } from './_context/LobbyProviders';
 import ChatCard from './_components/chat/ChatCard';
 import LobbyTitle from './_components/LobbyTitle';
 import Tips from './_components/Tips';
+import { WelcomeForm } from './_components/WelcomeForm';
 
 
 export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
@@ -12,6 +13,7 @@ export default async function Lobby({ params }: { params: Promise<{ id:string }>
     
     return (
         <LobbyProviders lobbyId={lobbyId}>
+            <WelcomeForm />
             <div className="min-h-screen bg-emerald-50">
                 <Navigation />
                 <main className="mx-5 sm:mx-14 my-7">
