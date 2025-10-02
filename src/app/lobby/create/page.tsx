@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/navigation";
 import Card from "@/components/ui/card";
 import LobbyForm from "@/features/lobby/create/lobby-form";
-import MapProvider from "@/features/maps/MapProvider";
+import MapProvider from "@/features/maps/map-provider";
 
 
 export default async function Page( {searchParams}: { searchParams: Promise<{[key: string]: string | undefined}>}) {

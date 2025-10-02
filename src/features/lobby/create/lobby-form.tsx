@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { AdvancedMarker, Map, MapMouseEvent, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { LobbyCreationDate } from "../types/lobby";
 import { insertLobby } from "../api/insert-lobby";
+import { MapControls } from "@/features/maps/map-controls";
 
 
 const lobbyNameSchema = z.string()
@@ -135,6 +136,7 @@ export default function LobbyForm({isPrivateParam}: Props) {
                 >
                 
                 {point && <AdvancedMarker position={point} />}
+                <MapControls location={point}/>
             </Map>
 
             <Button type="submit" disabled={!lobbyName || !placeName || error ? true : false}>作成</Button>
