@@ -1,33 +1,32 @@
 import { Navigation } from '@/components/navigation';
-import MemberCard from './_components/members/MemberCard';
-import TimerCard from './_components/timer/TimerCard';
-import { LobbyProviders } from './_context/LobbyProviders';
-import ChatCard from './_components/chat/ChatCard';
-import LobbyTitle from './_components/LobbyTitle';
-import Tips from './_components/Tips';
+import { fetchLobbyById } from '@/features/lobby/api/fetch-lobby';
+import Chat from '@/features/lobby/detail/components/lobby-chat';
+import Member from '@/features/lobby/detail/components/lobby-member';
+import Timer from '@/features/lobby/detail/components/lobby-timer';
+import Tips from '@/features/lobby/detail/components/lobby-tips';
+import LobbyTitle from '@/features/lobby/detail/components/lobby-title';
+import { WelcomeForm } from '@/features/lobby/detail/components/lobby-welcome-form';
+import { LobbyProvider } from '@/features/lobby/detail/lobby-provider';
 
 
 export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
-    const lobbyId = (await params).id;
-    
+    const lobby = await fetchLobbyById((await params).id)
+
     return (
-        <LobbyProviders lobbyId={lobbyId}>
+        <LobbyProvider lobby={lobby}>
+            <WelcomeForm />
             <div className="min-h-screen bg-emerald-50">
                 <Navigation />
                 <main className="mx-5 sm:mx-14 my-7">
-                    {/* ヘッダー */}
                     <LobbyTitle />
 
-                    <TimerCard />
-                    
-                    <ChatCard />
-
-                    <MemberCard />
-
+                    <Timer />
+                    <Chat />
+                    <Member />
                     <Tips />
                 </main>
             </div>
-        </LobbyProviders>
+        </LobbyProvider>
     )
 }
 
