@@ -8,12 +8,12 @@ import { FormEvent, useState } from "react"
 import { useLobby } from "../lobby-provider";
 
 export function WelcomeForm() {
-    const { setIsFormSubmitted } = useLobby();
+    const { setGoal } = useLobby();
     const [isOpen, setIsOpen] = useState(true);
-    const [goal, setGoal] = useState("");
+    const [newGoal, setNewGoal ] = useState("");
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        setIsFormSubmitted(true);
+        setGoal(newGoal);
         setIsOpen(false);
     }
 
@@ -39,8 +39,8 @@ export function WelcomeForm() {
                             <Label>作業内容</Label>
                             <Input 
                                 id="goal"
-                                value={goal}
-                                onChange={(e) => setGoal(e.target.value)}
+                                value={newGoal}
+                                onChange={(e) => setNewGoal(e.target.value)}
                                 required
                                 />
                         </div>

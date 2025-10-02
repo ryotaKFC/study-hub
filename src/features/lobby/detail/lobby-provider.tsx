@@ -21,6 +21,7 @@ export type Chat = {
 export type Member = {
     user_id: string;
     display_name: string;
+    user_goal: string
 }
 
 type LobbyContextType = {
@@ -29,15 +30,15 @@ type LobbyContextType = {
     chats: Chat[];
     time: string;
     isStudyTime: boolean;
-    setIsFormSubmitted: Dispatch<SetStateAction<boolean>>
+    setGoal: Dispatch<SetStateAction<string>>
     sendMessage: (content: string) => Promise<void>;
 }
 
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
 export function LobbyProvider({ lobby, children }: Props) {
-    const [ isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const { channel, chats, members } = useLobbySubscription(lobby.id, isFormSubmitted);
+    const [ goal, setGoal] = useState("");
+    const { channel, chats, members } = useLobbySubscription(lobby.id, goal);
     const { user } = useAuth();
     const { time, isStudyTime} = usePomodoroTimer(lobby);
 
@@ -65,7 +66,7 @@ export function LobbyProvider({ lobby, children }: Props) {
     }
     
     return (
-        <LobbyContext.Provider value={{ lobby, chats, members, isStudyTime, time, sendMessage, setIsFormSubmitted }}>
+        <LobbyContext.Provider value={{ lobby, chats, members, isStudyTime, time, sendMessage, setGoal }}>
             {children}
         </LobbyContext.Provider>
     )

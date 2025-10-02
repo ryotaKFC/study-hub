@@ -13,7 +13,9 @@ export default function LobbyMember() {
                 <div>
                     {members.map(member => 
                             <li key={member.user_id} className="list-none flex flex-row">
-                                {member.display_name}
+                                <p>
+                                    {member.display_name}：{member.user_goal}
+                                </p>
                             </li>
                         )}
                 </div>
