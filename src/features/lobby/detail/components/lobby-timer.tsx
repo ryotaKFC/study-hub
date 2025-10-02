@@ -1,14 +1,11 @@
 "use client"
 
 import Card from "@/components/ui/card";
-import { usePomodoroTimer } from "../../hooks/use-pomodoro-timer";
 import { useLobby } from "../lobby-provider";
 
 
-export default function Timer() {
-    const { lobby, setIsStudyTime } = useLobby();
-    const { time, isStudyTime } = usePomodoroTimer(lobby);
-    setIsStudyTime(isStudyTime);
+export default function LobbyTimer() {
+    const { time, isStudyTime } = useLobby();
 
     const titleText = isStudyTime ? "勉強中..." : "休憩時間";
     const discriptionText = isStudyTime ? 

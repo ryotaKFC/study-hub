@@ -3,7 +3,7 @@
 import Card from "@/components/ui/card";
 import { useLobby } from "../lobby-provider";
 
-export default function Member() {
+export default function LobbyMember() {
     const { members } = useLobby();
 
     return (

@@ -5,7 +5,7 @@ import Card from "@/components/ui/card";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLobby } from "../lobby-provider";
 
-export default function Chat() {
+export default function LobbyChat() {
     const { chats, isStudyTime , sendMessage } = useLobby();
     const [ newChat, setNewChat ] = useState("");
     const chatContainerRef = useRef<HTMLDivElement>(null);

@@ -1,9 +1,11 @@
+"use server"
+
 import { createClient } from "@/lib/supabase/server";
 import { Lobby, LobbyCreationDate } from "../types/lobby";
 
-const supabaseClient = await createClient();
 
-export async function storeLobby(lobbyData: LobbyCreationDate) {
+export async function insertLobby(lobbyData: LobbyCreationDate) {
+    const supabaseClient = await createClient();
     if (!lobbyData.name.trim()) return;
 
     const { data, error } = await supabaseClient

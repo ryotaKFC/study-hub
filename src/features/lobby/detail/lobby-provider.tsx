@@ -4,6 +4,7 @@ import { createContext, Dispatch, SetStateAction, use, useCallback, useState } f
 import { Lobby } from "../types/lobby";
 import { useLobbySubscription } from "./use-lobby-subscription";
 import { useAuth } from "@/features/auth/auth-provider";
+import { usePomodoroTimer } from "../hooks/use-pomodoro-timer";
 
 type Props = {
     lobby: Lobby;
@@ -26,19 +27,20 @@ type LobbyContextType = {
     lobby: Lobby;
     members: Member[];
     chats: Chat[];
+    time: string;
     isStudyTime: boolean;
-    setIsStudyTime: Dispatch<SetStateAction<boolean>>;
+    setIsFormSubmitted: Dispatch<SetStateAction<boolean>>
     sendMessage: (content: string) => Promise<void>;
 }
 
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
 export function LobbyProvider({ lobby, children }: Props) {
-    const [isStudyTime, setIsStudyTime] = useState(true);
-    const { channel, chats, members } = useLobbySubscription(lobby.id);
-
+    const [ isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const { channel, chats, members } = useLobbySubscription(lobby.id, isFormSubmitted);
     const { user } = useAuth();
-    
+    const { time, isStudyTime} = usePomodoroTimer(lobby);
+
     // メッセージの送信
     const sendMessage = useCallback( async (content: string) => {
         if(!content.trim() || !user || !channel) return;
@@ -63,7 +65,7 @@ export function LobbyProvider({ lobby, children }: Props) {
     }
     
     return (
-        <LobbyContext.Provider value={{ lobby, chats, members, isStudyTime, setIsStudyTime, sendMessage }}>
+        <LobbyContext.Provider value={{ lobby, chats, members, isStudyTime, time, sendMessage, setIsFormSubmitted }}>
             {children}
         </LobbyContext.Provider>
     )

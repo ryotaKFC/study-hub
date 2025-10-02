@@ -1,14 +1,12 @@
 "use client"
 
-import { APIProvider, Map} from '@vis.gl/react-google-maps';
+import { Map } from '@vis.gl/react-google-maps';
 
 export default function MapContent() {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
     return (
-        <APIProvider apiKey={apiKey}>
             <Map
-                id='main-mp'
+                id='main-map'
                 className='w-full h-100 '
                 defaultCenter={{lat: 35.681236, lng: 139.767125 }}
                 defaultZoom={14}
@@ -22,6 +20,5 @@ export default function MapContent() {
 
                 disableDefaultUI
             />
-        </ APIProvider>
     )
 }

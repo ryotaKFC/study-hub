@@ -4,19 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useState } from "react"
+import { useLobby } from "../lobby-provider";
 
 export function WelcomeForm() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [workDetails, setWorkDetails] = useState("");
+    const { setIsFormSubmitted } = useLobby();
+    const [isOpen, setIsOpen] = useState(true);
+    const [goal, setGoal] = useState("");
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setIsFormSubmitted(true);
         setIsOpen(false);
     }
 
-    useEffect(() => {
-        setIsOpen(true);
-    }, []);
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -38,9 +38,9 @@ export function WelcomeForm() {
                         <div>
                             <Label>作業内容</Label>
                             <Input 
-                                id="workDetails"
-                                value={workDetails}
-                                onChange={(e) => setWorkDetails(e.target.value)}
+                                id="goal"
+                                value={goal}
+                                onChange={(e) => setGoal(e.target.value)}
                                 required
                                 />
                         </div>

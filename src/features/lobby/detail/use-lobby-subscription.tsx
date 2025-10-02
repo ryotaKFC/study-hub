@@ -7,17 +7,17 @@ import { Chat, Member } from "./lobby-provider";
 import { createClient } from "@/lib/supabase/client";
 
 
-export function useLobbySubscription( lobbyId: string) {
+export function useLobbySubscription( lobbyId: string, isFormSubmitted: boolean ) {
     const { user } = useAuth();
     
     const [ members, setMembers] = useState<Member[]>([]);
     const [ chats, setChats ] = useState<Chat[]>([]);
     const [ channel, setChannel ] = useState<RealtimeChannel | null>(null);
     
-    const supabaseClient = createClient()
+    const supabaseClient = createClient();
     // 参加ロビーの決定
     useEffect(() => {
-        if (!user) return;
+        if (!user || !isFormSubmitted) return;
             
         // チャンネルの決定
         const newChannel =  supabaseClient.channel(String(lobbyId), {
@@ -27,12 +27,12 @@ export function useLobbySubscription( lobbyId: string) {
             }
         });
         
-        // チャットの購読
+        // チャットの受信
         newChannel.on("broadcast", { event: "chat" }, ({ payload }) => {
             setChats((prev) => [...prev, payload]);
         });
         
-        // メンバーの購読
+        // メンバーの受信
         newChannel.on("presence", { event: "sync" }, () => {
             const state = newChannel.presenceState<Member>();
             const new_members: Member[] = Object.values(state).flat();
@@ -55,7 +55,7 @@ export function useLobbySubscription( lobbyId: string) {
         })
 
 
-    }, [lobbyId, supabaseClient, user]);
+    }, [isFormSubmitted, lobbyId, supabaseClient, user]);
     
     return { members, chats, channel };
 }

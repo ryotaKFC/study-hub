@@ -1,10 +1,12 @@
+"use server"
+
 import { createClient } from "@/lib/supabase/server";
 import { Lobby } from "../types/lobby";
 
 
-const supabaseClient = await createClient();
 
 export async function fetchLobbies() {
+    const supabaseClient = await createClient();
     const { data, error } = await supabaseClient
         .from("lobbies")
         .select("*")
@@ -18,6 +20,7 @@ export async function fetchLobbies() {
 }
 
 export async function fetchLobbyById(lobbyId: string) {
+    const supabaseClient = await createClient();
     const { data, error} = await supabaseClient
         .from("lobbies")
         .select("*")

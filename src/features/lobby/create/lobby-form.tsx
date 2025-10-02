@@ -11,7 +11,7 @@ import z from "zod";
 import { useRouter } from "next/navigation";
 import { AdvancedMarker, Map, MapMouseEvent, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { LobbyCreationDate } from "../types/lobby";
-import { storeLobby } from "../api/insert-lobby";
+import { insertLobby } from "../api/insert-lobby";
 
 
 const lobbyNameSchema = z.string()
@@ -79,7 +79,8 @@ export default function LobbyForm({isPrivateParam}: Props) {
             location: point
         }
         setLobbyData(newLobbyData)
-        const newLobby = await storeLobby(newLobbyData);
+        // const newLobby = await storeLobby(newLobbyData);
+        const newLobby = await insertLobby(newLobbyData);
         router.push("/lobby/"+newLobby?.id)
         setLobbyData(null);
     }
