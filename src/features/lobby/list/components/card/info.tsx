@@ -1,6 +1,7 @@
 "use client"
 
-import { Lobby } from "@/types/lobby";
+import { Lobby } from "@/features/lobby/types/lobby";
+
 
 type Props = {
     lobby: Lobby;
