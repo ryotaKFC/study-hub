@@ -1,11 +1,15 @@
 "use client"
 
-import { useLobby } from "../../_context/LobbyProviders";
-import Timer from "./Timer";
 import Card from "@/components/ui/card";
+import { usePomodoroTimer } from "../../hooks/use-pomodoro-timer";
+import { useLobby } from "../lobby-provider";
 
-export default function TimerCard() {
-    const { isStudyTime } = useLobby();
+
+export default function Timer() {
+    const { lobby, setIsStudyTime } = useLobby();
+    const { time, isStudyTime } = usePomodoroTimer(lobby);
+    setIsStudyTime(isStudyTime);
+
     const titleText = isStudyTime ? "勉強中..." : "休憩時間";
     const discriptionText = isStudyTime ? 
     "🎯 集中して勉強しましょう！チャットは休憩時間に利用できます" :
@@ -15,7 +19,9 @@ export default function TimerCard() {
         <Card variant="background">
             <h1 className="text-3xl font-bold text-emerald-800 text-center">{titleText}</h1>
             <Card className="p-7 bg-emerald-100 ">
-                <Timer /> 
+                <h1 className='text-emerald-900 text-center text-6xl sm:text-8xl'>
+                    {time}
+                </h1 >
             </Card>
             <Card className="bg-emerald-50 text-center">
                 <p className="text-emerald-800">{discriptionText}</p>

@@ -7,11 +7,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { createLobby } from "@/lib/database/lobbies";
-import type {LobbyCreationDate} from "@/types/lobby"
 import z from "zod";
 import { useRouter } from "next/navigation";
 import { AdvancedMarker, Map, MapMouseEvent, useMapsLibrary } from "@vis.gl/react-google-maps";
+import { LobbyCreationDate } from "../types/lobby";
+import { storeLobby } from "../api/insert-lobby";
 
 
 const lobbyNameSchema = z.string()
@@ -23,7 +23,7 @@ type Props = {
 }
 
 
-export default function Form({isPrivateParam}: Props) {
+export default function LobbyForm({isPrivateParam}: Props) {
     const [error, setError] = useState("");
     const [lobbyName, setLobbyName] = useState("");
     const [isPrivate, setIsPrivate] = useState<boolean>(isPrivateParam);
@@ -79,7 +79,7 @@ export default function Form({isPrivateParam}: Props) {
             location: point
         }
         setLobbyData(newLobbyData)
-        const newLobby = await createLobby(newLobbyData);
+        const newLobby = await storeLobby(newLobbyData);
         router.push("/lobby/"+newLobby?.id)
         setLobbyData(null);
     }

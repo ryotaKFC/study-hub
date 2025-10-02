@@ -1,32 +1,29 @@
 "use client"
 
-import { useAuth } from "@/lib/supabase/auth-provider";
-import { useSupabase } from "@/lib/supabase/supabase-provider";
+import { useAuth } from "@/features/auth/auth-provider";
 import { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react"
-import type { Member, Chat } from "../_context/LobbyProviders"
+import { Chat, Member } from "./lobby-provider";
+import { createClient } from "@/lib/supabase/client";
 
-type Props = {
-    lobbyId: string
-}
 
-export function useLobbySubscription({ lobbyId }: Props) {
+export function useLobbySubscription( lobbyId: string) {
     const { user } = useAuth();
-    const supabaseClient = useSupabase();
-
+    
     const [ members, setMembers] = useState<Member[]>([]);
     const [ chats, setChats ] = useState<Chat[]>([]);
     const [ channel, setChannel ] = useState<RealtimeChannel | null>(null);
-
+    
+    const supabaseClient = createClient()
     // 参加ロビーの決定
     useEffect(() => {
         if (!user) return;
             
         // チャンネルの決定
-        const newChannel = supabaseClient.channel(String(lobbyId), {
+        const newChannel =  supabaseClient.channel(String(lobbyId), {
             config: {
                 presence: { key: user.id },
-                broadcast: {self: true}
+                broadcast: { self: true }
             }
         });
         

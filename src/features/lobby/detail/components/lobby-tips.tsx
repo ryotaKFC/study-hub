@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuth } from "@/lib/supabase/auth-provider"
+import { useAuth } from "@/features/auth/auth-provider"
 
 export default function Tips () {
     const { user } = useAuth()

@@ -1,8 +1,8 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, use, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
-import { useSupabase } from "@/lib/supabase/supabase-provider";
+import { createClient } from "@/lib/supabase/client";
 
 type Props = {
     children: React.ReactNode;
@@ -17,9 +17,9 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProviders({children}: Props) {
+    const supabaseClient = createClient();
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const supabaseClient= useSupabase();
 
     useEffect(() => {
         const getUser = async () => {
@@ -62,7 +62,7 @@ export function AuthProviders({children}: Props) {
 }
 
 export function useAuth() {
-    const context = useContext(AuthContext);
+    const context = use(AuthContext);
     if (context === undefined) {
         throw new Error("useAuth must be used within an AuthProvider");
     }

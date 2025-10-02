@@ -1,15 +1,13 @@
 "use client"
 
-import { useLobby } from "../../_context/LobbyProviders";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLobby } from "../lobby-provider";
 
 export default function Chat() {
     const { chats, isStudyTime , sendMessage } = useLobby();
-
     const [ newChat, setNewChat ] = useState("");
-
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const handleSubmit = useCallback( async (e: React.FormEvent) => {
@@ -25,7 +23,8 @@ export default function Chat() {
     })
 
     return (
-        <>
+        <Card variant="background">
+            <h1 className="text-xl font-bold bg-emerald-800 bg-clip-text text-transparent">💬チャット</h1>
             <Card className="bg-emerald-100/30">
                 <div 
                     ref={chatContainerRef}
@@ -46,6 +45,6 @@ export default function Chat() {
                 />
                 <Button type="submit" disabled={isStudyTime ? true:false} className="" >送信</Button>
             </form>
-        </>
+        </Card>
     )
 }

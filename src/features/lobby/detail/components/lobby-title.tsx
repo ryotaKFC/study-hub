@@ -1,6 +1,8 @@
 "use client"
 
-import { useLobby } from "../_context/LobbyProviders";
+import { useLobby } from "../lobby-provider";
+
+
 
 export default function LobbyTitle() {
     const { lobby } = useLobby();

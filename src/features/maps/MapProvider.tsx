@@ -6,7 +6,7 @@ type Props = {
     children: React.ReactNode,
 }
 
-export default function GoogleMapAPIProvider({children}: Props) {
+export default function MapProvider({children}: Props) {
     return (
         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
             {children}

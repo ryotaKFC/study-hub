@@ -1,23 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
-import type { Lobby } from "@/types/lobby"
-import { getLobbies } from "@/lib/database/lobbies";
+import { useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { Lobby } from "../types/lobby";
 
 
-export function useLobbies() {
-    const [lobbies, setLobbies] = useState<Lobby[]>([]);
-    const supabaseClient = supabase;
-
-    const fetchLobbies = useCallback(async () => {
-        const newLobbies = await getLobbies()
-        setLobbies(newLobbies);
-    }, [])
+export function useLobbiesSubscriptions(setLobbies: React.Dispatch<React.SetStateAction<Lobby[]>>) {
+    const supabaseClient = createClient();
 
     // 購読処理
     useEffect(() => {
-        fetchLobbies();
         const channel = supabaseClient
             .channel("public:lobbies")
             .on(
@@ -36,7 +28,5 @@ export function useLobbies() {
         return () => {
             supabaseClient.removeChannel(channel);
         };
-    }, [fetchLobbies, supabaseClient]);
-
-    return { lobbies };
+    }, [setLobbies, supabaseClient]);
 }

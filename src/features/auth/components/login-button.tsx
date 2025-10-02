@@ -1,8 +1,8 @@
 "use client"
 
-import { useAuth } from "@/features/auth/auth-provider";
-import { Button } from "./ui/button";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "../auth-provider";
 
 
 export default function LoginButton() {
