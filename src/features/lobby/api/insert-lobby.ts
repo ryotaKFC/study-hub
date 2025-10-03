@@ -17,6 +17,7 @@ export async function insertLobby(lobbyData: LobbyCreationDate) {
             startTime: new Date(),
             isPrivate: lobbyData.isPrivate,
             location: lobbyData.location,
+            locationName: lobbyData.locationName,
         }])
         .select("*")
         .single();

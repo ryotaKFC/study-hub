@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { AdvancedMarker, Map, MapMouseEvent, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { LobbyCreationDate } from "../types/lobby";
 import { insertLobby } from "../api/insert-lobby";
+import { MapControls } from "@/features/maps/map-controls";
 
 
 const lobbyNameSchema = z.string()
@@ -30,7 +31,7 @@ export default function LobbyForm({isPrivateParam}: Props) {
     const [studyMin, setStudyMin] = useState([25]);
     const [breakMin, setBreakMin] = useState([5]);
 
-    const [placeName, setPlaceName] = useState("")
+    const [locationName, setLocationName] = useState("")
     const [point, setPoint] = useState<{lat:number, lng:number}>({lat: 35.681236, lng: 139.767125 });
     // const [userLocation, setUserLocation] = useState<{lat:number, lng:number}>({lat: 35.681236, lng: 139.767125 });
     
@@ -76,7 +77,8 @@ export default function LobbyForm({isPrivateParam}: Props) {
             studyMin: studyMin[0],
             breakMin: breakMin[0],
             isPrivate: isPrivate,
-            location: point
+            location: point,
+            locationName: locationName,
         }
         setLobbyData(newLobbyData)
         // const newLobby = await storeLobby(newLobbyData);
@@ -94,7 +96,7 @@ export default function LobbyForm({isPrivateParam}: Props) {
         await place.fetchFields({ fields: ["displayName", "location"]});
         
         if (!place.location || !place.displayName) return;
-        setPlaceName(place.displayName)
+        setLocationName(place.displayName)
         setPoint({
             lat: place.location.lat(),
             lng: place.location.lng(),
@@ -118,15 +120,14 @@ export default function LobbyForm({isPrivateParam}: Props) {
 
             
             <h1 className="text-center">
-                自習場所：<span className="font-bold">{placeName}</span>
+                自習場所：<span className="font-bold">{locationName}</span>
             </h1>
 
             <Map
                 className='w-full h-100 '
                 mapId={"9b534672f1b3ee81bab3a217"}
                 defaultCenter={point}
-                defaultZoom={14}
-                gestureHandling='greedy'
+                defaultZoom={17}
                 onClick={(e) => {
                     if (!e.detail.placeId || !placesLib) return;
                     handleMapClick(e);
@@ -135,9 +136,10 @@ export default function LobbyForm({isPrivateParam}: Props) {
                 >
                 
                 {point && <AdvancedMarker position={point} />}
+                <MapControls location={point}/>
             </Map>
 
-            <Button type="submit" disabled={!lobbyName || !placeName || error ? true : false}>作成</Button>
+            <Button type="submit" disabled={!lobbyName || !locationName || error ? true : false}>作成</Button>
         </form>
     )
 }

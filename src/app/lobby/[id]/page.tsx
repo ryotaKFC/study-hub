@@ -17,9 +17,8 @@ export default async function Lobby({ params }: { params: Promise<{ id:string }>
             <WelcomeForm />
             <div className="min-h-screen bg-emerald-50">
                 <Navigation />
-                <main className="mx-5 sm:mx-14 my-7">
+                <main className="mx-5 sm:mx-14 my-7 space-y-5">
                     <LobbyTitle />
-
                     <Timer />
                     <Chat />
                     <Member />
