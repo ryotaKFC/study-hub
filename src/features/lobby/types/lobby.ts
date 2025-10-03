@@ -6,7 +6,7 @@ export type Lobby = {
     breakMin: number;
     isPrivate: boolean;
     location: {lat:number, lng:number};
-    locationname: string;
+    locationName: string;
 }
 
 export type LobbyCreationDate = {

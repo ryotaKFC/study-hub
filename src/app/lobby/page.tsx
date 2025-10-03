@@ -13,11 +13,13 @@ export default async function Lobbies() {
         <>
             <Navigation/>
             <main>
-                <div className="mx-auto my-5 text-center">
+                <div className="mx-auto my-8 text-center">
+                    <h1 className="font-bold m-4 text-center text-3xl sm:text-5xl">近くのロビー</h1>
+                    <p>近くの仲間と勉強しましょう！</p>
+
                     <Link href="/lobby/create">
                         <Button type="button" size={"lg"} >ロビーの作成</Button>
                     </Link>
-                    <h1 className="font-bold m-4 text-center text-3xl sm:text-5xl">Lobbies List</h1>
                 </div>
                 <LobbyList initialLobbies={lobbies}/>
 

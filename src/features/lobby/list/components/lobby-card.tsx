@@ -21,9 +21,14 @@ export default function LobbyList({initialLobbies}: Props) {
         <div className="px-4 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {lobbies.map((lobby) => (
                 <Card key={lobby.id} className="mx-5 p-5">
-                    <CardHeader className="text-xl sm:text-2xl flex justify-between">
-                        <h1>{lobby.name}</h1>
-                        <LobbyNowMode lobby={lobby}/>
+                    <CardHeader className="text-xl sm:text-2xl">
+                        <div className="flex justify-between">
+                            <h1>{lobby.name}</h1>
+                            <LobbyNowMode lobby={lobby}/>
+                        </div>
+                        <p className="text-sm font-bold text-gray-600">
+                            📍{lobby.locationName}
+                        </p>
                     </CardHeader>
                     <CardContent>
                         <LobbyInfo lobby={lobby}/>
