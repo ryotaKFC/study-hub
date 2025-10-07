@@ -2,24 +2,17 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Lobby } from "../../types/lobby";
-import { useLobbiesSubscriptions } from "../use-lobbies-subscription";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import LobbyInfo from "./card/lobby-info";
 import { LobbyNowMode } from "./card/lobby-now-mode";
+import { useLobbies } from "../use-lobbies";
 
-type Props = {
-    initialLobbies: Lobby[],
-}
 
-export default function LobbyList({initialLobbies}: Props) {
-    const [lobbies, setLobbies] = useState<Lobby[]>(initialLobbies);
-    useLobbiesSubscriptions(setLobbies);
-
+export default function LobbyList() {
+    const {data} = useLobbies();
     return (
         <div className="px-4 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {lobbies.map((lobby) => (
+            {data?.map((lobby) => (
                 <Card key={lobby.id} className="mx-5 p-5">
                     <CardHeader className="text-xl sm:text-2xl">
                         <div className="flex justify-between">
