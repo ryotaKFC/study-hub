@@ -9,7 +9,7 @@ export function HeroSection() {
             </div>
             <div className="my-4 leading-4">
                 <p className="">
-                    みんなでも、ひとりでも
+                    みんなで自習できる自習アプリ
                 </p>
             </div>
             <div className="flex space-x-6 justify-center text-center">
