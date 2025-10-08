@@ -5,6 +5,7 @@ import { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react"
 import { Chat, Member } from "./lobby-provider";
 import { createClient } from "@/lib/supabase/client";
+import { updateLobbyMemberCount } from "../api/update-lobby";
 
 
 export function useLobbySubscription( lobbyId: string, goal: string ) {
@@ -47,16 +48,35 @@ export function useLobbySubscription( lobbyId: string, goal: string ) {
                     display_name: user.user_metadata.name || "ななしさん",
                     user_goal: goal,
                 });
+                setTimeout(async () => {
+                    const state = newChannel.presenceState();
+                    const memberCount = Object.keys(state).length;
+                    console.log(memberCount);
+                    await updateLobbyMemberCount(lobbyId, memberCount);
+                }, 300);
             }
         });
 
         setChannel(newChannel);
+
+        const handleExit = async () => {
+            if(!channel) return;
+            const state = channel.presenceState();
+            const memberCount = Object.keys(state).length;
+
+            await updateLobbyMemberCount(lobbyId, memberCount - 1);
+            channel.unsubscribe();
+            supabaseClient.removeChannel(channel)
+        }
+
+        window.addEventListener("beforeunload", handleExit);
         return (() => {
-            supabaseClient.removeChannel(newChannel);
+            window.removeEventListener("beforeunload", handleExit);
+            handleExit();
         })
 
 
-    }, [goal, lobbyId, supabaseClient, user]);
+    }, [channel, goal, lobbyId, supabaseClient, user]);
     
     return { members, chats, channel };
 }
