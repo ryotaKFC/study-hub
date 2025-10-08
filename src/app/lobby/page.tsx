@@ -1,15 +1,11 @@
 "use server"
 
 import { Navigation } from "@/components/navigation";
-import { Button } from "@/components/ui/button";
-import LobbyList from "@/features/lobby/list/components/lobby-card";
-import Link from "next/link";
+import Lobbies from "@/features/lobby/list/lobbies";
 
 
 
-export default async function Lobbies() {
-    // const lobbies = await (fetchNearLobbies());
-
+export default async function Page() {
     return (
         <>
             <Navigation/>
@@ -19,13 +15,10 @@ export default async function Lobbies() {
                     <p>仲間と一緒に勉強しましょう！</p>
 
                     
-                    <Link href="/lobby/create">
-                        <Button type="button" size={"lg"} >ロビーの作成</Button>
-                    </Link>
                     
                     
                 </div>
-                <LobbyList />
+                <Lobbies />
 
             </main>
         </>
