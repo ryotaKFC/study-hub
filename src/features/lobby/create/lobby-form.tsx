@@ -33,7 +33,6 @@ export default function LobbyForm({isPrivateParam}: Props) {
 
     const [locationName, setLocationName] = useState("")
     const [point, setPoint] = useState<{lat:number, lng:number}>({lat: 35.681236, lng: 139.767125 });
-    // const [userLocation, setUserLocation] = useState<{lat:number, lng:number}>({lat: 35.681236, lng: 139.767125 });
     
     const placesLib = useMapsLibrary("places");
     const [lobbyData, setLobbyData] = useState<LobbyCreationDate | null>()
