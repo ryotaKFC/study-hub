@@ -26,7 +26,7 @@ export default function LobbyTimer() {
             </CardContent>
             <CardFooter>
                 <Card className="bg-emerald-50/50 w-full">
-                    <p className="text-emerald-800 mx-auto">{discriptionText}</p>
+                    <p className="mx-3 text-emerald-800 text-center">{discriptionText}</p>
                 </Card>
             </CardFooter>
         </Card>
