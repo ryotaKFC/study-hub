@@ -8,6 +8,7 @@ import { usePomodoroTimer } from "../hooks/use-pomodoro-timer";
 
 type Props = {
     lobby: Lobby;
+    previewMode: boolean;
     children: React.ReactNode;
 }
 
@@ -25,6 +26,7 @@ export type Member = {
 }
 
 type LobbyContextType = {
+    previewMode: boolean;
     lobby: Lobby;
     members: Member[];
     chats: Chat[];
@@ -36,7 +38,7 @@ type LobbyContextType = {
 
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
-export function LobbyProvider({ lobby, children }: Props) {
+export function LobbyProvider({ lobby, previewMode, children }: Props) {
     const [ goal, setGoal] = useState("");
     const { channel, chats, members } = useLobbySubscription(lobby.id, goal);
     const { user } = useAuth();
@@ -66,7 +68,7 @@ export function LobbyProvider({ lobby, children }: Props) {
     }
     
     return (
-        <LobbyContext.Provider value={{ lobby, chats, members, isStudyTime, time, sendMessage, setGoal }}>
+        <LobbyContext.Provider value={{ previewMode, lobby, chats, members, isStudyTime, time, sendMessage, setGoal }}>
             {children}
         </LobbyContext.Provider>
     )

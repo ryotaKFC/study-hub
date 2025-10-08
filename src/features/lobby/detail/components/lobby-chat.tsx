@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLobby } from "../lobby-provider";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { useAuth } from "@/features/auth/auth-provider";
 
 export default function LobbyChat() {
-    const { chats, isStudyTime , sendMessage } = useLobby();
+    const { user } = useAuth()
+    const { previewMode, chats, isStudyTime , sendMessage } = useLobby();
     const [ newChat, setNewChat ] = useState("");
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -21,6 +23,8 @@ export default function LobbyChat() {
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
     })
+
+    if(!user && !previewMode) return null;
 
     return (
         <Card className="sm:px-10">

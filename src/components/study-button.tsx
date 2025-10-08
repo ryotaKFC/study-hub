@@ -32,12 +32,12 @@ export function StudyButton() {
         return (
             <>
                 <Link href="/lobby/create?isPrivate=true">
-                    <Button variant="default" onClick={handleClick}>
+                    <Button variant="outline" onClick={handleClick}>
                         一人で勉強！
                     </Button>
                 </Link>
                 <Link href="/lobby">
-                    <Button variant="outline" onClick={handleClick}>
+                    <Button variant="default" onClick={handleClick}>
                         誰かと勉強！
                     </Button>
                 </Link>
