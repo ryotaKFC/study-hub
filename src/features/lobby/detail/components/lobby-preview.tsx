@@ -24,7 +24,7 @@ const previewLobby: Lobby = {
 
 export function LobbyPreview() {
     return (
-        <LobbyProvider lobby={previewLobby}>
+        <LobbyProvider lobby={previewLobby} previewMode={true}>
             <main className="mx-5 sm:mx-14 my-7 space-y-5">
                 <LobbyTitle />
                 <LobbyTimer />

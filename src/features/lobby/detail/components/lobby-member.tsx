@@ -2,9 +2,13 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useLobby } from "../lobby-provider";
+import { useAuth } from "@/features/auth/auth-provider";
 
 export default function LobbyMember() {
-    const { members } = useLobby();
+    const { user } = useAuth();
+    const { previewMode, members } = useLobby();
+
+    if(!user && !previewMode) return null;
 
     return (
         <Card className="sm:px-10">

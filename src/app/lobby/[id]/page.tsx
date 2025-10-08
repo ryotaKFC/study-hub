@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: Promise<{ id:string }> 
     const lobby = await fetchLobbyById((await params).id)
 
     return (
-        <LobbyProvider lobby={lobby}>
+        <LobbyProvider lobby={lobby} previewMode={false}>
             <WelcomeForm />
             <div className="min-h-screen bg-emerald-50">
                 <Navigation />
