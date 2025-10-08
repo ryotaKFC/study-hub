@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Lobby } from "@/features/lobby/types/lobby";
-import { Link } from "lucide-react";
 import LobbyInfo from "./lobby-info";
 import { LobbyNowMode } from "./lobby-now-mode";
+import Link from "next/link";
 
 type Props = {
     lobby: Lobby;

@@ -13,9 +13,8 @@ export function useLobbies() {
     const [isLoading, setIsLoading] = useState(false);
     // const [error, setError] = useState<unknown>()
 
-    //　ロビーの取得
-    useEffect(() => {
-        // 位置情報許可されてたら近くのロビー取得
+    
+    const fetchNearbyOrAllLobbies = useCallback(() => {
         if(isGeolocationGranted && location.lat && location.lng) {
             setIsLoading(true);
             (async (lat:number, lng:number) => {
@@ -28,7 +27,6 @@ export function useLobbies() {
                     setIsLoading(false);
                 }
             })(location.lat, location.lng);
-        // 位置情報拒否されてたら全ロビー取得
         } else {
             setIsLoading(true);
             (async () => {
@@ -43,8 +41,12 @@ export function useLobbies() {
             })();
         }
     }, [isGeolocationGranted, location.lat, location.lng])
-
+    
     const enableNearbyLobbyMode = useCallback(() => {
+        if (isGeolocationGranted) {
+            setIsGeolocationGranted(false);
+            return;
+        }
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
@@ -53,13 +55,18 @@ export function useLobbies() {
                 },
                 (err) => {
                     setIsGeolocationGranted(false)
-                    console.error("位置情報の取得に失敗", err)
+                    window.alert("位置情報が取得できませんでした");
+                    console.error("位置情報の取得に失敗", err);
                 }
             )
         } else {
             setIsGeolocationGranted(false)
         }
-    }, [])
+    }, [isGeolocationGranted])
 
-    return { lobbies, isLoading, isGeolocationGranted, enableNearbyLobbyMode }
+    useEffect(() => {
+        fetchNearbyOrAllLobbies()
+    }, [fetchNearbyOrAllLobbies])
+    
+    return { lobbies, isLoading, isGeolocationGranted, fetchNearbyOrAllLobbies, enableNearbyLobbyMode }
 }
