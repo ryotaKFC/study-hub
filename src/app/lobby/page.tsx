@@ -17,6 +17,7 @@ export default async function Page() {
                 </div>
                 <Lobbies />
 
+
             </main>
         </>
     )
