@@ -19,7 +19,7 @@ export default function LobbyTimer() {
             </CardHeader>
             <CardContent >
                 <Card className="py-9 bg-emerald-100">
-                    <h1 className='text-emerald-800 text-center text-6xl sm:text-8xl'>
+                    <h1 className='text-emerald-800 text-center text-7xl sm:text-8xl'>
                         {time}
                     </h1 >
                 </Card>
