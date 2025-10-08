@@ -18,6 +18,8 @@ const previewLobby: Lobby = {
     isPrivate: false,
     location: {lat:0, lng:0},
     locationName: "テストロビー",
+    memberCount: 0,
+    lastActivityAt: "",
 }
 
 export function LobbyPreview() {

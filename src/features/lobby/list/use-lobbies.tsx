@@ -11,8 +11,6 @@ export function useLobbies() {
     const [lobbies, setLobbies] = useState<Lobby[]>([]);
 
     const [isLoading, setIsLoading] = useState(false);
-    // const [error, setError] = useState<unknown>()
-
     
     const fetchNearbyOrAllLobbies = useCallback(() => {
         if(isGeolocationGranted && location.lat && location.lng) {

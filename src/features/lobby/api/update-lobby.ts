@@ -6,11 +6,10 @@ export async function updateLobbyMemberCount(lobbyId:string, memberCount: number
     const supabaseClient = await createClient()
     const { error } = await supabaseClient
         .from("lobbies")
-        .update({ memberCount: memberCount })
+        .update({ memberCount: memberCount, lastActivityAt:new Date()})
         .eq("id", lobbyId)
     if (error) {
         console.error("error", error);
         throw error;
     }
-    
 }

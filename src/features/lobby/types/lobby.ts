@@ -7,6 +7,8 @@ export type Lobby = {
     isPrivate: boolean;
     location: {lat:number, lng:number};
     locationName: string;
+    memberCount: number;
+    lastActivityAt: string;
 }
 
 export type LobbyCreationDate = {
