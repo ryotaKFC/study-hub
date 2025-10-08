@@ -9,7 +9,7 @@ import { WelcomeForm } from '@/features/lobby/detail/components/lobby-welcome-fo
 import { LobbyProvider } from '@/features/lobby/detail/lobby-provider';
 
 
-export default async function Lobby({ params }: { params: Promise<{ id:string }> }) {
+export default async function Page({ params }: { params: Promise<{ id:string }> }) {
     const lobby = await fetchLobbyById((await params).id)
 
     return (
