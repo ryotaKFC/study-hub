@@ -31,8 +31,9 @@ type LobbyContextType = {
     lobby: Lobby;
     members: Member[];
     chats: Chat[];
-    time: string;
+    // time: string;
     isStudyTime: boolean;
+    setIsStudyTime: Dispatch<SetStateAction<boolean>>
     setGoal: Dispatch<SetStateAction<string>>
     sendMessage: (content: string) => Promise<void>;
 }
@@ -43,7 +44,8 @@ export function LobbyProvider({ lobby, previewMode, children }: Props) {
     const [ goal, setGoal] = useState("");
     const { channel, chats, members } = useLobbySubscription(lobby.id, goal);
     const { user } = useAuth();
-    const { time, isStudyTime} = usePomodoroTimer(lobby);
+    const [isStudyTime, setIsStudyTime] = useState(true);
+    // const { time, isStudyTime} = usePomodoroTimer(lobby);
 
     // メッセージの送信
     const sendMessage = useCallback( async (content: string) => {
@@ -69,7 +71,7 @@ export function LobbyProvider({ lobby, previewMode, children }: Props) {
     }
     
     return (
-        <LobbyContext.Provider value={{ previewMode, lobby, chats, members, isStudyTime, time, sendMessage, setGoal }}>
+        <LobbyContext.Provider value={{ previewMode, lobby, chats, members, isStudyTime, setIsStudyTime, sendMessage, setGoal }}>
             {children}
         </LobbyContext.Provider>
     )
