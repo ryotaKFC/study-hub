@@ -24,9 +24,9 @@ export function StudyButton() {
 
     function handleClick(e: MouseEvent<HTMLButtonElement>) {
         if (user) return;
-        if (!window.confirm(CONFIRMATION_MESSAGE)) {
-            e.preventDefault()
-        }
+        // if (!window.confirm(CONFIRMATION_MESSAGE)) {
+        //     e.preventDefault()
+        // }
     }
         
         return (
