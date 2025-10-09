@@ -112,10 +112,10 @@ export default function LobbyForm({isPrivateParam}: Props) {
             <Label className="mx-auto">休憩時間<p>（{breakMin}分）</p></Label>
             <Slider defaultValue={[5]} min={0} max={15} step={1} onValueChange={setBreakMin} className=" mx-auto" />
             
-            <div className="flex justify-center space-x-2">
+            {/* <div className="flex justify-center space-x-2">
                 <Checkbox id="isPrivate" className="" checked={isPrivate} onCheckedChange={(checked) => setIsPrivate(checked === true)} />
-                <Label htmlFor="isPrivate">非公開</Label>
-            </div>
+                <Label htmlFor="isPrivate">ロビーの非公開</Label>
+            </div> */}
 
             
             <h1 className="text-center">
