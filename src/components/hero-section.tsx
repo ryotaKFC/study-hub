@@ -46,11 +46,10 @@ export async function HeroSection() {
                     </CardHeader>
                     <CardContent>
                         <div className="mx-30 my-4">
-                            <Image className="shadow-xl w-full rounded-xl" src="/preview-timer.png" alt="preview timre" width={700} height={700} />
+                            <Image className="shadow-xl w-full rounded-xl" src="/preview-member.png" alt="preview timre" width={700} height={700} />
                         </div>
-                        <span className="font-bold">25分勉強⇔5分休憩のサイクル</span>
-                        <p>ポモドーロとは、こまめに休憩を挟むことで、時間の使い方を意識しつつ集中力を維持しながら生産性を上げる効果のある手法です</p>
-                        <p>このサイトでは、従来の25分勉強⇔5分休憩だけでなく、好きな時間に設定することもできます</p>
+                        <span className="font-bold">仲間と自習</span>
+                        <p>近くの知り合い、遠い誰かとも一緒に自習ができます</p>
                     </CardContent>
                 </Card>
                 <Card>
