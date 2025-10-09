@@ -5,6 +5,7 @@ import { Lobby } from "../types/lobby";
 import { useLobbySubscription } from "./use-lobby-subscription";
 import { useAuth } from "@/features/auth/auth-provider";
 import { usePomodoroTimer } from "../hooks/use-pomodoro-timer";
+import { Loading } from "@/components/loading";
 
 type Props = {
     lobby: Lobby;
@@ -64,7 +65,7 @@ export function LobbyProvider({ lobby, previewMode, children }: Props) {
 
 
     if (!lobby) {
-        return <div>Loading...</div>
+        return <Loading />
     }
     
     return (

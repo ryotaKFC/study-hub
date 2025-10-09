@@ -3,11 +3,12 @@
 import { useLobbies } from "./use-lobbies";
 import { LobbyCard } from "./components/card/lobby-card";
 import { LobbiesController } from "./components/lobbies-controller";
+import { Loading } from "@/components/loading";
 
 
 export default function Lobbies() {
     const {lobbies, isLoading, isGeolocationGranted, enableNearbyLobbyMode, fetchNearbyOrAllLobbies} = useLobbies();
-    if (isLoading) return <p>ロード中...</p>
+    if (isLoading) return <Loading />
     
     return (
         <>

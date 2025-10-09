@@ -8,18 +8,25 @@ import Image from "next/image";
 export default function LoginButton() {
     const { user, signInWithGoogle, signOut } = useAuth();
 
+    function handleSignOutButton() {
+        const confirmed = window.confirm("ログアウトしますか？");
+        if(confirmed) {
+            signOut();
+        }
+    }
+
     if (!user) {
         return (
             <div className="flex items-center gap-2">
-                <Button variant="link" onClick={signInWithGoogle} >
-                    Google ログイン
+                <Button className="bg-blue-500 hover:bg-blue-400" onClick={signInWithGoogle} >
+                    Googleでログイン
                 </Button>
             </div>
         )
     } else {
         return (
             <div className="flex items-center gap-2">
-                <Button variant="link" onClick={signOut}>
+                <Button variant="link" onClick={handleSignOutButton}>
                     ログアウト
                 </Button>
                 <div>

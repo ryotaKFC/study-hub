@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 
-const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、みんなで勉強することができます)";
+// const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、みんなで勉強することができます)";
 
 export function StudyButton() {
     const [user, setUser] = useState<User | null>(null);
@@ -24,21 +24,21 @@ export function StudyButton() {
 
     function handleClick(e: MouseEvent<HTMLButtonElement>) {
         if (user) return;
-        if (!window.confirm(CONFIRMATION_MESSAGE)) {
-            e.preventDefault()
-        }
+        // if (!window.confirm(CONFIRMATION_MESSAGE)) {
+        //     e.preventDefault()
+        // }
     }
         
         return (
             <>
-                <Link href="/lobby/create?isPrivate=true">
+                <Link href="/lobby/create">
                     <Button variant="outline" onClick={handleClick}>
-                        一人で勉強！
+                        ロビーを作る
                     </Button>
                 </Link>
                 <Link href="/lobby">
                     <Button variant="default" onClick={handleClick}>
-                        誰かと勉強！
+                        ロビーを探す
                     </Button>
                 </Link>
             </>
