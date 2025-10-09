@@ -127,6 +127,7 @@ export default function LobbyForm({isPrivateParam}: Props) {
                 mapId={"9b534672f1b3ee81bab3a217"}
                 defaultCenter={point}
                 defaultZoom={17}
+                gestureHandling="cooperative"
                 onClick={(e) => {
                     if (!e.detail.placeId || !placesLib) return;
                     handleMapClick(e);
