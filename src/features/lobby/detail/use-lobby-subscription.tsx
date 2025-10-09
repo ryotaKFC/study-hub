@@ -60,13 +60,13 @@ export function useLobbySubscription( lobbyId: string, goal: string ) {
         setChannel(newChannel);
 
         const handleExit = async () => {
-            if(!channel) return;
-            const state = channel.presenceState();
+            if(!newChannel) return;
+            const state = newChannel.presenceState();
             const memberCount = Object.keys(state).length;
 
             await updateLobbyMemberCount(lobbyId, memberCount - 1);
-            channel.unsubscribe();
-            supabaseClient.removeChannel(channel)
+            newChannel.unsubscribe();
+            supabaseClient.removeChannel(newChannel)
         }
 
         window.addEventListener("beforeunload", handleExit);
@@ -76,7 +76,7 @@ export function useLobbySubscription( lobbyId: string, goal: string ) {
         })
 
 
-    }, [channel, goal, lobbyId, supabaseClient, user]);
+    }, [ goal, lobbyId, supabaseClient, user]);
     
-    return { members, chats, channel };
+    return { channel, members, chats };
 }
