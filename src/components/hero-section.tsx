@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export async function HeroSection() {
     return (
-        <div className="space-y-14">
+        <div className="space-y-24">
             <section className="min-h-[calc(100vh-4rem)] flex flex-col justify-center text-center">
                 <div>
                     <span className="leading-9 text-5xl sm:text-8xl">Let&apos;s study!!</span>
@@ -27,7 +27,7 @@ export async function HeroSection() {
                 <h1 className="font-bold text-5xl">どういうアプリ？</h1>
                 <Card>
                     <CardHeader>
-                        <span className="font-bold text-xl">1人でも、みんなでも自習できる自習アプリ！</span>
+                        <span className="font-bold text-xl">みんなで自習できる自習アプリ！</span>
                     </CardHeader>
                     <CardContent className="">
                         <p>このアプリは、1人でも仲間と一緒でも使えるオンライン自習スペースです</p>

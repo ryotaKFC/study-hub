@@ -4,7 +4,6 @@ import { createContext, Dispatch, SetStateAction, use, useCallback, useState } f
 import { Lobby } from "../types/lobby";
 import { useLobbySubscription } from "./use-lobby-subscription";
 import { useAuth } from "@/features/auth/auth-provider";
-import { usePomodoroTimer } from "../hooks/use-pomodoro-timer";
 import { Loading } from "@/components/loading";
 
 type Props = {
