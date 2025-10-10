@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import LoginButton from './login-button';
 import Link from 'next/link';
+import { Button } from './ui/button';
+import { BookOpen } from 'lucide-react';
+
 
 export function Navigation() {
     return (
@@ -11,9 +14,18 @@ export function Navigation() {
                     <Image src="../book.svg" alt="site icon" width={50} height={50} />
                 </Link>
                 <Link href="/">
-                    <span className="text-xl hidden sm:inline">Study Hub</span>
+                    <span className="text-xl flex">Study Hub</span>
                 </Link>
             </div>
+
+            <nav className='list-none hidden sm:flex'>
+                <Link href={"/lobby/create"}>
+                    <Button variant={"link"}>ロビーを作る</Button>
+                </Link>
+                <Link href={"/lobby/"}>
+                    <Button variant={"link"}>ロビーを探す</Button>
+                </Link>
+            </nav>
 
             {/* ログイン */}
             <div className="w-40 text-center">
