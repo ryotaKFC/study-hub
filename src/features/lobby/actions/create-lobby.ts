@@ -4,7 +4,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { lobbySchema } from "../schemas";
 import { Lobby, LobbyCreationDate } from "../types";
 
-export async function insertLobby(
+export async function createLobby(
 	supabase: SupabaseClient,
 	lobbyData: LobbyCreationDate,
 ): Promise<Lobby | null> {
@@ -23,15 +23,15 @@ export async function insertLobby(
 				breakMin: validLobby.data.breakMin,
 				startTime: new Date(),
 				isPrivate: validLobby.data.isPrivate,
-				location: validLobby.data.location,
-				locationName: validLobby.data.locationName,
 			},
 		])
 		.select("*")
 		.single();
+
 	if (error) {
 		console.error("ロビーの作成に失敗しました", error);
 		throw error;
 	}
+
 	return data as Lobby;
 }
