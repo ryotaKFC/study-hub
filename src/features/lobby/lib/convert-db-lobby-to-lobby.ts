@@ -10,11 +10,7 @@ export function convertDBLobbyToLobby(dbLobby: any[]): Lobby[] {
 		studyMin: lobby.study_min,
 		breakMin: lobby.break_min,
 		isPrivate: lobby.is_private,
-		location: {
-			lat: lobby.location?.lat,
-			lng: lobby.location?.lng,
-		},
-		locationName: lobby.location_name,
+		isInSchool: lobby.is_in_school,
 		lastActivityAt: lobby.last_activity_at,
 		memberCount: lobby.member_count,
 	}));
