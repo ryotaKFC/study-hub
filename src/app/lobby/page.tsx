@@ -1,7 +1,7 @@
 "use server";
 
 import { Navigation } from "@/components/navigation";
-import Lobbies from "@/features/lobby/list/lobbies";
+import Lobbies from "@/features/lobby/components/lobby-list/lobbies";
 
 export default async function Page() {
 	return (

@@ -1,9 +1,9 @@
 "use client";
 
 import { Loading } from "@/components/loading";
-import { LobbyCard } from "./components/card/lobby-card";
-import { LobbiesController } from "./components/lobbies-controller";
-import { useLobbies } from "./use-lobbies";
+import { useLobbies } from "../../hooks/use-lobbies";
+import { LobbyCard } from "./card/lobby-card";
+import { LobbiesController } from "./lobbies-controller";
 
 export default function Lobbies() {
 	const {

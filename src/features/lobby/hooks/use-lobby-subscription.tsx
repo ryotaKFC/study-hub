@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { createClient } from "@/lib/supabase/client";
 import { joinLobby } from "../actions/join-lobby";
-import { Chat, Member } from "./lobby-provider";
+import { Chat, Member } from "../providers/lobby-provider";
 
 export function useLobbySubscription(lobbyId: string, goal: string) {
 	const { user } = useAuth();
@@ -76,4 +76,7 @@ export function useLobbySubscription(lobbyId: string, goal: string) {
 	}, [goal, lobbyId, supabase, user]);
 
 	return { channel, members, chats };
+}
+function updateLobbyMemberCount(lobbyId: string, arg1: number) {
+	throw new Error("Function not implemented.");
 }
