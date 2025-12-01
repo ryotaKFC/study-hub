@@ -19,7 +19,6 @@ type Props = {
 
 export default function LobbyForm({ isPrivateParam }: Props) {
 	const router = useRouter();
-	// const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
 	const {
 		register,
@@ -137,7 +136,7 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 				<Label htmlFor="isPrivate">ロビーの非公開</Label>
 			</div>
 
-			<Button type="submit" disabled={isSubmitting || !isValid || !lobbyName}>
+			<Button type="submit" disabled={isSubmitting || !isValid}>
 				作成
 			</Button>
 		</form>
