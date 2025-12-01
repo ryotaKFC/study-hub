@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, use, useState } from "react";
-import { Loading } from "@/components/loading";
 import { useAuth } from "@/features/auth/auth-provider";
 import { useTimer } from "@/features/timer/hooks/use-timer";
 import { WelcomeForm } from "../components/lobby-welcome-form";
@@ -35,10 +34,6 @@ export function LobbyProvider({
 	const { user } = useAuth();
 	const { channel, chats, members } = useLobbySubscription(lobby.lobbyId, goal);
 	const { time, isStudyTime } = useTimer(lobby);
-
-	if (!lobby) {
-		return <Loading />;
-	}
 
 	// メッセージの送信
 	async function sendMessage(content: string) {
