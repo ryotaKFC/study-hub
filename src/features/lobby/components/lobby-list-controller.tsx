@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-type Props = {
+type LobbyListControllerProps = {
 	isInSchoolFilter: boolean;
-	handleSwitchChange: () => void;
+	handleSchoolFilterChange: () => void;
 };
 
 export function LobbyListController({
 	isInSchoolFilter,
-	handleSwitchChange,
-}: Props) {
+	handleSchoolFilterChange,
+}: LobbyListControllerProps) {
 	return (
 		<div className="flex flex-col justify-center items-center my-5 space-y-4">
 			<div className="space-x-4 ">
@@ -32,11 +32,11 @@ export function LobbyListController({
 				</Button>
 			</div>
 			<div className="flex space-x-2">
-				<Label htmlFor="geolocationSwitch">近い順に並び替え</Label>
+				<Label htmlFor="school-filter-switch">学校内のロビーのみ表示</Label>
 				<Switch
-					id="geolocationSwitch"
+					id="school-filter-switch"
 					checked={isInSchoolFilter}
-					onCheckedChange={handleSwitchChange}
+					onCheckedChange={handleSchoolFilterChange}
 				/>
 			</div>
 		</div>

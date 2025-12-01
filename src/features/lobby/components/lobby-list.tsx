@@ -18,7 +18,7 @@ export default function LobbyList({ lobbiesInitial }: LobbyListProps) {
 		<>
 			<LobbyListController
 				isInSchoolFilter={isInSchoolFilter}
-				handleSwitchChange={() => setIsInSchoolFilter((prev) => !prev)}
+				handleSchoolFilterChange={() => setIsInSchoolFilter((prev) => !prev)}
 			/>
 			<div className="px-4 grid grid-cols-1 sm:px-8 sm:grid-cols-2 md:grid-cols-3 gap-6">
 				{lobbies?.map((lobby) => (
