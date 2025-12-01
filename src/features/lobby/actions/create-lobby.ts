@@ -1,14 +1,14 @@
 "use server";
 
 import { SupabaseClient } from "@supabase/supabase-js";
-import { lobbySchema } from "../schemas";
+import { creationLobySchema } from "../schemas";
 import { Lobby, LobbyCreationDate } from "../types";
 
 export async function createLobby(
 	supabase: SupabaseClient,
 	lobbyData: LobbyCreationDate,
 ): Promise<Lobby | null> {
-	const validLobby = lobbySchema.safeParse(lobbyData);
+	const validLobby = creationLobySchema.safeParse(lobbyData);
 	if (!validLobby.success) {
 		console.error("Invalid lobby data", validLobby.error);
 		return null;
