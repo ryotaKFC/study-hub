@@ -3,9 +3,17 @@ import { getLobbies } from "@/features/lobby/actions/get-lobbies";
 import LobbyList from "@/features/lobby/components/lobby-list";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function Page() {
+type PageProps = {
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default async function Page({ searchParams }: PageProps) {
+	const params = await searchParams;
+	const inSchoolParam = params["inSchool"] === "true";
+
 	const supabase = await createClient();
-	const lobbiies = await getLobbies(supabase, false);
+	const lobbiesPromise = getLobbies(supabase, inSchoolParam);
+
 	return (
 		<>
 			<Navigation />
@@ -16,7 +24,10 @@ export default async function Page() {
 					</h1>
 					<p>仲間と一緒に勉強しましょう！</p>
 				</div>
-				<LobbyList lobbiesInitial={lobbiies} />
+				<LobbyList
+					lobbiesPromise={lobbiesPromise}
+					isInSchoolFilter={inSchoolParam}
+				/>
 			</main>
 		</>
 	);
