@@ -35,7 +35,7 @@ export function WelcomeForm({ setGoal }: WelcomeFormProps) {
 			setError(null);
 			setNewGoal(validGoal.data);
 		} else {
-			setError(validGoal.error.message[0]);
+			setError(validGoal.error.message);
 		}
 		setNewGoal(e.target.value);
 	}
