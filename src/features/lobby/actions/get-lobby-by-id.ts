@@ -9,7 +9,7 @@ export async function fetchLobbyById(
 	const { data, error } = await supabase
 		.from("lobbies")
 		.select("*")
-		.eq("id", lobbyId)
+		.eq("lobby_id", lobbyId)
 		.single();
 
 	if (error) {

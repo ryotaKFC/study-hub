@@ -18,11 +18,11 @@ export async function createLobby(
 		.from("lobbies")
 		.insert([
 			{
-				name: validLobby.data.lobbyName,
-				studyMin: validLobby.data.studyMin,
-				breakMin: validLobby.data.breakMin,
-				startTime: new Date(),
-				isPrivate: validLobby.data.isPrivate,
+				lobby_name: validLobby.data.lobbyName,
+				study_min: validLobby.data.studyMin,
+				break_min: validLobby.data.breakMin,
+				start_time: new Date(),
+				is_private: validLobby.data.isPrivate,
 			},
 		])
 		.select("*")

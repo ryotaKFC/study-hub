@@ -1,35 +1,17 @@
 "use client";
 
-import {
-	createContext,
-	Dispatch,
-	SetStateAction,
-	use,
-	useCallback,
-	useState,
-} from "react";
+import { createContext, use, useState } from "react";
 import { Loading } from "@/components/loading";
 import { useAuth } from "@/features/auth/auth-provider";
-import { Lobby } from "../types/index";
-import { useLobbySubscription } from "./use-lobby-subscription";
+import { useTimer } from "@/features/timer/hooks/use-timer";
+import { WelcomeForm } from "../components/lobby-welcome-form";
+import { useLobbySubscription } from "../hooks/use-lobby-subscription";
+import { Chat, Lobby, Member } from "../types";
 
-type Props = {
+type LobbyProviderProps = {
 	lobby: Lobby;
 	previewMode: boolean;
 	children: React.ReactNode;
-};
-
-export type Chat = {
-	chatId: string;
-	userId: string;
-	displayName: string;
-	content: string;
-};
-
-export type Member = {
-	user_id: string;
-	display_name: string;
-	user_goal: string;
 };
 
 type LobbyContextType = {
@@ -37,69 +19,70 @@ type LobbyContextType = {
 	lobby: Lobby;
 	members: Member[];
 	chats: Chat[];
-	// time: string;
+	time: string;
 	isStudyTime: boolean;
-	setIsStudyTime: Dispatch<SetStateAction<boolean>>;
-	setGoal: Dispatch<SetStateAction<string>>;
 	sendMessage: (content: string) => Promise<void>;
 };
 
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
-export function LobbyProvider({ lobby, previewMode, children }: Props) {
-	const [goal, setGoal] = useState("");
-	const { channel, chats, members } = useLobbySubscription(lobby.id, goal);
+export function LobbyProvider({
+	lobby,
+	previewMode,
+	children,
+}: LobbyProviderProps) {
+	const [goal, setGoal] = useState<string | null>(null);
 	const { user } = useAuth();
-	const [isStudyTime, setIsStudyTime] = useState(true);
-	// const { time, isStudyTime} = usePomodoroTimer(lobby);
-
-	// メッセージの送信
-	const sendMessage = useCallback(
-		async (content: string) => {
-			if (!content.trim() || !user || !channel) return;
-
-			const payload = {
-				chatId: crypto.randomUUID(),
-				userId: user.id,
-				displayName: user.user_metadata.name || "ななしさん",
-				content: content,
-			};
-
-			await channel.send({
-				type: "broadcast",
-				event: "chat",
-				payload: payload,
-			});
-		},
-		[channel, user],
-	);
+	const { channel, chats, members } = useLobbySubscription(lobby.lobbyId, goal);
+	const { time, isStudyTime } = useTimer(lobby);
 
 	if (!lobby) {
 		return <Loading />;
 	}
 
-	return (
-		<LobbyContext.Provider
-			value={{
-				previewMode,
-				lobby,
-				chats,
-				members,
-				isStudyTime,
-				setIsStudyTime,
-				sendMessage,
-				setGoal,
-			}}
-		>
-			{children}
-		</LobbyContext.Provider>
-	);
+	// メッセージの送信
+	async function sendMessage(content: string) {
+		if (!content.trim() || !user || !channel) return;
+
+		const payload = {
+			chatId: crypto.randomUUID(),
+			userId: user.id,
+			displayName: user.user_metadata.name || "ななしさん",
+			content: content,
+		};
+
+		await channel.send({
+			type: "broadcast",
+			event: "chat",
+			payload: payload,
+		});
+	}
+
+	if (!goal && !previewMode) {
+		return <WelcomeForm setGoal={setGoal} />;
+	} else {
+		return (
+			<LobbyContext.Provider
+				value={{
+					previewMode,
+					lobby,
+					chats,
+					members,
+					time,
+					isStudyTime,
+					sendMessage,
+				}}
+			>
+				{children}
+			</LobbyContext.Provider>
+		);
+	}
 }
 
-export const useLobby = () => {
+export function useLobby() {
 	const context = use(LobbyContext);
 	if (context === undefined) {
-		throw new Error("ロビーが見つかりませんでした：LobbyProviders.tsx");
+		throw new Error("ロビーが見つかりませんでした：LobbyProvider.tsx");
 	}
 	return context;
-};
+}

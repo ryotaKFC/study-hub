@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -12,20 +12,36 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useLobby } from "../lobby-provider";
+import { goalSchema } from "../schemas";
 
-export function WelcomeForm() {
-	const { setGoal } = useLobby();
-	const [isOpen, setIsOpen] = useState(true);
-	const [newGoal, setNewGoal] = useState("");
+type WelcomeFormProps = {
+	setGoal: Dispatch<SetStateAction<string | null>>;
+};
+
+export function WelcomeForm({ setGoal }: WelcomeFormProps) {
+	const [newGoal, setNewGoal] = useState<string>("");
+	const [error, setError] = useState<string | null>(null);
+
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		goalSchema.parse(newGoal);
 		setGoal(newGoal);
-		setIsOpen(false);
+	}
+
+	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+		const validGoal = goalSchema.safeParse(e.target.value);
+
+		if (validGoal.success) {
+			setError(null);
+			setNewGoal(validGoal.data);
+		} else {
+			setError(validGoal.error.message[0]);
+		}
+		setNewGoal(e.target.value);
 	}
 
 	return (
-		<Dialog open={isOpen} onOpenChange={setIsOpen}>
+		<Dialog open={true}>
 			<DialogContent
 				onInteractOutside={(e) => {
 					e.preventDefault();
@@ -46,12 +62,15 @@ export function WelcomeForm() {
 							<Input
 								id="goal"
 								value={newGoal}
-								onChange={(e) => setNewGoal(e.target.value)}
+								onChange={(e) => handleChange(e)}
 								required
 							/>
+							{error && <p className="text-red-500 text-sm">{error}</p>}
 						</div>
 						<DialogFooter>
-							<Button type="submit">送信する</Button>
+							<Button disabled={!!error || !newGoal.trim()} type="submit">
+								送信する
+							</Button>
 						</DialogFooter>
 					</DialogHeader>
 				</form>

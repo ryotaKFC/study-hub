@@ -1,13 +1,11 @@
 "use client";
 
-import React from "react";
-import { Lobby } from "../../types";
-import { LobbyProvider } from "../lobby-provider";
-import LobbyChat from "./lobby-chat";
-import LobbyMember from "./lobby-member";
-import LobbyTimer from "./lobby-timer";
-import Tips from "./lobby-tips";
-import LobbyTitle from "./lobby-title";
+import { LobbyProvider } from "../providers/lobby-provider";
+import { Lobby } from "../types";
+import LobbyChatCard from "./lobby-chat-card";
+import LobbyTitle from "./lobby-detail-title";
+import LobbyMemberCard from "./lobby-member-card";
+import LobbyTimerCard from "./lobby-timer-card";
 
 const previewLobby: Lobby = {
 	lobbyId: "prev",
@@ -26,10 +24,9 @@ export function LobbyPreview() {
 		<LobbyProvider lobby={previewLobby} previewMode={true}>
 			<main className="mx-5 sm:mx-14 my-7 space-y-5">
 				<LobbyTitle />
-				<LobbyTimer />
-				<LobbyChat />
-				<LobbyMember />
-				<Tips />
+				<LobbyTimerCard />
+				<LobbyChatCard />
+				<LobbyMemberCard />
 			</main>
 		</LobbyProvider>
 	);

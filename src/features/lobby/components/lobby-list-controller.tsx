@@ -7,15 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
 type Props = {
-	isGeolocationGranted: boolean;
+	isInSchoolFilter: boolean;
 	handleSwitchChange: () => void;
-	handleUpdateButton: () => void;
 };
 
-export function LobbiesController({
-	isGeolocationGranted,
+export function LobbyListController({
+	isInSchoolFilter,
 	handleSwitchChange,
-	handleUpdateButton,
 }: Props) {
 	return (
 		<div className="flex flex-col justify-center items-center my-5 space-y-4">
@@ -26,7 +24,7 @@ export function LobbiesController({
 					</Button>
 				</Link>
 				<Button
-					onClick={handleUpdateButton}
+					onClick={() => location.reload()}
 					variant={"outline"}
 					className="inline-block align-middle hover:cursor-pointer"
 				>
@@ -37,7 +35,7 @@ export function LobbiesController({
 				<Label htmlFor="geolocationSwitch">近い順に並び替え</Label>
 				<Switch
 					id="geolocationSwitch"
-					checked={isGeolocationGranted}
+					checked={isInSchoolFilter}
 					onCheckedChange={handleSwitchChange}
 				/>
 			</div>

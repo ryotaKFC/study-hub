@@ -1,27 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
 import {
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
-import { usePomodoroTimer } from "../../hooks/use-pomodoro-timer";
-import { useLobby } from "../lobby-provider";
+import { useLobby } from "../providers/lobby-provider";
 
-export default function LobbyTimer() {
-	const { lobby, setIsStudyTime } = useLobby();
-	const { time, isStudyTime } = usePomodoroTimer(lobby);
+export default function LobbyTimerCard() {
+	const { isStudyTime, time } = useLobby();
 
 	const titleText = isStudyTime ? "勉強中..." : "休憩時間";
 	const discriptionText = isStudyTime
 		? "🎯 集中して勉強しましょう！チャットは休憩時間に利用できます"
 		: "🍵 少し休憩しましょう！チャットで雑談もOKです";
-
-	useEffect(() => {
-		setIsStudyTime(isStudyTime);
-	}, [isStudyTime, setIsStudyTime]);
 
 	return (
 		<Card className="space-y-3 sm:px-10">

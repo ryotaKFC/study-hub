@@ -9,9 +9,9 @@ import {
 	CardHeader,
 } from "@/components/ui/card";
 import { useAuth } from "@/features/auth/auth-provider";
-import { useLobby } from "../lobby-provider";
+import { useLobby } from "../providers/lobby-provider";
 
-export default function LobbyChat() {
+export default function LobbyChatCard() {
 	const { user } = useAuth();
 	const { previewMode, chats, isStudyTime, sendMessage } = useLobby();
 	const [newChat, setNewChat] = useState("");

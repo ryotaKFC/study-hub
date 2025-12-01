@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { createClient } from "@/lib/supabase/client";
 import { joinLobby } from "../actions/join-lobby";
-import { Chat, Member } from "../providers/lobby-provider";
+import { leaveLobby } from "../actions/leave-lobby";
+import { Chat, Member } from "../types";
 
-export function useLobbySubscription(lobbyId: string, goal: string) {
+export function useLobbySubscription(lobbyId: string, goal: string | null) {
 	const { user } = useAuth();
 
 	const [members, setMembers] = useState<Member[]>([]);
@@ -15,12 +16,13 @@ export function useLobbySubscription(lobbyId: string, goal: string) {
 	const [channel, setChannel] = useState<RealtimeChannel | null>(null);
 
 	const supabase = createClient();
+
 	// 参加ロビーの決定
 	useEffect(() => {
-		if (!user || !goal.trim()) return;
+		if (!user || !goal) return;
 
 		// チャンネルの決定
-		const newChannel = supabase.channel(String(lobbyId), {
+		const newChannel = supabase.channel(lobbyId, {
 			config: {
 				presence: { key: user.id },
 				broadcast: { self: true },
@@ -47,26 +49,23 @@ export function useLobbySubscription(lobbyId: string, goal: string) {
 					display_name: user.user_metadata.name || "ななしさん",
 					user_goal: goal,
 				});
+				// 少し遅延させてから参加処理を行う
 				setTimeout(async () => {
-					const state = newChannel.presenceState();
-					const memberCount = Object.keys(state).length;
-					console.log(memberCount);
-					await joinLobby(supabase, lobbyId, memberCount);
+					await joinLobby(supabase, newChannel, lobbyId);
 				}, 300);
 			}
 		});
 
 		setChannel(newChannel);
 
-		const handleExit = async () => {
+		async function handleExit() {
 			if (!newChannel) return;
-			const state = newChannel.presenceState();
-			const memberCount = Object.keys(state).length;
 
-			await updateLobbyMemberCount(lobbyId, memberCount - 1);
+			await leaveLobby(supabase, newChannel, lobbyId);
+
 			newChannel.unsubscribe();
 			supabase.removeChannel(newChannel);
-		};
+		}
 
 		window.addEventListener("beforeunload", handleExit);
 		return () => {
@@ -76,7 +75,4 @@ export function useLobbySubscription(lobbyId: string, goal: string) {
 	}, [goal, lobbyId, supabase, user]);
 
 	return { channel, members, chats };
-}
-function updateLobbyMemberCount(lobbyId: string, arg1: number) {
-	throw new Error("Function not implemented.");
 }

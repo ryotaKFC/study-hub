@@ -1,6 +1,6 @@
 import { RealtimeChannel, SupabaseClient } from "@supabase/supabase-js";
 
-export async function joinLobby(
+export async function leaveLobby(
 	supabase: SupabaseClient,
 	realtimeChannel: RealtimeChannel,
 	lobbyId: string,

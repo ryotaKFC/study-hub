@@ -52,6 +52,7 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 		const newLobby = await createLobby(supabase, data);
 		router.push("/lobby/" + newLobby?.lobbyId);
 	}
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
 			<label htmlFor="lobbyName" className="mx-auto">

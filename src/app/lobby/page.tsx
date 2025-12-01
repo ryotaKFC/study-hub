@@ -1,9 +1,11 @@
-"use server";
-
 import { Navigation } from "@/components/navigation";
-import Lobbies from "@/features/lobby/components/lobby-list/lobbies";
+import { getLobbies } from "@/features/lobby/actions/get-lobbies";
+import LobbyList from "@/features/lobby/components/lobby-list";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function Page() {
+	const supabase = await createClient();
+	const lobbiies = await getLobbies(supabase, false);
 	return (
 		<>
 			<Navigation />
@@ -14,7 +16,7 @@ export default async function Page() {
 					</h1>
 					<p>仲間と一緒に勉強しましょう！</p>
 				</div>
-				<Lobbies />
+				<LobbyList lobbiesInitial={lobbiies} />
 			</main>
 		</>
 	);

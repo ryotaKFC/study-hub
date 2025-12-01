@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { Card } from "@/components/ui/card";
 import LobbyForm from "@/features/lobby/components/lobby-form";
-import MapProvider from "@/features/maps/map-provider";
 
 export default async function Page({
 	searchParams,
@@ -15,15 +14,8 @@ export default async function Page({
 			<main>
 				<h1 className="font-bold text-3xl text-center m-5">ロビーの作成</h1>
 				<Card className="mx-[3%] px-4 sm:mx-[20%] sm:px-10">
-					<MapProvider>
-						<LobbyForm isPrivateParam={isPrivate === "true"} />
-					</MapProvider>
+					<LobbyForm isPrivateParam={isPrivate === "true"} />
 				</Card>
-
-				{/* <Card variant="background" className="mx-[3%] px-4 sm:mx-[10%] sm:px-10">
-                    <h2 className="font-bold text-xl text-center">ロケーションの選択</h2>
-                    <MapContent />
-                </Card> */}
 			</main>
 		</div>
 	);

@@ -1,0 +1,68 @@
+[
+  {
+    "isStudyTime": "true", 
+    "label": "1限", 
+    "start": "09:00",
+    "end": "09:50"
+  },
+  {
+    "isStudyTime": "false", 
+    "label": "休み時間", 
+    "start": "09:50",
+    "end": "10:00"
+  },
+  {
+    "isStudyTime": "true", 
+    "label": "2限", 
+    "start": "10:00",
+    "end": "10:50"
+  },
+  {
+    "isStudyTime": "false", 
+    "label": "休み時間", 
+    "start": "10:50",
+    "end": "11:00"
+  },
+  {
+    "isStudyTime": "true", 
+    "label": "3限", 
+    "start": "11:00",
+    "end": "11:50"
+  },
+  {
+    "isStudyTime": "false", 
+    "label": "休み時間", 
+    "start": "11:50",
+    "end": "12:40"
+  },
+  {
+    "isStudyTime": "true", 
+    "label": "4限", 
+    "start": "12:40",
+    "end": "13:30"
+  },
+  {
+    "isStudyTime": "false", 
+    "label": "休み時間", 
+    "start": "13:30",
+    "end": "13:40"
+  },
+  {
+    "isStudyTime": "true", 
+    "label": "5限", 
+    "start": "13:40",
+    "end": "14:30"
+  },
+  {
+    "isStudyTime": "false", 
+    "label": "休み時間", 
+    "start": "14:30",
+    "end": "14:40"
+  },
+  {
+    "isStudyTime": "true", 
+    "label": "6限", 
+    "start": "14:40",
+    "end": "15:30"
+  }
+]
