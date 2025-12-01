@@ -40,7 +40,6 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 	});
 
 	const isInSchool = watch("isInSchool");
-	const lobbyName = watch("lobbyName");
 	const studyMin = watch("studyMin");
 	const breakMin = watch("breakMin");
 
