@@ -11,7 +11,6 @@ export default async function Page({
 }) {
 	const supabase = await createClient();
 	const lobby = await fetchLobbyById(supabase, (await params).id);
-	console.log("lobby", lobby);
 
 	return (
 		<div className="min-h-screen bg-emerald-50">
