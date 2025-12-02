@@ -1,15 +1,22 @@
 "use client";
 
+import { useEffect } from "react";
 import {
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
+import { useTimer } from "@/features/timer/hooks/use-timer";
 import { useLobby } from "../providers/lobby-provider";
 
 export default function LobbyTimerCard() {
-	const { isStudyTime, time } = useLobby();
+	const { setIsStudyTime, lobby } = useLobby();
+	const { time, isStudyTime } = useTimer(lobby);
+
+	useEffect(() => {
+		setIsStudyTime(isStudyTime);
+	}, [isStudyTime, setIsStudyTime]);
 
 	const titleText = isStudyTime ? "勉強中..." : "休憩時間";
 	const discriptionText = isStudyTime

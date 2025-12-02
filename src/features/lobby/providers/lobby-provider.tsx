@@ -1,8 +1,7 @@
 "use client";
 
-import { createContext, use, useState } from "react";
+import { createContext, Dispatch, SetStateAction, use, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
-import { useTimer } from "@/features/timer/hooks/use-timer";
 import { WelcomeForm } from "../components/lobby-welcome-form";
 import { useLobbySubscription } from "../hooks/use-lobby-subscription";
 import { Chat, Lobby, Member } from "../types";
@@ -18,8 +17,8 @@ type LobbyContextType = {
 	lobby: Lobby;
 	members: Member[];
 	chats: Chat[];
-	time: string;
 	isStudyTime: boolean;
+	setIsStudyTime: Dispatch<SetStateAction<boolean>>;
 	sendMessage: (content: string) => Promise<void>;
 };
 
@@ -33,7 +32,7 @@ export function LobbyProvider({
 	const [goal, setGoal] = useState<string | null>(null);
 	const { user } = useAuth();
 	const { channel, chats, members } = useLobbySubscription(lobby.lobbyId, goal);
-	const { time, isStudyTime } = useTimer(lobby);
+	const [isStudyTime, setIsStudyTime] = useState(false);
 
 	// メッセージの送信
 	async function sendMessage(content: string) {
@@ -63,8 +62,8 @@ export function LobbyProvider({
 					lobby,
 					chats,
 					members,
-					time,
 					isStudyTime,
+					setIsStudyTime,
 					sendMessage,
 				}}
 			>
