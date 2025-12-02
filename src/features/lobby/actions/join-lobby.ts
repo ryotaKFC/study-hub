@@ -8,7 +8,7 @@ export async function joinLobby(
 	const memberCount = Object.keys(realtimeChannel.presenceState()).length;
 	const { error } = await supabase
 		.from("lobbies")
-		.update({ memberCount: memberCount, lastActivityAt: new Date() })
+		.update({ member_count: memberCount, last_activity_at: new Date() })
 		.eq("lobby_id", lobbyId);
 
 	if (error) {
