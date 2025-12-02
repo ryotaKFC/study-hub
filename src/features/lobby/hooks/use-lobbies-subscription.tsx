@@ -19,7 +19,7 @@ export function useLobbiesSubscriptions(
 					event: "INSERT",
 					schema: "public",
 					table: "lobbies",
-					filter: "isPrivate=eq.false",
+					filter: "is_private=eq.false",
 				},
 				(payload) => {
 					setLobbies((prev) => [payload.new as Lobby, ...prev]);

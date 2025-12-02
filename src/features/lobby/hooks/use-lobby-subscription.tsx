@@ -37,20 +37,24 @@ export function useLobbySubscription(lobbyId: string, goal: string | null) {
 		// メンバーの受信
 		newChannel.on("presence", { event: "sync" }, () => {
 			const state = newChannel.presenceState<Member>();
-			const new_members: Member[] = Object.values(state).flat();
-			setMembers(new_members);
+			const allMembers = Object.values(state).flat();
+			const uniqueMembers = Array.from(
+				new Map(allMembers.map((member) => [member.userId, member])).values(),
+			);
+			setMembers(uniqueMembers);
 		});
 
 		// チャンネルへ参加
 		newChannel.subscribe(async (status) => {
 			if (status === "SUBSCRIBED") {
 				await newChannel.track({
-					user_id: user.id,
-					display_name: user.user_metadata.name || "ななしさん",
-					user_goal: goal,
+					userId: user.id,
+					displayName: user.user_metadata.name || "ななしさん",
+					userGoal: goal,
 				});
 				// 少し遅延させてから参加処理を行う
 				setTimeout(async () => {
+					console.log(newChannel.presenceState<Member>());
 					await joinLobby(supabase, newChannel, lobbyId);
 				}, 300);
 			}
