@@ -2,7 +2,6 @@
 
 import { RealtimeChannel } from "@supabase/supabase-js";
 import { createContext, Dispatch, SetStateAction, use, useState } from "react";
-import { useAuth } from "@/features/auth/auth-provider";
 import { WelcomeForm } from "../components/lobby-welcome-form";
 import { useLobbySubscription } from "../hooks/use-lobby-subscription";
 import { Lobby, Member } from "../types";
@@ -20,7 +19,6 @@ type LobbyContextType = {
 	isStudyTime: boolean;
 	channel: RealtimeChannel | null;
 	setIsStudyTime: Dispatch<SetStateAction<boolean>>;
-	sendMessage: (content: string) => Promise<void>;
 };
 
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
@@ -31,27 +29,8 @@ export function LobbyProvider({
 	children,
 }: LobbyProviderProps) {
 	const [goal, setGoal] = useState<string | null>(null);
-	const { user } = useAuth();
 	const { channel, members } = useLobbySubscription(lobby.lobbyId, goal);
 	const [isStudyTime, setIsStudyTime] = useState(false);
-
-	// メッセージの送信
-	async function sendMessage(content: string) {
-		if (!content.trim() || !user || !channel) return;
-
-		const payload = {
-			chatId: crypto.randomUUID(),
-			userId: user.id,
-			displayName: user.user_metadata.name || "ななしさん",
-			content: content,
-		};
-
-		await channel.send({
-			type: "broadcast",
-			event: "chat",
-			payload: payload,
-		});
-	}
 
 	if (!goal && !previewMode) {
 		return <WelcomeForm setGoal={setGoal} />;
@@ -66,7 +45,6 @@ export function LobbyProvider({
 					isStudyTime,
 					channel,
 					setIsStudyTime,
-					sendMessage,
 				}}
 			>
 				{children}
