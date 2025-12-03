@@ -8,9 +8,13 @@ import {
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
+import { useAuth } from "@/features/auth/auth-provider";
 import { useChat } from "../hooks/use-chat";
+import { useLobby } from "../providers/lobby-provider";
 
 export default function LobbyChatCard() {
+	const { user } = useAuth();
+	const { previewMode } = useLobby();
 	const { chats, disabledChat, handleSubmit, newChat, setNewChat } = useChat();
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -21,6 +25,8 @@ export default function LobbyChatCard() {
 				chatContainerRef.current.scrollHeight;
 		}
 	});
+
+	if (!user && !previewMode) return null;
 
 	return (
 		<Card className="sm:px-10">
