@@ -1,10 +1,13 @@
 "use client";
-
-import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import { use } from "react";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { useLobbyList } from "../hooks/use-lobby-list";
 import { Lobby } from "../types";
 import { LobbyCard } from "./lobby-list/card/lobby-card";
-import { LobbyListController } from "./lobby-list-controller";
 
 type LobbyListProps = {
 	lobbiesPromise: Promise<Lobby[]>;
@@ -16,17 +19,7 @@ export default function LobbyList({
 	isInSchoolFilter,
 }: LobbyListProps) {
 	const lobbies = use(lobbiesPromise);
-	const router = useRouter();
-	const searchParams = useSearchParams();
-
-	function handleSchoolFilterChange() {
-		const newFilterValue = !isInSchoolFilter;
-		const newParams = new URLSearchParams(searchParams.toString());
-		newParams.set("inSchool", newFilterValue.toString());
-		router.replace(`/lobby/?${newParams.toString()}`);
-	}
-
-	// ロード画面だしたい
+	const { handleSchoolFilterChange } = useLobbyList(isInSchoolFilter);
 
 	return (
 		<>
@@ -40,5 +33,42 @@ export default function LobbyList({
 				))}
 			</div>
 		</>
+	);
+}
+
+type LobbyListControllerProps = {
+	isInSchoolFilter: boolean;
+	handleSchoolFilterChange: () => void;
+};
+
+export function LobbyListController({
+	isInSchoolFilter,
+	handleSchoolFilterChange,
+}: LobbyListControllerProps) {
+	return (
+		<div className="flex flex-col justify-center items-center my-5 space-y-4">
+			<div className="space-x-4 ">
+				<Link href="/lobby/create">
+					<Button className="inline-block align-middle hover:cursor-pointer">
+						ロビーの作成
+					</Button>
+				</Link>
+				<Button
+					onClick={() => location.reload()}
+					variant={"outline"}
+					className="inline-block align-middle hover:cursor-pointer"
+				>
+					<Image src="/reload.svg" alt="reload icon" width={20} height={20} />
+				</Button>
+			</div>
+			<div className="flex space-x-2">
+				<Label htmlFor="school-filter-switch">学校内のロビーのみ表示</Label>
+				<Switch
+					id="school-filter-switch"
+					checked={isInSchoolFilter}
+					onCheckedChange={handleSchoolFilterChange}
+				/>
+			</div>
+		</div>
 	);
 }
