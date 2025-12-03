@@ -5,7 +5,7 @@ import { createContext, Dispatch, SetStateAction, use, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { WelcomeForm } from "../components/lobby-welcome-form";
 import { useLobbySubscription } from "../hooks/use-lobby-subscription";
-import { Chat, Lobby, Member } from "../types";
+import { Lobby, Member } from "../types";
 
 type LobbyProviderProps = {
 	lobby: Lobby;
@@ -17,7 +17,6 @@ type LobbyContextType = {
 	previewMode: boolean;
 	lobby: Lobby;
 	members: Member[];
-	chats: Chat[];
 	isStudyTime: boolean;
 	channel: RealtimeChannel | null;
 	setIsStudyTime: Dispatch<SetStateAction<boolean>>;
@@ -33,7 +32,7 @@ export function LobbyProvider({
 }: LobbyProviderProps) {
 	const [goal, setGoal] = useState<string | null>(null);
 	const { user } = useAuth();
-	const { channel, chats, members } = useLobbySubscription(lobby.lobbyId, goal);
+	const { channel, members } = useLobbySubscription(lobby.lobbyId, goal);
 	const [isStudyTime, setIsStudyTime] = useState(false);
 
 	// メッセージの送信
@@ -62,7 +61,7 @@ export function LobbyProvider({
 				value={{
 					previewMode,
 					lobby,
-					chats,
+
 					members,
 					isStudyTime,
 					channel,
