@@ -5,7 +5,10 @@ export async function leaveLobby(
 	realtimeChannel: RealtimeChannel,
 	lobbyId: string,
 ): Promise<void> {
-	const memberCount = Object.keys(realtimeChannel.presenceState()).length;
+	const memberCount = Math.max(
+		Object.keys(realtimeChannel.presenceState()).length - 1,
+		0,
+	);
 	const { error } = await supabase
 		.from("lobbies")
 		.update({ member_count: memberCount, last_activity_at: new Date() })

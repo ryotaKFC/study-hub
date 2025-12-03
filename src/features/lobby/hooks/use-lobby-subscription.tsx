@@ -67,8 +67,8 @@ export function useLobbySubscription(lobbyId: string, goal: string | null) {
 
 		window.addEventListener("beforeunload", handleExit);
 		return () => {
-			window.removeEventListener("beforeunload", handleExit);
 			handleExit();
+			window.removeEventListener("beforeunload", handleExit);
 		};
 	}, [goal, lobbyId, supabase, user]);
 
