@@ -7,7 +7,7 @@ import { useLobbySubscription } from "../hooks/use-lobby-subscription";
 import { Lobby, Member } from "../types";
 
 type LobbyProviderProps = {
-	lobby: Lobby;
+	lobbyPromise: Promise<Lobby>;
 	previewMode: boolean;
 	children: React.ReactNode;
 };
@@ -24,10 +24,11 @@ type LobbyContextType = {
 const LobbyContext = createContext<LobbyContextType | undefined>(undefined);
 
 export function LobbyProvider({
-	lobby,
+	lobbyPromise,
 	previewMode,
 	children,
 }: LobbyProviderProps) {
+	const lobby = use(lobbyPromise);
 	const [goal, setGoal] = useState<string | null>(null);
 	const { channel, members } = useLobbySubscription(lobby.lobbyId, goal);
 	const [isStudyTime, setIsStudyTime] = useState(false);

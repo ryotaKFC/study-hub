@@ -10,12 +10,12 @@ export default async function Page({
 	params: Promise<{ id: string }>;
 }) {
 	const supabase = await createClient();
-	const lobby = await fetchLobbyById(supabase, (await params).id);
+	const lobbyPromise = fetchLobbyById(supabase, (await params).id);
 
 	return (
 		<div className="min-h-screen bg-emerald-50">
 			<Navigation />
-			<LobbyProvider lobby={lobby} previewMode={false}>
+			<LobbyProvider lobbyPromise={lobbyPromise} previewMode={false}>
 				<LobbyDetail />
 			</LobbyProvider>
 		</div>
