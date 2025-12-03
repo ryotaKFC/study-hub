@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useLobby } from "@/features/lobby/providers/lobby-provider";
 import { Lobby } from "@/features/lobby/types";
+import { useTimer } from "@/features/timer/hooks/use-timer";
 import { GetRelativeTime } from "@/lib/get-relative-time";
 
 type Props = {
@@ -23,7 +24,7 @@ export function LobbyCard({ lobby }: Props) {
 			<CardHeader className="text-xl sm:text-2xl">
 				<div className="flex justify-between">
 					<h1>{lobby.lobbyName}</h1>
-					<NowModeBadge />
+					<NowModeBadge lobby={lobby} />
 				</div>
 				<div className="flex space-x-2">
 					<MapPinned className="h-5 w-4" />
@@ -66,8 +67,8 @@ export function LobbyCard({ lobby }: Props) {
 	);
 }
 
-function NowModeBadge() {
-	const { isStudyTime } = useLobby();
+function NowModeBadge({ lobby }: { lobby: Lobby }) {
+	const { isStudyTime } = useTimer(lobby);
 	return (
 		<Card
 			className={`text-sm font-bold p-1 rounded-sm ${isStudyTime ? "bg-red-100/50" : "bg-lime-100/50"}`}
