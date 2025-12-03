@@ -9,9 +9,9 @@ import {
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
+import { useLobby } from "@/features/lobby/providers/lobby-provider";
 import { Lobby } from "@/features/lobby/types";
 import { GetRelativeTime } from "@/lib/get-relative-time";
-import { LobbyNowMode } from "./lobby-now-mode";
 
 type Props = {
 	lobby: Lobby;
@@ -23,7 +23,7 @@ export function LobbyCard({ lobby }: Props) {
 			<CardHeader className="text-xl sm:text-2xl">
 				<div className="flex justify-between">
 					<h1>{lobby.lobbyName}</h1>
-					<LobbyNowMode lobby={lobby} />
+					<NowModeBadge />
 				</div>
 				<div className="flex space-x-2">
 					<MapPinned className="h-5 w-4" />
@@ -62,6 +62,17 @@ export function LobbyCard({ lobby }: Props) {
 					<Button className="w-full">参加</Button>
 				</Link>
 			</CardFooter>
+		</Card>
+	);
+}
+
+function NowModeBadge() {
+	const { isStudyTime } = useLobby();
+	return (
+		<Card
+			className={`text-sm font-bold p-1 rounded-sm ${isStudyTime ? "bg-red-100/50" : "bg-lime-100/50"}`}
+		>
+			{isStudyTime ? "勉強中" : "休憩中"}
 		</Card>
 	);
 }
