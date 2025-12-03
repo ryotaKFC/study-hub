@@ -27,7 +27,7 @@ export function useChat(): {
 	async function handleSubmit(e: React.FormEvent): Promise<void> {
 		e.preventDefault();
 		if (!newChat.trim() || !user || !channel) return;
-		setDisabledChat(true);
+		if (isStudyTime) setDisabledChat(true);
 
 		const payload = {
 			chatId: crypto.randomUUID(),
