@@ -6,13 +6,12 @@ import { useAuth } from "@/features/auth/auth-provider";
 import { createClient } from "@/lib/supabase/client";
 import { joinLobby } from "../actions/join-lobby";
 import { leaveLobby } from "../actions/leave-lobby";
-import { Chat, Member } from "../types";
+import { Member } from "../types";
 
 export function useLobbySubscription(lobbyId: string, goal: string | null) {
 	const { user } = useAuth();
 
 	const [members, setMembers] = useState<Member[]>([]);
-	const [chats, setChats] = useState<Chat[]>([]);
 	const [channel, setChannel] = useState<RealtimeChannel | null>(null);
 
 	const supabase = createClient();
@@ -27,11 +26,6 @@ export function useLobbySubscription(lobbyId: string, goal: string | null) {
 				presence: { key: user.id },
 				broadcast: { self: true },
 			},
-		});
-
-		// チャットの受信
-		newChannel.on("broadcast", { event: "chat" }, ({ payload }) => {
-			setChats((prev) => [...prev, payload]);
 		});
 
 		// メンバーの受信
@@ -78,5 +72,5 @@ export function useLobbySubscription(lobbyId: string, goal: string | null) {
 		};
 	}, [goal, lobbyId, supabase, user]);
 
-	return { channel, members, chats };
+	return { channel, members };
 }

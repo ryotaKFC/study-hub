@@ -1,5 +1,6 @@
 "use client";
 
+import { RealtimeChannel } from "@supabase/supabase-js";
 import { createContext, Dispatch, SetStateAction, use, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { WelcomeForm } from "../components/lobby-welcome-form";
@@ -18,6 +19,7 @@ type LobbyContextType = {
 	members: Member[];
 	chats: Chat[];
 	isStudyTime: boolean;
+	channel: RealtimeChannel | null;
 	setIsStudyTime: Dispatch<SetStateAction<boolean>>;
 	sendMessage: (content: string) => Promise<void>;
 };
@@ -63,6 +65,7 @@ export function LobbyProvider({
 					chats,
 					members,
 					isStudyTime,
+					channel,
 					setIsStudyTime,
 					sendMessage,
 				}}

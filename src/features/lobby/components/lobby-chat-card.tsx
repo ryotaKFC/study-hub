@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -8,32 +8,19 @@ import {
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
-import { useAuth } from "@/features/auth/auth-provider";
-import { useLobby } from "../providers/lobby-provider";
+import { useChat } from "../hooks/use-chat";
 
 export default function LobbyChatCard() {
-	const { user } = useAuth();
-	const { previewMode, chats, isStudyTime, sendMessage } = useLobby();
-	const [newChat, setNewChat] = useState("");
+	const { chats, disabledChat, handleSubmit, newChat, setNewChat } = useChat();
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
-	const handleSubmit = useCallback(
-		async (e: React.FormEvent) => {
-			e.preventDefault();
-			await sendMessage(newChat);
-			setNewChat("");
-		},
-		[newChat, sendMessage],
-	);
-
+	// チャットが追加されたときにスクロールする
 	useEffect(() => {
 		if (chatContainerRef.current) {
 			chatContainerRef.current.scrollTop =
 				chatContainerRef.current.scrollHeight;
 		}
 	});
-
-	if (!user && !previewMode) return null;
 
 	return (
 		<Card className="sm:px-10">
@@ -61,14 +48,10 @@ export default function LobbyChatCard() {
 					<input
 						value={newChat}
 						onChange={(e) => setNewChat(e.target.value)}
-						placeholder="休憩時間のみチャットは利用できます！"
+						placeholder="勉強中は5分に一度のみ送信可能です"
 						className="border rounded-sm w-full flex flex-row-reverse text-sm sm:text-xl"
 					/>
-					<Button
-						type="submit"
-						disabled={isStudyTime ? true : false}
-						className=""
-					>
+					<Button type="submit" disabled={disabledChat} className="">
 						送信
 					</Button>
 				</form>
