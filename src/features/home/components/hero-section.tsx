@@ -21,10 +21,6 @@ export async function HeroSection() {
 				<div className="flex space-x-6 justify-center text-center">
 					<StudyButton />
 				</div>
-
-				{/* <div className="text-center my-10">
-                    <p>どういうアプリ？</p>
-                </div> */}
 			</section>
 			<section className="space-y-7 px-4 sm:px-25 text-center">
 				<h1 className="font-bold text-5xl">どういうアプリ？</h1>
