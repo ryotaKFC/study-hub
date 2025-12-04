@@ -3,7 +3,7 @@ import z from "zod";
 export const goalSchema = z
 	.string()
 	.min(2, { message: "目標は2文字以上で入力してください!" })
-	.max(50, { message: "目標は50文字以内で入力してください!" });
+	.max(20, { message: "目標は20文字以内で入力してください!" });
 
 const lobbyNameSchema = z
 	.string()
