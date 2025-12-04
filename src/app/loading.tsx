@@ -1,9 +1,9 @@
-import { Navigation } from "@/components/navigation";
+import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
 
 export default function Loading() {
 	return (
 		<>
-			<Navigation />
+			<NavigationBar />
 			<p className="text-2xl text-center">Loading...</p>;
 		</>
 	);

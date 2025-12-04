@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import LoginButton from "./login-button";
-import { Button } from "./ui/button";
 
-export function Navigation() {
+export function NavigationBar() {
 	return (
-		<nav className="flex justify-between items-center px-4 py-2 bg-background shadow-md border-b border-black sticky top-0 z-50">
+		<nav className="absolute flex justify-between items-center px-4 py-2 bg-background shadow-md border-b border-black w-full top-0 z-50">
 			{/* logo */}
 			<div className="flex items-center space-x-4">
 				<Link href="/">

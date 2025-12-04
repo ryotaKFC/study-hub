@@ -1,7 +1,7 @@
-import { Navigation } from "@/components/navigation";
 import { fetchLobbyById } from "@/features/lobby/actions/get-lobby-by-id";
 import { LobbyDetail } from "@/features/lobby/components/lobby-detail";
 import { LobbyProvider } from "@/features/lobby/providers/lobby-provider";
+import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Page({
@@ -14,7 +14,7 @@ export default async function Page({
 
 	return (
 		<div className="min-h-screen bg-emerald-50">
-			<Navigation />
+			<NavigationBar />
 			<LobbyProvider lobbyPromise={lobbyPromise} previewMode={false}>
 				<LobbyDetail />
 			</LobbyProvider>
