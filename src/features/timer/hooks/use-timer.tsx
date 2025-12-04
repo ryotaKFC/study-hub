@@ -10,7 +10,7 @@ export function useTimer(lobby: Lobby): {
 	time: string;
 	isStudyTime: boolean;
 } {
-	const [isStudyTime, setIsStudyTime] = useState(true);
+	const [isStudyTime, setIsStudyTime] = useState(false);
 	const [seconds, setSeconds] = useState(0);
 
 	const lobbyStartTime = Math.floor(new Date(lobby.startTime).getTime() / 1000);
