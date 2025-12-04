@@ -12,7 +12,9 @@ export default async function Page({
 		<div>
 			<NavigationBar />
 			<main>
-				<h1 className="font-bold text-3xl text-center m-5">ロビーの作成</h1>
+				<h1 className="font-bold text-3xl text-center mt-24 mb-4">
+					ロビーの作成
+				</h1>
 				<Card className="mx-[3%] px-4 sm:mx-[20%] sm:px-10">
 					<LobbyForm isPrivateParam={isPrivate === "true"} />
 				</Card>
