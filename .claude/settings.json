@@ -17,8 +17,12 @@
 	"hooks": {
 		"SessionStart": [
 			{
-				"type": "command",
-				"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/setup-skills.sh"
+				"hooks": [
+					{
+						"type": "command",
+						"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/setup-skills.sh"
+					}
+				]
 			}
 		]
 	}
