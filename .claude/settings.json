@@ -1,13 +1,12 @@
 {
 	"permissions": {
 		"disableBypassPermissionsMode": "disable",
-		"ask": ["Bash(curl:*)", "Bash(wget:*)", "WebSearch"],
+		"ask": ["Bash(pnpm add:*)"],
 		"deny": [
 			"Bash(sudo:*)",
 			"Read(id_rsa)",
 			"Read(id_ed25519)",
-			"Read(**/*token*)",
-			"Read(**/*key*)",
+			"Read(**/.env*)",
 			"Write(**/secrets/**)",
 			"Bash(nc:*)",
 			"Bash(psql:*)",
