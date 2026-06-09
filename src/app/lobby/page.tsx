@@ -9,7 +9,7 @@ type PageProps = {
 
 export default async function Page({ searchParams }: PageProps) {
 	const params = await searchParams;
-	const inSchoolParam = params["inSchool"] === "true";
+	const inSchoolParam = params.inSchool === "true";
 
 	const supabase = await createClient();
 	const lobbiesPromise = getLobbies(supabase, inSchoolParam);

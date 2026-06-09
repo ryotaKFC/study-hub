@@ -1,6 +1,11 @@
 "use client";
 
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+	type Dispatch,
+	type FormEvent,
+	type SetStateAction,
+	useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,

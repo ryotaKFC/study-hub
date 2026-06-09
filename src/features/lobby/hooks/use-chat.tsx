@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { useLobby } from "../providers/lobby-provider";
-import { Chat } from "../types";
+import type { Chat } from "../types";
 
 const CHAT_COOLTIME_SECONDS = 300; // 5分
 

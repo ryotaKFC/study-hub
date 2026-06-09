@@ -1,38 +1,36 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "../auth-provider";
 
-
 export default function LoginButton() {
-    const { user, signInWithGoogle, signOut } = useAuth();
+	const { user, signInWithGoogle, signOut } = useAuth();
 
-    if (!user) {
-        return (
-            <div className="flex items-center gap-2">
-                <Button variant="link" onClick={signInWithGoogle} >
-                    Google ログイン
-                </Button>
-            </div>
-        )
-    } else {
-        return (
-            <div className="flex items-center gap-2">
-                <Button variant="link" onClick={signOut}>
-                    ログアウト
-                </Button>
-                <div>
-                    <Image
-                        src={user.user_metadata.avatar_url}
-                        alt="User avatar"
-                        width={30}
-                        height={30}
-                        className="rounded-full"
-                    />
-                </div>
-            </div>
-        )
-    }
-
+	if (!user) {
+		return (
+			<div className="flex items-center gap-2">
+				<Button variant="link" onClick={signInWithGoogle}>
+					Google ログイン
+				</Button>
+			</div>
+		);
+	} else {
+		return (
+			<div className="flex items-center gap-2">
+				<Button variant="link" onClick={signOut}>
+					ログアウト
+				</Button>
+				<div>
+					<Image
+						src={user.user_metadata.avatar_url}
+						alt="User avatar"
+						width={30}
+						height={30}
+						className="rounded-full"
+					/>
+				</div>
+			</div>
+		);
+	}
 }

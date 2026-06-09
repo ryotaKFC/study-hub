@@ -1,0 +1,40 @@
+{
+	"permissions": {
+		"disableBypassPermissionsMode": "disable",
+		"ask": ["Bash(curl:*)", "Bash(wget:*)", "WebSearch"],
+		"deny": [
+			"Bash(sudo:*)",
+			"Bash(rm -rf:*)",
+			"Bash(git push:*)",
+			"Bash(git reset:*)",
+			"Bash(git rebase:*)",
+			"Read(.env*)",
+			"Read(id_rsa)",
+			"Read(id_ed25519)",
+			"Read(**/*token*)",
+			"Read(**/*key*)",
+			"Write(**/secrets/**)",
+			"Bash(nc:*)",
+			"Bash(npm install:*)",
+			"Bash(npm uninstall:*)",
+			"Bash(npm remove:*)",
+			"Bash(psql:*)",
+			"Bash(mysql:*)",
+			"Bash(aws)"
+		]
+	},
+	"hooks": {
+		"PreToolUse": [
+			{
+				"matcher": "Bash",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bash .claude/hooks/pre-commit-review.sh",
+						"timeout": 15
+					}
+				]
+			}
+		]
+	}
+}

@@ -5,5 +5,5 @@ export function formattedTime(second: number) {
 	const minStr = min.toString().padStart(2, "0");
 	const secStr = sec.toString().padStart(2, "0");
 
-	return minStr + ":" + secStr;
+	return `${minStr}:${secStr}`;
 }

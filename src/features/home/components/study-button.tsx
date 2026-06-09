@@ -22,7 +22,7 @@ export function StudyButton() {
 		getUser();
 	}, [supabaseClient.auth]);
 
-	function handleClick(e: MouseEvent<HTMLButtonElement>) {
+	function handleClick(_e: MouseEvent<HTMLButtonElement>) {
 		if (user) return;
 		// if (!window.confirm(CONFIRMATION_MESSAGE)) {
 		//     e.preventDefault()
