@@ -14,11 +14,6 @@
 			"tailwindDirectives": true
 		}
 	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
-		}
-	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
