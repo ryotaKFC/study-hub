@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, use, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { createContext, use, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type Props = {

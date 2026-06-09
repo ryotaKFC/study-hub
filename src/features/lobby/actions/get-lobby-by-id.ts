@@ -1,6 +1,6 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { convertDBLobbyToLobby } from "../lib/convert-db-lobby-to-lobby";
-import { Lobby } from "../types";
+import type { Lobby } from "../types";
 
 export async function fetchLobbyById(
 	supabase: SupabaseClient,

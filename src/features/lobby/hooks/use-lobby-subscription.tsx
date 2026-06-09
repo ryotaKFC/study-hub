@@ -1,12 +1,12 @@
 "use client";
 
-import { RealtimeChannel } from "@supabase/supabase-js";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { createClient } from "@/lib/supabase/client";
 import { joinLobby } from "../actions/join-lobby";
 import { leaveLobby } from "../actions/leave-lobby";
-import { Member } from "../types";
+import type { Member } from "../types";
 
 export function useLobbySubscription(lobbyId: string, goal: string | null) {
 	const { user } = useAuth();

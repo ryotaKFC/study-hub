@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { createClient } from "@/lib/supabase/client";
 import { createLobby } from "../actions/create-lobby";
 import { creationLobySchema } from "../schemas";
-import { LobbyCreationDate } from "../types";
+import type { LobbyCreationDate } from "../types";
 
 type Props = {
 	isPrivateParam: boolean;
@@ -48,7 +48,7 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 
 		const supabase = createClient();
 		const newLobby = await createLobby(supabase, data);
-		router.push("/lobby/" + newLobby?.lobbyId);
+		router.push(`/lobby/${newLobby?.lobbyId}`);
 	}
 
 	return (
@@ -65,7 +65,7 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 
 			<p className="mx-auto">
 				勉強時間：
-				{isInSchool ? "授業と同期されます" : studyMin + "分"}
+				{isInSchool ? "授業と同期されます" : `${studyMin}分`}
 			</p>
 			<Controller
 				name="studyMin"
@@ -86,7 +86,7 @@ export default function LobbyForm({ isPrivateParam }: Props) {
 
 			<p className="mx-auto">
 				休憩時間：
-				{isInSchool ? "授業と同期されます" : breakMin + "分"}
+				{isInSchool ? "授業と同期されます" : `${breakMin}分`}
 			</p>
 			<Controller
 				name="breakMin"

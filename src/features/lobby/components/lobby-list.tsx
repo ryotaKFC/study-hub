@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useLobbyList } from "../hooks/use-lobby-list";
-import { Lobby } from "../types";
+import type { Lobby } from "../types";
 import { LobbyCard } from "./lobby-card";
 
 type LobbyListProps = {
