@@ -20,6 +20,10 @@
 				"hooks": [
 					{
 						"type": "command",
+						"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/sync-develop-base.sh"
+					},
+					{
+						"type": "command",
 						"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/setup-skills.sh"
 					}
 				]
