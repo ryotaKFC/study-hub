@@ -1,4 +1,8 @@
-# GitHub Copilot レビュー指示
+# Claude コードレビュー指示
+
+このリポジトリのコードレビュー（GitHub Actions の `claude-code-review` ワークフロー、
+および `@claude` メンション）で従う方針をまとめる。ローカルの Claude Code でも
+プロジェクト共通の規約として参照する。
 
 ## 基本方針
 
