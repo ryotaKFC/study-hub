@@ -1,10 +1,16 @@
 "use client";
 
-import { RealtimeChannel } from "@supabase/supabase-js";
-import { createContext, Dispatch, SetStateAction, use, useState } from "react";
+import type { RealtimeChannel } from "@supabase/supabase-js";
+import {
+	createContext,
+	type Dispatch,
+	type SetStateAction,
+	use,
+	useState,
+} from "react";
 import { WelcomeForm } from "../components/lobby-welcome-form";
 import { useLobbySubscription } from "../hooks/use-lobby-subscription";
-import { Lobby, Member } from "../types";
+import type { Lobby, Member } from "../types";
 
 type LobbyProviderProps = {
 	lobbyPromise: Promise<Lobby>;

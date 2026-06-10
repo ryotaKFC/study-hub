@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { features } from "../data/features";
-import { Feature } from "../types";
+import type { Feature } from "../types";
 import { StudyButton } from "./study-button";
 
 export async function HeroSection() {

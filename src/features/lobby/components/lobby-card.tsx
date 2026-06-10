@@ -14,7 +14,7 @@ import {
 	CardFooter,
 	CardHeader,
 } from "@/components/ui/card";
-import { Lobby } from "@/features/lobby/types";
+import type { Lobby } from "@/features/lobby/types";
 import { useTimer } from "@/features/timer/hooks/use-timer";
 import { GetRelativeTime } from "@/lib/get-relative-time";
 
@@ -56,11 +56,11 @@ export function LobbyCard({ lobby }: Props) {
 					</div>
 					<div className="flex justify-between">
 						<p>自習時間:</p>
-						<p>{lobby.isInSchool ? "授業と同期" : lobby.studyMin + " 分"}</p>
+						<p>{lobby.isInSchool ? "授業と同期" : `${lobby.studyMin} 分`}</p>
 					</div>
 					<div className="flex justify-between">
 						<p>休み時間:</p>
-						<p>{lobby.isInSchool ? "授業と同期" : lobby.breakMin + " 分"}</p>
+						<p>{lobby.isInSchool ? "授業と同期" : `${lobby.breakMin} 分`}</p>
 					</div>
 					<div className="flex justify-between">
 						<p>開始時間:</p>

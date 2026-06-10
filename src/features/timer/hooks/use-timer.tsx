@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Lobby } from "@/features/lobby/types";
+import type { Lobby } from "@/features/lobby/types";
 import schoolTime from "../data/school-time.json";
 import { formattedTime } from "../lib/formatted-time";
 import { parseTimeToTodayDate } from "../lib/parseTimeToTodayDate";

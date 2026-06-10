@@ -1,8 +1,8 @@
 import type { Lobby } from "../types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: Supabase DB response lacks type
 export function convertDBLobbyToLobby(dbLobby: any[]): Lobby[] {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: Supabase DB response lacks type
 	const formattedLobby: Lobby[] = dbLobby.map((lobby: any) => ({
 		lobbyId: lobby.lobby_id,
 		lobbyName: lobby.lobby_name,

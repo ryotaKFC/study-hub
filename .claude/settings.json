@@ -1,0 +1,33 @@
+{
+	"permissions": {
+		"disableBypassPermissionsMode": "disable",
+		"ask": ["Bash(pnpm add:*)"],
+		"deny": [
+			"Bash(sudo:*)",
+			"Read(id_rsa)",
+			"Read(id_ed25519)",
+			"Read(**/.env*)",
+			"Write(**/secrets/**)",
+			"Bash(nc:*)",
+			"Bash(psql:*)",
+			"Bash(mysql:*)",
+			"Bash(aws)"
+		]
+	},
+	"hooks": {
+		"SessionStart": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/sync-develop-base.sh"
+					},
+					{
+						"type": "command",
+						"command": "\"$CLAUDE_PROJECT_DIR\"/scripts/setup-skills.sh"
+					}
+				]
+			}
+		]
+	}
+}

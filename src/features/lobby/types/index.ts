@@ -1,5 +1,5 @@
 import type z from "zod";
-import { creationLobySchema, lobbySchema } from "../schemas";
+import type { creationLobySchema, lobbySchema } from "../schemas";
 
 export type Lobby = z.infer<typeof lobbySchema>;
 
