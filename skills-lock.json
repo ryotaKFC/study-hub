@@ -18,12 +18,6 @@
 			"sourceType": "github",
 			"skillPath": "skills/engineering/grill-with-docs/SKILL.md",
 			"computedHash": "eb0e91e84277283dc2b23ed544399e53afd6b5287e5b6929f25fe8aa608e164b"
-		},
-		"test": {
-			"source": "ryotaKFC/ryotaKFC",
-			"sourceType": "github",
-			"skillPath": "skills/test/SKILL.md",
-			"computedHash": "44712480fd84f09002770716f52f0c8083eb229c377d13bc1559e71e8b0de14e"
 		}
 	}
 }
