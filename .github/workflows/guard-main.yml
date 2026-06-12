@@ -1,0 +1,24 @@
+name: Guard main branch
+
+# main へは develop からのみマージできるようにするためのガード。
+# feat ブランチが develop を飛ばして main に直接マージされるのを防ぐ
+# （想定フロー: feat -> develop -> main）。
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  guard:
+    name: Only allow develop -> main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          echo "PR head branch: $HEAD_BRANCH"
+          if [ "$HEAD_BRANCH" != "develop" ]; then
+            echo "::error::main へは develop からのみマージできます（フロー: feat -> develop -> main）。現在の head ブランチ: $HEAD_BRANCH"
+            exit 1
+          fi
+          echo "develop -> main のマージです。OK"
