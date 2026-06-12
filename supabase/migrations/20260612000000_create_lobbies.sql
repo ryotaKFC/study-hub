@@ -59,3 +59,23 @@ create policy "ロビーは誰でも更新できる"
     to anon, authenticated
     using (true)
     with check (true);
+
+-- 列レベルの権限制御
+-- RLS ポリシーは行単位の制御のみで、書き換え可能なカラムは制限できない。
+-- anon キーを持つクライアントが PostgREST に直接リクエストを送って他人のロビーの
+-- lobby_name / is_private などを改ざんしたり、member_count に不正な初期値で
+-- 作成したりするのを防ぐため、操作可能なカラムを GRANT で明示的に限定する。
+-- （config.toml の auto_expose 既定が false 化されるため、明示 GRANT は動作上も必要）
+revoke all on public.lobbies from anon, authenticated;
+
+-- 一覧・詳細の閲覧
+grant select on public.lobbies to anon, authenticated;
+
+-- 作成時にクライアントが指定するカラムのみ INSERT を許可
+-- （member_count / last_activity_at / created_at / lobby_id はデフォルト値に任せる）
+grant insert (lobby_name, start_time, study_min, break_min, is_private, is_in_school)
+    on public.lobbies to anon, authenticated;
+
+-- 参加・退出時の人数更新（join-lobby / leave-lobby）のみ UPDATE を許可
+grant update (member_count, last_activity_at)
+    on public.lobbies to anon, authenticated;
