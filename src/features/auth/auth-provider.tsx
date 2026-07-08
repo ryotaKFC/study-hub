@@ -38,10 +38,11 @@ export function AuthProviders({ children }: Props) {
 	}, [supabaseClient.auth]);
 
 	async function signInWithGoogle() {
+		console.log(location.origin);
 		const { error } = await supabaseClient.auth.signInWithOAuth({
 			provider: "google",
 			options: {
-				redirectTo: window.location.href, // 直前のURLに戻す
+				redirectTo: `${location.origin}/auth/callback`,
 			},
 		});
 		if (error) {
