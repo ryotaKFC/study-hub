@@ -39,6 +39,11 @@ jobs:
             変更内容を確認し、問題のある箇所には `mcp__github_inline_comment__create_inline_comment`
             でインラインコメントを付けてください。指摘が無い場合や全体的な所感は
             `gh pr comment` でまとめて投稿してください。
+              gh pr comment で投稿する際は、本文に \n という文字列を含めず、
+            必ずヒアドキュメント（例: gh pr comment "$PR" --body "$(cat <<'EOF'
+            実際の改行を含む本文
+            EOF
+            )")を使って実際の改行を使用してください。
           claude_args: |
             --model claude-sonnet-4-6
             --allowed-tools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
