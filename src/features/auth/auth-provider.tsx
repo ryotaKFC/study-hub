@@ -38,7 +38,6 @@ export function AuthProviders({ children }: Props) {
 	}, [supabaseClient.auth]);
 
 	async function signInWithGoogle() {
-		console.log(location.origin);
 		const { error } = await supabaseClient.auth.signInWithOAuth({
 			provider: "google",
 			options: {
