@@ -51,7 +51,7 @@ export function useTimer(lobby: Lobby): {
 					setSeconds(studySec + breakSec - timeWithInCycle);
 				}
 			}
-		});
+		}, 1000);
 
 		return () => clearInterval(interval);
 	}, [breakSec, isStudyTime, lobby.isInSchool, lobbyStartTime, studySec]);
