@@ -38,10 +38,14 @@ export function AuthProviders({ children }: Props) {
 	}, [supabaseClient.auth]);
 
 	async function signInWithGoogle() {
+		const redirectPathAfterLogin = encodeURIComponent(
+			location.pathname + location.search,
+		);
+
 		const { error } = await supabaseClient.auth.signInWithOAuth({
 			provider: "google",
 			options: {
-				redirectTo: `${location.origin}/auth/callback`,
+				redirectTo: `${location.origin}/auth/callback?next=${redirectPathAfterLogin}`,
 			},
 		});
 		if (error) {
