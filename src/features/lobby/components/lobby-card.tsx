@@ -7,16 +7,11 @@ import {
 	Users as UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-} from "@/components/ui/card";
 import type { Lobby } from "@/features/lobby/types";
 import { useTimer } from "@/features/timer/hooks/use-timer";
-import { GetRelativeTime } from "@/lib/get-relative-time";
+import { GetRelativeTime } from "@/shared/lib/get-relative-time";
+import { Button } from "@/shared/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
 
 type Props = {
 	lobby: Lobby;

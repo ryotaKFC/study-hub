@@ -3,8 +3,8 @@
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { type MouseEvent, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/shared/api/supabase/client";
+import { Button } from "@/shared/ui/button";
 
 // const CONFIRMATION_MESSAGE = "ログインせずに勉強しますか？\n(ログインすることで、みんなで勉強することができます)";
 

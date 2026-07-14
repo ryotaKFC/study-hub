@@ -2,9 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Button } from "@/shared/ui/button";
+import { Label } from "@/shared/ui/label";
+import { Switch } from "@/shared/ui/switch";
 import { useLobbyList } from "../hooks/use-lobby-list";
 import type { Lobby } from "../types";
 import { LobbyCard } from "./lobby-card";

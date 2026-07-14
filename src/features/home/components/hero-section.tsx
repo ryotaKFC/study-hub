@@ -1,7 +1,7 @@
 "use server";
 
 import Image from "next/image";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/shared/ui/card";
 import { features } from "../data/features";
 import type { Feature } from "../types";
 import { StudyButton } from "./study-button";

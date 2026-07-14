@@ -3,7 +3,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/shared/api/supabase/client";
 import { joinLobby } from "../actions/join-lobby";
 import { leaveLobby } from "../actions/leave-lobby";
 import type { Member } from "../types";
