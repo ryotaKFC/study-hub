@@ -1,7 +1,7 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAuth } from "@/features/auth/auth-provider";
+import { Card, CardContent, CardHeader } from "@/shared/ui/card";
 import { useLobby } from "../providers/lobby-provider";
 
 export default function LobbyMemberCard() {
