@@ -1,10 +1,10 @@
 "use server";
 
 import Image from "next/image";
+import type { Feature } from "@/_pages/home/types";
+import { features } from "@/_pages/home/ui/features";
+import { StudyButton } from "@/_pages/home/ui/study-button";
 import { Card, CardContent, CardHeader } from "@/shared/ui/card";
-import type { Feature } from "../types";
-import { features } from "./features";
-import { StudyButton } from "./study-button";
 
 export async function HeroSection() {
 	return (

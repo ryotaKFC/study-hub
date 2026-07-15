@@ -1,5 +1,5 @@
-import { BackgroundPreviewLobby } from "./background-preview-lobby";
-import { HeroSection } from "./hero-section";
+import { BackgroundPreviewLobby } from "@/_pages/home/ui/background-preview-lobby";
+import { HeroSection } from "@/_pages/home/ui/hero-section";
 
 export function Home() {
 	return (

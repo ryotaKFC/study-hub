@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import schoolTime from "@/_pages/lobby-detail/config/school-time.json";
+import { formattedTime } from "@/_pages/lobby-detail/lib/formatted-time";
+import { parseTimeToTodayDate } from "@/_pages/lobby-detail/lib/parseTimeToTodayDate";
 import type { Lobby } from "@/features/lobby/types";
-import schoolTime from "../config/school-time.json";
-import { formattedTime } from "../lib/formatted-time";
-import { parseTimeToTodayDate } from "../lib/parseTimeToTodayDate";
 
 export function useTimer(lobby: Lobby): {
 	time: string;

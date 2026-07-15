@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLobby } from "@/_pages/lobby-detail/model/lobby-provider";
+import { useChat } from "@/_pages/lobby-detail/model/use-chat";
 import { useAuth } from "@/features/auth/auth-provider";
-import { useLobby } from "@/pages/lobby-detail/model/lobby-provider";
-import { useChat } from "@/pages/lobby-detail/model/use-chat";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
 

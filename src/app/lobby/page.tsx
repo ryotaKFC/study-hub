@@ -1,5 +1,5 @@
-import { getLobbies } from "@/pages/lobby-detail/api/get-lobbies";
-import LobbyList from "@/pages/lobby-list/ui/lobby-list";
+import { getLobbies } from "@/_pages/lobby-detail/api/get-lobbies";
+import LobbyList from "@/_pages/lobby-list/ui/lobby-list";
 import { createClient } from "@/shared/api/supabase/server";
 import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 

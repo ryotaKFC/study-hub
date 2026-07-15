@@ -2,12 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
+import { useLobbyList } from "@/_pages/lobby-list/api/use-lobby-list";
+import { LobbyCard } from "@/_pages/lobby-list/ui/lobby-card";
 import type { Lobby } from "@/features/lobby/types";
 import { Button } from "@/shared/ui/button";
 import { Label } from "@/shared/ui/label";
 import { Switch } from "@/shared/ui/switch";
-import { useLobbyList } from "../api/use-lobby-list";
-import { LobbyCard } from "./lobby-card";
 
 type LobbyListProps = {
 	lobbiesPromise: Promise<Lobby[]>;

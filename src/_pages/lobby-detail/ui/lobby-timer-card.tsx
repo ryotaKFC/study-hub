@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useLobby } from "@/pages/lobby-detail/model/lobby-provider";
-import { useTimer } from "@/pages/lobby-detail/model/use-timer";
+import { useLobby } from "@/_pages/lobby-detail/model/lobby-provider";
+import { useTimer } from "@/_pages/lobby-detail/model/use-timer";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
 
 export default function LobbyTimerCard() {

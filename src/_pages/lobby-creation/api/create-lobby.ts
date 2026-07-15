@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { convertDBLobbyToLobby } from "../../../features/lobby/lib/convert-db-lobby-to-lobby";
-import { creationLobySchema } from "../../../features/lobby/schemas";
-import type { Lobby, LobbyCreationDate } from "../../../features/lobby/types";
+import { convertDBLobbyToLobby } from "@/features/lobby/lib/convert-db-lobby-to-lobby";
+import { creationLobySchema } from "@/features/lobby/schemas";
+import type { Lobby, LobbyCreationDate } from "@/features/lobby/types";
 
 export async function createLobby(
 	supabase: SupabaseClient,

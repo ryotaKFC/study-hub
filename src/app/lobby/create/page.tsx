@@ -1,4 +1,4 @@
-import LobbyForm from "@/pages/lobby-creation/ui/lobby-form";
+import LobbyForm from "@/_pages/lobby-creation/ui/lobby-form";
 import { Card } from "@/shared/ui/card";
 import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 

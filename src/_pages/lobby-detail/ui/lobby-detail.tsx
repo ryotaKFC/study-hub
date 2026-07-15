@@ -1,7 +1,7 @@
-import LobbyChatCard from "./lobby-chat-card";
-import LobbyTitle from "./lobby-detail-title";
-import LobbyMemberCard from "./lobby-member-card";
-import LobbyTimerCard from "./lobby-timer-card";
+import LobbyChatCard from "@/_pages/lobby-detail/ui/lobby-chat-card";
+import LobbyTitle from "@/_pages/lobby-detail/ui/lobby-detail-title";
+import LobbyMemberCard from "@/_pages/lobby-detail/ui/lobby-member-card";
+import LobbyTimerCard from "@/_pages/lobby-detail/ui/lobby-timer-card";
 
 export function LobbyDetail() {
 	return (
