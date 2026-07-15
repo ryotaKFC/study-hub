@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/shared/ui/card";
-import { features } from "../data/features";
 import type { Feature } from "../types";
+import { features } from "./features";
 import { StudyButton } from "./study-button";
 
 export async function HeroSection() {
