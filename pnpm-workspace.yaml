@@ -1,0 +1,2 @@
+# ライブラリのアップデートは基本renovateに任せるので、長めに3日ぐらいに設定
+minimumReleaseAge: 4320
