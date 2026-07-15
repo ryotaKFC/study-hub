@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
 import { createClient } from "@/shared/api/supabase/client";
 import type { Member } from "../../../features/lobby/types";
-import { joinLobby } from "../actions/join-lobby";
-import { leaveLobby } from "../actions/leave-lobby";
+import { joinLobby } from "../api/join-lobby";
+import { leaveLobby } from "../api/leave-lobby";
 
 export function useLobbySubscription(lobbyId: string, goal: string | null) {
 	const { user } = useAuth();

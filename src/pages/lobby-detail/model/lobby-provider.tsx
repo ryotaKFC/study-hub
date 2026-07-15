@@ -9,7 +9,7 @@ import {
 	useState,
 } from "react";
 import type { Lobby, Member } from "../../../features/lobby/types";
-import { WelcomeForm } from "../components/lobby-welcome-form";
+import { WelcomeForm } from "../ui/lobby-welcome-form";
 import { useLobbySubscription } from "./use-lobby-subscription";
 
 type LobbyProviderProps = {

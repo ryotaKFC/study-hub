@@ -1,5 +1,5 @@
-import { fetchLobbyById } from "@/features/lobby/actions/get-lobby-by-id";
-import { LobbyDetail } from "@/features/lobby/components/lobby-detail";
+import { fetchLobbyById } from "@/pages/lobby-detail/api/get-lobby-by-id";
+import { LobbyDetail } from "@/pages/lobby-detail/ui/lobby-detail";
 import { LobbyProvider } from "@/pages/lobby-detail/model/lobby-provider";
 import { createClient } from "@/shared/api/supabase/server";
 import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
