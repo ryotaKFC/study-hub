@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { useTimer } from "@/features/timer/hooks/use-timer";
+import { useLobby } from "@/pages/lobby-detail/model/lobby-provider";
+import { useTimer } from "@/pages/lobby-detail/model/use-timer";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
-import { useLobby } from "../providers/lobby-provider";
 
 export default function LobbyTimerCard() {
 	const { setIsStudyTime, lobby } = useLobby();

@@ -1,5 +1,5 @@
-import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
 import { Home } from "@/pages/home/ui/home";
+import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 
 export default function Page() {
 	return (

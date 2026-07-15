@@ -1,6 +1,6 @@
-import { LobbyDetail } from "@/features/lobby/components/lobby-detail";
-import { LobbyProvider } from "@/features/lobby/providers/lobby-provider";
 import type { Lobby } from "@/features/lobby/types";
+import { LobbyProvider } from "@/pages/lobby-detail/model/lobby-provider";
+import { LobbyDetail } from "@/pages/lobby-detail/ui/lobby-detail";
 
 const previewLobbyPromise: Promise<Lobby> = Promise.resolve({
 	lobbyId: "prev",

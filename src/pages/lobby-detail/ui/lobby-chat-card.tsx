@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { useAuth } from "@/features/auth/auth-provider";
+import { useLobby } from "@/pages/lobby-detail/model/lobby-provider";
+import { useChat } from "@/pages/lobby-detail/model/use-chat";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card";
-import { useChat } from "../hooks/use-chat";
-import { useLobby } from "../providers/lobby-provider";
 
 export default function LobbyChatCard() {
 	const { user } = useAuth();

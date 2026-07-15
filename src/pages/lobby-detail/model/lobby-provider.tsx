@@ -8,9 +8,9 @@ import {
 	use,
 	useState,
 } from "react";
+import type { Lobby, Member } from "../../../features/lobby/types";
 import { WelcomeForm } from "../components/lobby-welcome-form";
-import { useLobbySubscription } from "../hooks/use-lobby-subscription";
-import type { Lobby, Member } from "../types";
+import { useLobbySubscription } from "./use-lobby-subscription";
 
 type LobbyProviderProps = {
 	lobbyPromise: Promise<Lobby>;

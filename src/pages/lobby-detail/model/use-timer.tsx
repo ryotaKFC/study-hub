@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Lobby } from "@/features/lobby/types";
-import schoolTime from "../data/school-time.json";
+import schoolTime from "../../../features/timer/data/school-time.json";
 import { formattedTime } from "../lib/formatted-time";
 import { parseTimeToTodayDate } from "../lib/parseTimeToTodayDate";
 

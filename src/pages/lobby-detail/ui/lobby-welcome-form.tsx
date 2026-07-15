@@ -6,6 +6,7 @@ import {
 	type SetStateAction,
 	useState,
 } from "react";
+import { goalSchema } from "@/features/lobby/schemas";
 import { Button } from "@/shared/ui/button";
 import {
 	Dialog,
@@ -17,7 +18,6 @@ import {
 } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import { goalSchema } from "../schemas";
 
 type WelcomeFormProps = {
 	setGoal: Dispatch<SetStateAction<string | null>>;
