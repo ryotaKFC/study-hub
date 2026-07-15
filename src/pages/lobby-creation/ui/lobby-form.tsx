@@ -9,9 +9,9 @@ import { Checkbox } from "@/shared/ui/checkbox";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { Slider } from "@/shared/ui/slider";
-import { createLobby } from "../actions/create-lobby";
-import { creationLobySchema } from "../schemas";
-import type { LobbyCreationDate } from "../types";
+import { creationLobySchema } from "../../../features/lobby/schemas";
+import type { LobbyCreationDate } from "../../../features/lobby/types";
+import { createLobby } from "../api/create-lobby";
 
 type Props = {
 	isPrivateParam: boolean;

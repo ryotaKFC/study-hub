@@ -1,5 +1,5 @@
-import LobbyForm from "@/features/lobby/components/lobby-form";
 import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
+import LobbyForm from "@/pages/lobby-creation/ui/lobby-form";
 import { Card } from "@/shared/ui/card";
 
 export default async function Page({
