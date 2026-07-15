@@ -2,11 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
+import type { Lobby } from "@/features/lobby/types";
 import { Button } from "@/shared/ui/button";
 import { Label } from "@/shared/ui/label";
 import { Switch } from "@/shared/ui/switch";
 import { useLobbyList } from "../api/use-lobby-list";
-import type { Lobby } from "@/features/lobby/types";
 import { LobbyCard } from "./lobby-card";
 
 type LobbyListProps = {
