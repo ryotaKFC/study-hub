@@ -8,13 +8,17 @@ import { LobbyProvider } from "../model/lobby-provider";
 
 type LobbyDetailPageProps = {
 	lobbyPromise: Promise<Lobby>;
+	previewMode: boolean;
 };
 
-export function LobbyDetailPage({ lobbyPromise }: LobbyDetailPageProps) {
+export function LobbyDetailPage({
+	lobbyPromise,
+	previewMode,
+}: LobbyDetailPageProps) {
 	return (
 		<main className="min-h-screen bg-emerald-50">
 			<NavigationBar />
-			<LobbyProvider lobbyPromise={lobbyPromise} previewMode={false}>
+			<LobbyProvider lobbyPromise={lobbyPromise} previewMode={previewMode}>
 				<div className="mx-5 sm:mx-14 my-7 space-y-5">
 					<LobbyTitle />
 					<LobbyTimerCard />
