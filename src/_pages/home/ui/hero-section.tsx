@@ -1,5 +1,3 @@
-"use server";
-
 import Image from "next/image";
 import type { Feature } from "@/_pages/home/types";
 import { features } from "@/_pages/home/ui/features";
