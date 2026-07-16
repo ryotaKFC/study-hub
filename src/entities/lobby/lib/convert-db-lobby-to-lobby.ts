@@ -1,4 +1,4 @@
-import type { Lobby } from "../types";
+import type { Lobby } from "@/entities/lobby/types";
 
 // biome-ignore lint/suspicious/noExplicitAny: Supabase DB response lacks type
 export function convertDBLobbyToLobby(dbLobby: any[]): Lobby[] {

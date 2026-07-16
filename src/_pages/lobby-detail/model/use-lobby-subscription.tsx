@@ -4,8 +4,8 @@ import type { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { joinLobby } from "@/_pages/lobby-detail/api/join-lobby";
 import { leaveLobby } from "@/_pages/lobby-detail/api/leave-lobby";
+import type { Member } from "@/entities/lobby/types";
 import { useAuth } from "@/entities/user/model/auth-provider";
-import type { Member } from "@/features/lobby/types";
 import { createClient } from "@/shared/api/supabase/client";
 
 export function useLobbySubscription(lobbyId: string, goal: string | null) {

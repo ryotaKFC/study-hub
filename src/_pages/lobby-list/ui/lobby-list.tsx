@@ -4,7 +4,7 @@ import Link from "next/link";
 import { use } from "react";
 import { useLobbyList } from "@/_pages/lobby-list/model/use-lobby-list";
 import { LobbyCard } from "@/_pages/lobby-list/ui/lobby-card";
-import type { Lobby } from "@/features/lobby/types";
+import type { Lobby } from "@/entities/lobby/types";
 import { Button } from "@/shared/ui/button";
 import { Label } from "@/shared/ui/label";
 import { Switch } from "@/shared/ui/switch";

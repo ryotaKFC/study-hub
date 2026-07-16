@@ -6,7 +6,7 @@ import {
 	type SetStateAction,
 	useState,
 } from "react";
-import { goalSchema } from "@/features/lobby/schemas";
+import { goalSchema } from "@/entities/lobby/types";
 import { Button } from "@/shared/ui/button";
 import {
 	Dialog,

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import schoolTime from "@/_pages/lobby-detail/config/school-time.json";
 import { formattedTime } from "@/_pages/lobby-detail/lib/formatted-time";
 import { parseTimeToTodayDate } from "@/_pages/lobby-detail/lib/parseTimeToTodayDate";
-import type { Lobby } from "@/features/lobby/types";
+import type { Lobby } from "@/entities/lobby/types";
 
 export function useTimer(lobby: Lobby): {
 	time: string;
