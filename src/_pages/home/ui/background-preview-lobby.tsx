@@ -1,5 +1,5 @@
 import { LobbyProvider } from "@/_pages/lobby-detail/model/lobby-provider";
-import { LobbyDetail } from "@/_pages/lobby-detail/ui/lobby-detail";
+import { LobbyDetail } from "@/_pages/lobby-detail/ui/lobby-detail-page";
 import type { Lobby } from "@/entities/lobby/types";
 
 const previewLobbyPromise: Promise<Lobby> = Promise.resolve({
