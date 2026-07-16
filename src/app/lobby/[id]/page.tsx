@@ -10,5 +10,5 @@ export default async function Page({
 	const supabase = await createClient();
 	const lobbyPromise = fetchLobbyById(supabase, (await params).id);
 
-	return <LobbyDetailPage lobbyPromise={lobbyPromise} />;
+	return <LobbyDetailPage lobbyPromise={lobbyPromise} previewMode={false} />;
 }
