@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/shared/ui/button";
-import { useAuth } from "../auth-provider";
+import { useAuth } from "../../../entities/user/model/auth-provider";
 
 export default function LoginButton() {
 	const { user, signInWithGoogle, signOut } = useAuth();
