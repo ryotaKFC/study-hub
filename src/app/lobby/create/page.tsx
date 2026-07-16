@@ -1,6 +1,6 @@
-import LobbyForm from "@/features/lobby/components/lobby-form";
-import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
+import LobbyForm from "@/_pages/lobby-creation/ui/lobby-form";
 import { Card } from "@/shared/ui/card";
+import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 
 export default async function Page({
 	searchParams,

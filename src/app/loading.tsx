@@ -1,4 +1,4 @@
-import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
+import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 
 export default function Loading() {
 	return (

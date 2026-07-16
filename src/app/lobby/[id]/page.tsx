@@ -1,8 +1,8 @@
-import { fetchLobbyById } from "@/features/lobby/actions/get-lobby-by-id";
-import { LobbyDetail } from "@/features/lobby/components/lobby-detail";
-import { LobbyProvider } from "@/features/lobby/providers/lobby-provider";
-import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
+import { fetchLobbyById } from "@/_pages/lobby-detail/api/get-lobby-by-id";
+import { LobbyProvider } from "@/_pages/lobby-detail/model/lobby-provider";
+import { LobbyDetail } from "@/_pages/lobby-detail/ui/lobby-detail";
 import { createClient } from "@/shared/api/supabase/server";
+import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 
 export default async function Page({
 	params,

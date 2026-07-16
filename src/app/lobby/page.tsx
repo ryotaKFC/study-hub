@@ -1,7 +1,7 @@
-import { getLobbies } from "@/features/lobby/actions/get-lobbies";
-import LobbyList from "@/features/lobby/components/lobby-list";
-import { NavigationBar } from "@/features/navigation-bar/components/navigation-bar";
+import { getLobbies } from "@/_pages/lobby-list/api/get-lobbies";
+import LobbyList from "@/_pages/lobby-list/ui/lobby-list";
 import { createClient } from "@/shared/api/supabase/server";
+import { NavigationBar } from "@/widgets/navigation-bar/ui/navigation-bar";
 
 type PageProps = {
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
