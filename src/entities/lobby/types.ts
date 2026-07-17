@@ -40,3 +40,20 @@ export const lobbySchema = z.object({
 	memberCount: z.number().min(0),
 	isInSchool: z.boolean(),
 });
+
+export type Lobby = z.infer<typeof lobbySchema>;
+
+export type LobbyCreationDate = z.infer<typeof creationLobySchema>;
+
+export type Member = {
+	userId: string;
+	displayName: string;
+	userGoal: string;
+};
+
+export type Chat = {
+	chatId: string;
+	userId: string;
+	displayName: string;
+	content: string;
+};

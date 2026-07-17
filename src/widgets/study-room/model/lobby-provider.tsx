@@ -8,9 +8,9 @@ import {
 	use,
 	useState,
 } from "react";
-import { useLobbySubscription } from "@/_pages/lobby-detail/model/use-lobby-subscription";
-import { WelcomeForm } from "@/_pages/lobby-detail/ui/lobby-welcome-form";
-import type { Lobby, Member } from "@/features/lobby/types";
+import type { Lobby, Member } from "@/entities/lobby/types";
+import { WelcomeForm } from "@/widgets/study-room/ui/lobby-welcome-form";
+import { useLobbySubscription } from "./use-lobby-subscription";
 
 type LobbyProviderProps = {
 	lobbyPromise: Promise<Lobby>;

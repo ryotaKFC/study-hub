@@ -1,6 +1,5 @@
-import { LobbyProvider } from "@/_pages/lobby-detail/model/lobby-provider";
-import { LobbyDetail } from "@/_pages/lobby-detail/ui/lobby-detail";
-import type { Lobby } from "@/features/lobby/types";
+import { LobbyDetailPage } from "@/_pages/lobby-detail/ui/lobby-detail-page";
+import type { Lobby } from "@/entities/lobby/types";
 
 const previewLobbyPromise: Promise<Lobby> = Promise.resolve({
 	lobbyId: "prev",
@@ -17,9 +16,7 @@ const previewLobbyPromise: Promise<Lobby> = Promise.resolve({
 export function BackgroundPreviewLobby() {
 	return (
 		<div className="absolute inset-0 mt-7 -z-10 opacity-60 pointer-events-none blur-sm overflow-hidden">
-			<LobbyProvider lobbyPromise={previewLobbyPromise} previewMode={true}>
-				<LobbyDetail />
-			</LobbyProvider>
+			<LobbyDetailPage lobbyPromise={previewLobbyPromise} previewMode={true} />
 		</div>
 	);
 }

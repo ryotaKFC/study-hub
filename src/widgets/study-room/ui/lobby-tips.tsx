@@ -1,4 +1,4 @@
-import { useAuth } from "@/features/auth/auth-provider";
+import { useAuth } from "@/entities/user/model/auth-provider";
 
 export default function LobbyTips() {
 	const { user } = useAuth();

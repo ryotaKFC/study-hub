@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useAuth } from "@/entities/user/model/auth-provider";
 import { Button } from "@/shared/ui/button";
-import { useAuth } from "../auth-provider";
 
 export default function LoginButton() {
 	const { user, signInWithGoogle, signOut } = useAuth();
