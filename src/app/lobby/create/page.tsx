@@ -5,7 +5,7 @@ export default async function Page({
 }: {
 	searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-	const { isPrivateParam } = await searchParams;
+	const { isPrivate = false } = await searchParams;
 
-	return <LobbyCreationPage isPrivate={isPrivateParam === "true"} />;
+	return <LobbyCreationPage isPrivate={isPrivate === "true"} />;
 }
