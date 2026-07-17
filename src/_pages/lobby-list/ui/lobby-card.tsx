@@ -7,7 +7,7 @@ import {
 	Users as UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useTimer } from "@/_pages/lobby-detail/model/use-timer";
+import { useTimer } from "@/entities/lobby/model/use-timer";
 import type { Lobby } from "@/entities/lobby/types";
 import { GetRelativeTime } from "@/shared/lib/get-relative-time";
 import { Button } from "@/shared/ui/button";

@@ -2,11 +2,11 @@
 
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-import { joinLobby } from "@/_pages/lobby-detail/api/join-lobby";
-import { leaveLobby } from "@/_pages/lobby-detail/api/leave-lobby";
 import type { Member } from "@/entities/lobby/types";
 import { useAuth } from "@/entities/user/model/auth-provider";
 import { createClient } from "@/shared/api/supabase/client";
+import { joinLobby } from "@/widgets/study-room/api/join-lobby";
+import { leaveLobby } from "@/widgets/study-room/api/leave-lobby";
 
 export function useLobbySubscription(lobbyId: string, goal: string | null) {
 	const { user } = useAuth();

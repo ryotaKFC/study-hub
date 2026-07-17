@@ -1,8 +1,8 @@
 "use client";
 
-import { useLobby } from "@/_pages/lobby-detail/model/lobby-provider";
 import { useAuth } from "@/entities/user/model/auth-provider";
 import { Card, CardContent, CardHeader } from "@/shared/ui/card";
+import { useLobby } from "../model/lobby-provider";
 
 export default function LobbyMemberCard() {
 	const { user } = useAuth();
